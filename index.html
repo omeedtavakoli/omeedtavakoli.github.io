@@ -20,11 +20,14 @@
       padding: 2.5rem 3rem;
       -webkit-font-smoothing: antialiased;
       cursor: default;
+      overflow: hidden;
     }
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 2;
     }
     .about-link {
       color: #fff;
@@ -58,10 +61,27 @@
       fill: currentColor;
     }
     .center {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Home view */
+    .home-view {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      inset: 0;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .home-view.hidden {
+      transform: translateX(-100%);
+      opacity: 0;
+      pointer-events: none;
     }
     .name-box {
       text-decoration: none;
@@ -81,10 +101,68 @@
       background: rgba(255, 0, 0, 0.06);
       box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
     }
+
+    /* About view */
+    .about-view {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .about-view.visible {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .about-content {
+      max-width: 560px;
+      max-height: calc(100vh - 12rem);
+      overflow-y: auto;
+      padding-right: 1rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.15) transparent;
+    }
+    .about-content::-webkit-scrollbar {
+      width: 4px;
+    }
+    .about-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .about-content::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px;
+    }
+    .about-title {
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+    .about-updated {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 2rem;
+    }
+    .about-content p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 1.2rem;
+    }
+    .about-content p:last-child {
+      margin-bottom: 0;
+    }
+
     footer {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
+      position: relative;
+      z-index: 2;
     }
     footer span {
       font-size: 20px;
@@ -94,12 +172,14 @@
     }
     @media (max-width: 500px) {
       body { padding: 2rem 1.5rem; }
+      .about-content { max-width: 100%; }
+      .about-title { font-size: 24px; }
     }
   </style>
 </head>
 <body>
   <header>
-    <a class="about-link" href="#">About</a>
+    <a class="about-link" href="#about" id="about-toggle">About</a>
     <div class="socials">
       <a class="x-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -109,14 +189,32 @@
       </a>
     </div>
   </header>
+
   <div class="center">
-    <a class="name-box" href="https://omeedtavakoli.notion.site/Omeed-Tavakoli-249331aefa948094bfa3df822080b096" target="_blank" rel="noopener">Omeed Tavakoli</a>
+    <div class="home-view" id="home-view">
+      <a class="name-box" href="https://omeedtavakoli.notion.site/Omeed-Tavakoli-249331aefa948094bfa3df822080b096" target="_blank" rel="noopener">Omeed Tavakoli</a>
+    </div>
+    <div class="about-view" id="about-view">
+      <div class="about-content">
+        <h1 class="about-title">My Backstory</h1>
+        <p class="about-updated">Last updated: January 2026</p>
+        <p>Growing up, my older brother who studied at Babson College made a huge impact on me. When I was 4 years old, he showed me my first "high tech" toy—the first-generation iPad. From around 7, I stumbled across clips of Jackie Chan and Bruce Lee on a website called YouTube.</p>
+        <p>For more than two years, I couldn't sleep at night because I wanted to be the closest thing to a "modern samurai". I googled the closest martial arts studio in my small hometown in Maryland, then my training began.</p>
+        <p>I did "meh" in high school. Bored out of my mind, did the bare minimum to look like I had everything under control. I was at the martial arts studio 6 hours basically every day chasing my 3rd degree black belt while coaching and competing in tournaments to kill time.</p>
+        <p>Fast forward to mid 2024 in Boston, I was in my second year of college and trying to figure out what career path I actually wanted. Around that time, my brother sent me a link to a startup called Perplexity with a short text saying "might be worth sending a cold email." That message eventually led me to join Perplexity's ~10 person growth team, where I worked for about a year while in school. During that time, I met people who are now some of my closest friends and realized that startups were the career path I wanted to pursue all along.</p>
+        <p>Soon after, I packed my bags, left the East Coast, and moved out West to get closer to Silicon Valley. To be honest, this was not where I thought I would end up when I was 4 years old, but I am glad I did.</p>
+        <p>More coming soon.</p>
+      </div>
+    </div>
   </div>
+
   <footer>
     <span id="time"></span>
     <span id="date"></span>
   </footer>
+
   <script>
+    // Clock
     function update() {
       var now = new Date();
       document.getElementById('date').textContent = now.toLocaleDateString('en-US', {
@@ -128,6 +226,38 @@
     }
     update();
     setInterval(update, 1000);
+
+    // Hash routing
+    var homeView = document.getElementById('home-view');
+    var aboutView = document.getElementById('about-view');
+    var aboutToggle = document.getElementById('about-toggle');
+
+    function navigate() {
+      if (window.location.hash === '#about') {
+        homeView.classList.add('hidden');
+        aboutView.classList.add('visible');
+        aboutToggle.textContent = 'Back';
+        aboutToggle.href = '#';
+      } else {
+        homeView.classList.remove('hidden');
+        aboutView.classList.remove('visible');
+        aboutToggle.textContent = 'About';
+        aboutToggle.href = '#about';
+      }
+    }
+
+    aboutToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (window.location.hash === '#about') {
+        history.pushState(null, '', window.location.pathname);
+      } else {
+        history.pushState(null, '', '#about');
+      }
+      navigate();
+    });
+
+    window.addEventListener('popstate', navigate);
+    navigate();
   </script>
 </body>
 </html>
