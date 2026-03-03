@@ -1,14 +1,131 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=https://omeedtavakoli.notion.site/Omeed-Tavakoli-249331aefa948094bfa3df822080b096" />
-    <title>Redirecting...</title>
-  </head>
-  <body>
-    <p>If you are not redirected automatically, 
-      <a href="https://omeedtavakoli.notion.site/Omeed-Tavakoli-249331aefa948094bfa3df822080b096">
-        click here
-      </a>.
-    </p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omeed Tavakoli</title>
+  <meta name="description" content="Omeed Tavakoli">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.5rem 3rem;
+      -webkit-font-smoothing: antialiased;
+      cursor: default;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .name {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .name:hover { color: red; }
+
+    .x-link {
+      display: inline-flex;
+      align-items: center;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+
+    .x-link:hover { color: red; }
+
+    .x-link svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .about-box {
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      border: 1px solid #fff;
+      padding: 1rem 2.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .about-box:hover {
+      color: red;
+      border-color: red;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    footer span {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 500px) {
+      body { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="name" href="https://www.linkedin.com/in/omeedtavakoli/" target="_blank" rel="noopener">Omeed Tavakoli</a>
+    <a class="x-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+  </header>
+
+  <div class="center">
+    <a class="about-box" href="https://omeedtavakoli.notion.site/Omeed-Tavakoli-249331aefa948094bfa3df822080b096" target="_blank" rel="noopener">About</a>
+  </div>
+
+  <footer>
+    <span id="time"></span>
+    <span id="date"></span>
+  </footer>
+
+  <script>
+    function update() {
+      const now = new Date();
+      document.getElementById('date').textContent = now.toLocaleDateString('en-US', {
+        month: 'numeric', day: 'numeric', year: 'numeric'
+      });
+      document.getElementById('time').textContent = now.toLocaleTimeString('en-US', {
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      });
+    }
+    update();
+    setInterval(update, 1000);
+  </script>
+
+</body>
 </html>
