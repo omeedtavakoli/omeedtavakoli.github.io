@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omeed Tavakoli</title>
+  <meta name="description" content="Omeed Tavakoli — building things in Silicon Valley.">
+
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Omeed Tavakoli">
+  <meta property="og:description" content="Building things in Silicon Valley.">
+  <meta property="og:url" content="https://omeedtavakoli.com">
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Omeed Tavakoli">
+  <meta name="twitter:description" content="Building things in Silicon Valley.">
+  <meta name="twitter:site" content="@omeedtavakoli">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1a1a1a;
+      color: #fff;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.5rem 3rem;
+      -webkit-font-smoothing: antialiased;
+      cursor: default;
+      overflow: hidden;
+      /* Fix iOS Safari scroll-locking */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Page entrance animation */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    header, .center, footer {
+      animation: fadeUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    header { animation-delay: 0s; }
+    .center { animation-delay: 0.1s; }
+    footer { animation-delay: 0.2s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      header, .center, footer {
+        animation: none;
+      }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .Backstory-link {
+      color: #fff;
+      text-decoration: none;
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.4s ease;
+    }
+    .Backstory-link:hover {
+      color: red;
+    }
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .x-link, .li-link, .notion-link {
+      display: inline-flex;
+      align-items: center;
+      color: #fff;
+      cursor: pointer;
+      transition: color 0.4s ease;
+    }
+    .x-link:hover, .li-link:hover, .notion-link:hover {
+      color: red;
+    }
+    .x-link svg, .li-link svg, .notion-link svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+    .center {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Home view */
+    .home-view {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      inset: 0;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .home-view.hidden {
+      transform: translateX(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .name-box {
+      text-decoration: none;
+      color: #fff;
+      font-size: 20px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      font-style: bold;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 0;
+      transition: color 0.4s ease;
+      position: relative;
+    }
+    .name-box::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 1px;
+      background: red;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(.77, 0, .175, 1);
+    }
+    .name-box:hover {
+      color: red;
+    }
+    .name-box:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* About view */
+    .about-view {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .about-view.visible {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .about-content {
+      max-width: 800px;
+      max-height: calc(100vh - 12rem);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-right: 1rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.15) transparent;
+    }
+    .about-content::-webkit-scrollbar {
+      width: 4px;
+    }
+    .about-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .about-content::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px;
+    }
+    .about-title {
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+    .about-updated {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2rem;
+    }
+    .about-content p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 1.2rem;
+    }
+    .about-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: relative;
+      z-index: 2;
+    }
+    footer span {
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      font-variant-numeric: tabular-nums;
+    }
+    @media (max-width: 500px) {
+      body { padding: 2rem 1.5rem; }
+      .about-content { max-width: 100%; }
+      .about-title { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="Backstory-link" href="#about" id="about-toggle">Backstory</a>
+    <div class="socials">
+      <a class="x-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener" aria-label="X (Twitter)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a class="li-link" href="https://www.linkedin.com/in/omeedtavakoli/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a class="notion-link" href="https://omeedtavakoli.notion.site/Omeed-Tavakoli-249331aefa948094bfa3df822080b096" target="_blank" rel="noopener" aria-label="Notion">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.98-.7-2.055-.607L2.84 2.298c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.166V6.354c0-.606-.233-.933-.748-.886l-15.177.887c-.56.046-.747.326-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952l1.448.327s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V8.755L7.36 8.662c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.14c-.093-.514.28-.886.747-.933zM1.936 1.035L15.13.028c1.635-.14 2.055-.047 3.082.7l4.25 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.632-1.68 1.726l-15.458.933c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.933V2.668c0-.793.373-1.54 1.355-1.633z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <div class="center">
+    <div class="home-view" id="home-view">
+      <a class="name-box" href="mailto:omeedt1234@gmail.com">Omeed Tavakoli</a>
+    </div>
+    <div class="about-view" id="about-view">
+      <div class="about-content">
+        <h1 class="about-title">My Backstory</h1>
+        <p class="about-updated">Last updated: January 2026</p>
+        <p>Growing up, my older brother who studied at Babson College had a major impact on me. When I was four, he showed me my first "high tech" toy — the first-gen iPad.</p>
+        <p>Around seven, I stumbled onto clips of Jackie Chan, Bruce Lee, and Chuck Norris on YouTube. For more than two years, I couldn't sleep at night because I wanted to be the closest thing to a modern ninja or samurai. I found the nearest martial arts studio in my hometown in Maryland and never stopped.</p>
+        <p>When I was 14, my first job was instructing at a small martial arts school. I spent six hours a day preparing for my third-degree black belt test, earned in May 2022, while coaching underbelt students and competing in national tournaments. By 18, I was awarded a black top gi (which I did wear around the house).</p>
+        <p>Two years later, I was in my second year of college in Boston, watching podcasts and trying to figure out what I actually wanted to do. My brother sent me a link to a startup called Perplexity with a short text: "might be worth sending a cold email."</p>
+        <p>That email led me to join Perplexity's ~10 person growth team, where I worked for about a year. I met great people and realized startups were what I wanted all along.</p>
+        <p>So I packed my bags, left the East Coast, and moved west to get closer to Silicon Valley.</p>
+        <p>Coming soon on what's next.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span id="time"></span>
+    <span id="date"></span>
+  </footer>
+
+  <script>
+    // Clock
+    function update() {
+      var now = new Date();
+      document.getElementById('date').textContent = now.toLocaleDateString('en-US', {
+        month: 'numeric', day: 'numeric', year: 'numeric'
+      });
+      document.getElementById('time').textContent = now.toLocaleTimeString('en-US', {
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      });
+    }
+    update();
+    setInterval(update, 1000);
+
+    // Hash routing
+    var homeView = document.getElementById('home-view');
+    var aboutView = document.getElementById('about-view');
+    var aboutToggle = document.getElementById('about-toggle');
+
+    function navigate() {
+      if (window.location.hash === '#about') {
+        homeView.classList.add('hidden');
+        aboutView.classList.add('visible');
+        aboutToggle.textContent = 'Back';
+        aboutToggle.href = '#';
+      } else {
+        homeView.classList.remove('hidden');
+        aboutView.classList.remove('visible');
+        aboutToggle.textContent = 'Backstory';
+        aboutToggle.href = '#about';
+      }
+    }
+
+    aboutToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (window.location.hash === '#about') {
+        history.pushState(null, '', window.location.pathname);
+      } else {
+        history.pushState(null, '', '#about');
+      }
+      navigate();
+    });
+
+    // Escape key to go back from about view
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && window.location.hash === '#about') {
+        history.pushState(null, '', window.location.pathname);
+        navigate();
+      }
+    });
+
+    window.addEventListener('popstate', navigate);
+    navigate();
+  </script>
+</body>
+</html>
