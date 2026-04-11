@@ -190,6 +190,17 @@
       opacity: 1;
       pointer-events: auto;
     }
+    .about-view::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5rem;
+      background: linear-gradient(to bottom, transparent, #1a1a1a);
+      pointer-events: none;
+      z-index: 1;
+    }
     .about-content {
       max-width: 800px;
       max-height: calc(100vh - 12rem);
@@ -255,11 +266,14 @@
         width: 18px;
         height: 18px;
       }
+      .about-view {
+        align-items: flex-start;
+        padding-top: 0.75rem;
+      }
       .about-content {
         max-width: 100%;
         padding-right: 0;
-        max-height: calc(100vh - 9rem);
-        max-height: calc(-webkit-fill-available - 9rem);
+        max-height: calc(100dvh - 10rem);
       }
       .about-title { font-size: 22px; }
       footer {
