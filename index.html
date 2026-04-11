@@ -48,16 +48,26 @@
       50%  { transform: scaleX(1); }
       100% { transform: scaleX(0); }
     }
+    @keyframes underlineIn {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+    @keyframes underlineOut {
+      from { transform: scaleX(1); }
+      to   { transform: scaleX(0); }
+    }
     .name-box {
       animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
       animation-delay: 0s;
     }
-    .name-box::after {
-      animation: underlineSwoosh 1.4s cubic-bezier(0.7, 0, 0.3, 1) 0.4s none;
+    .name-box.is-entering::after {
+      animation: underlineSwoosh 1.4s cubic-bezier(0.7, 0, 0.3, 1) 0.4s forwards;
+    }
+    .name-box.has-hovered::after {
+      animation: underlineOut 0.4s cubic-bezier(.77, 0, .175, 1) forwards;
     }
     .name-box:hover::after {
-      animation: none;
-      transform: scaleX(1);
+      animation: underlineIn 0.4s cubic-bezier(.77, 0, .175, 1) forwards;
     }
     header, footer {
       animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
@@ -155,13 +165,9 @@
       background: red;
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform 0.4s cubic-bezier(.77, 0, .175, 1);
     }
     .name-box:hover {
       color: #fff;
-    }
-    .name-box:hover::after {
-      transform: scaleX(1);
     }
 
     /* About view */
@@ -302,6 +308,19 @@
   </footer>
 
   <script>
+    // Underline animation: one-time load swoosh, then hover takes over
+    var nameBox = document.querySelector('.name-box');
+    nameBox.classList.add('is-entering');
+    nameBox.addEventListener('animationend', function onEnter(e) {
+      if (e.animationName === 'underlineSwoosh') {
+        nameBox.classList.remove('is-entering');
+        nameBox.removeEventListener('animationend', onEnter);
+      }
+    });
+    nameBox.addEventListener('mouseleave', function() {
+      nameBox.classList.add('has-hovered');
+    }, { once: true });
+
     // Clock
     function update() {
       var now = new Date();
