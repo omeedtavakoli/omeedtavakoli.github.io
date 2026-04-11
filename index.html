@@ -36,6 +36,8 @@
       overflow: hidden;
       /* Fix iOS Safari scroll-locking */
       -webkit-overflow-scrolling: touch;
+      /* Remove tap highlight on iOS */
+      -webkit-tap-highlight-color: transparent;
     }
 
     /* Page entrance animation */
@@ -61,13 +63,13 @@
       animation-delay: 0s;
     }
     .name-box.is-entering::after {
-      animation: underlineSwoosh 1.4s cubic-bezier(0.7, 0, 0.3, 1) 0.4s forwards;
+      animation: underlineSwoosh 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.4s forwards;
     }
     .name-box.has-hovered::after {
-      animation: underlineOut 0.4s cubic-bezier(.77, 0, .175, 1) forwards;
+      animation: underlineOut 0.7s cubic-bezier(.77, 0, .175, 1) forwards;
     }
     .name-box:hover::after {
-      animation: underlineIn 0.4s cubic-bezier(.77, 0, .175, 1) forwards;
+      animation: underlineIn 0.7s cubic-bezier(.77, 0, .175, 1) forwards;
     }
     header, footer {
       animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
@@ -256,6 +258,7 @@
         max-width: 100%;
         padding-right: 0;
         max-height: calc(100vh - 9rem);
+        max-height: calc(-webkit-fill-available - 9rem);
       }
       .about-title { font-size: 22px; }
       footer {
