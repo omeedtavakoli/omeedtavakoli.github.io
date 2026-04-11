@@ -65,11 +65,11 @@
     .name-box.is-entering::after {
       animation: underlineSwoosh 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.4s forwards;
     }
-    .name-box.has-hovered::after {
-      animation: underlineOut 0.7s cubic-bezier(.77, 0, .175, 1) forwards;
-    }
-    .name-box:hover::after {
+    .name-box.underline-in::after {
       animation: underlineIn 0.7s cubic-bezier(.77, 0, .175, 1) forwards;
+    }
+    .name-box.underline-out::after {
+      animation: underlineOut 0.7s cubic-bezier(.77, 0, .175, 1) forwards;
     }
     header, footer {
       animation: fadeIn 2.1s cubic-bezier(0.7, 0, 0.3, 1) both;
@@ -311,8 +311,10 @@
   </footer>
 
   <script>
-    // Underline animation: one-time load swoosh, then hover takes over
+    // Underline animation: one-time load swoosh, then JS controls hover for both mouse and touch
     var nameBox = document.querySelector('.name-box');
+
+    // Load swoosh
     nameBox.classList.add('is-entering');
     nameBox.addEventListener('animationend', function onEnter(e) {
       if (e.animationName === 'underlineSwoosh') {
@@ -320,9 +322,34 @@
         nameBox.removeEventListener('animationend', onEnter);
       }
     });
-    nameBox.addEventListener('mouseleave', function() {
-      nameBox.classList.add('has-hovered');
-    }, { once: true });
+
+    function underlineShow() {
+      nameBox.classList.remove('underline-out');
+      nameBox.classList.add('underline-in');
+    }
+    function underlineHide() {
+      nameBox.classList.remove('underline-in');
+      nameBox.classList.add('underline-out');
+    }
+    function underlineReset() {
+      nameBox.classList.remove('underline-in', 'underline-out');
+    }
+
+    // Mouse (desktop)
+    nameBox.addEventListener('mouseenter', underlineShow);
+    nameBox.addEventListener('mouseleave', underlineHide);
+
+    // Touch (iOS/mobile) — retract on touchend so it cleans up before mail dialog or app switch
+    nameBox.addEventListener('touchstart', function(e) {
+      underlineShow();
+    }, { passive: true });
+    nameBox.addEventListener('touchend', underlineHide);
+    nameBox.addEventListener('touchcancel', underlineReset);
+
+    // Safety net: reset if user comes back to the page (e.g. after mail app)
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) underlineReset();
+    });
 
     // Clock
     function update() {
