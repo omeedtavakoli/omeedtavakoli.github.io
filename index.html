@@ -27,6 +27,7 @@
       font-family: 'Times New Roman', Times, serif;
       font-size: 20px;
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -339,11 +340,13 @@
     nameBox.addEventListener('mouseenter', underlineShow);
     nameBox.addEventListener('mouseleave', underlineHide);
 
-    // Touch (iOS/mobile) — retract on touchend so it cleans up before mail dialog or app switch
-    nameBox.addEventListener('touchstart', function(e) {
+    // Touch (iOS/mobile) — let underlineIn finish before retracting
+    nameBox.addEventListener('touchstart', function() {
       underlineShow();
     }, { passive: true });
-    nameBox.addEventListener('touchend', underlineHide);
+    nameBox.addEventListener('touchend', function() {
+      setTimeout(underlineHide, 800);
+    });
     nameBox.addEventListener('touchcancel', underlineReset);
 
     // Safety net: reset if user comes back to the page (e.g. after mail app)
