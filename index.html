@@ -39,28 +39,34 @@
     }
 
     /* Page entrance animation */
-    @keyframes fadeUpBlur {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-        filter: blur(6px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    header, footer, .name-box {
-      animation: fadeUpBlur 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+    @keyframes fadeInFlicker {
+      0%   { opacity: 0; }
+      60%  { opacity: 0.95; }
+      65%  { opacity: 0.55; }
+      70%  { opacity: 0.9; }
+      100% { opacity: 1; }
     }
-    header { animation-delay: 0.1s; }
-    footer { animation-delay: 0.15s; }
-    .name-box { animation-delay: 0.05s; }
+    .name-box {
+      animation: fadeInFlicker 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
+      animation-delay: 0s;
+    }
+    header {
+      animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
+      animation-delay: 0.6s;
+    }
+    footer {
+      animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
+      animation-delay: 1.2s;
+    }
 
     @media (prefers-reduced-motion: reduce) {
       header, footer, .name-box {
         animation: none;
+        opacity: 1;
       }
     }
 
@@ -151,7 +157,7 @@
       transition: transform 0.4s cubic-bezier(.77, 0, .175, 1);
     }
     .name-box:hover {
-      color: red;
+      color: #fff;
     }
     .name-box:hover::after {
       transform: scaleX(1);
