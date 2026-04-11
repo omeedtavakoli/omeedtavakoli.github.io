@@ -326,6 +326,18 @@
   </footer>
 
   <script>
+    // Tab title typewriter effect
+    (function() {
+      var full = 'Omeed Tavakoli';
+      var i = 0;
+      document.title = '';
+      var interval = setInterval(function() {
+        document.title = full.slice(0, i);
+        i++;
+        if (i > full.length) clearInterval(interval);
+      }, 100);
+    })();
+
     // Underline animation: one-time load swoosh, then JS controls hover for both mouse and touch
     var nameBox = document.querySelector('.name-box');
 
