@@ -87,18 +87,24 @@
     header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       position: relative;
       z-index: 2;
     }
-    .Backstory-link {
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .nav-link {
       color: #fff;
       text-decoration: none;
       font-size: 20px;
       cursor: pointer;
       transition: color 0.4s ease;
     }
-    .Backstory-link:hover {
+    .nav-link:hover {
       color: red;
     }
     .socials {
@@ -173,8 +179,9 @@
       color: #fff;
     }
 
-    /* About view */
-    .about-view {
+    /* About & Projects views — shared */
+    .about-view,
+    .projects-view {
       position: absolute;
       inset: 0;
       display: flex;
@@ -185,12 +192,14 @@
       pointer-events: none;
       transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .about-view.visible {
+    .about-view.visible,
+    .projects-view.visible {
       transform: translateX(0);
       opacity: 1;
       pointer-events: auto;
     }
-    .about-view::after {
+    .about-view::after,
+    .projects-view::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -240,6 +249,43 @@
       margin-bottom: 0;
     }
 
+    /* Projects list */
+    .projects-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+    .project-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      text-decoration: none;
+      color: inherit;
+    }
+    .projects-list li:first-child .project-item {
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .project-title {
+      font-size: 16px;
+      color: rgba(255,255,255,0.9);
+      transition: color 0.3s ease;
+    }
+    .project-meta {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      white-space: nowrap;
+      margin-left: 2rem;
+      flex-shrink: 0;
+      transition: color 0.3s ease;
+    }
+    .project-item:hover .project-title {
+      color: red;
+    }
+    .project-item:hover .project-meta {
+      color: rgba(255,255,255,0.6);
+    }
+
     footer {
       display: flex;
       justify-content: space-between;
@@ -258,7 +304,7 @@
         padding: 1.75rem 1.5rem;
         font-size: 16px;
       }
-      .Backstory-link {
+      .nav-link {
         font-size: 16px;
       }
       .socials { gap: 1rem; }
@@ -266,7 +312,8 @@
         width: 18px;
         height: 18px;
       }
-      .about-view {
+      .about-view,
+      .projects-view {
         align-items: flex-start;
         padding-top: 0.75rem;
       }
@@ -287,7 +334,10 @@
 </head>
 <body>
   <header>
-    <a class="Backstory-link" href="#about" id="about-toggle">Backstory</a>
+    <nav class="nav-links">
+      <a class="nav-link" href="#about" id="about-toggle">Backstory</a>
+      <a class="nav-link" href="#projects" id="projects-toggle">Projects</a>
+    </nav>
     <div class="socials">
       <a class="x-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener" aria-label="X (Twitter)">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -316,6 +366,37 @@
         <p>That email led me to join Perplexity's ~10 person growth team, where I worked for about a year. I was leading the company's education expansion vertical, and realized startups were what I wanted all along.</p>
         <p>So I packed my bags, left the East Coast, and moved west to get closer to Silicon Valley.</p>
         <p>Coming soon on what's next.</p>
+      </div>
+    </div>
+    <div class="projects-view" id="projects-view">
+      <div class="about-content">
+        <h1 class="about-title">Projects</h1>
+        <ul class="projects-list">
+          <li>
+            <a class="project-item" href="https://x.com/omeedtavakoli/status/2015214499809337758?s=20" target="_blank" rel="noopener">
+              <span class="project-title">How To Buy Clarity While It's Cheap</span>
+              <span class="project-meta">Essay ↗</span>
+            </a>
+          </li>
+          <li>
+            <a class="project-item" href="https://drive.google.com/file/d/1wWxrdxCSKyTXEHgyay6H7A4Pbe9bkJxg/view" target="_blank" rel="noopener">
+              <span class="project-title">AI Math Proofs Research Paper (Draft)</span>
+              <span class="project-meta">Paper ↗</span>
+            </a>
+          </li>
+          <li>
+            <a class="project-item" href="https://www.youtube.com/@omeedtavakoli" target="_blank" rel="noopener">
+              <span class="project-title">Interviews with Martial Artists</span>
+              <span class="project-meta">Podcast ↗</span>
+            </a>
+          </li>
+          <li>
+            <a class="project-item" href="https://omeedtavakoli.notion.site/Backpacking-in-Europe-Fall-23-273331aefa948096a271d296166b3f09" target="_blank" rel="noopener">
+              <span class="project-title">Backpacking in Europe — Fall '23</span>
+              <span class="project-meta">Essay ↗</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -384,19 +465,36 @@
     // Hash routing
     var homeView = document.getElementById('home-view');
     var aboutView = document.getElementById('about-view');
+    var projectsView = document.getElementById('projects-view');
     var aboutToggle = document.getElementById('about-toggle');
+    var projectsToggle = document.getElementById('projects-toggle');
 
     function navigate() {
-      if (window.location.hash === '#about') {
+      var hash = window.location.hash;
+      if (hash === '#about') {
         homeView.classList.add('hidden');
         aboutView.classList.add('visible');
+        projectsView.classList.remove('visible');
         aboutToggle.textContent = 'Back';
-        aboutToggle.href = '#';
+        aboutToggle.href = window.location.pathname;
+        projectsToggle.textContent = 'Projects';
+        projectsToggle.href = '#projects';
+      } else if (hash === '#projects') {
+        homeView.classList.add('hidden');
+        projectsView.classList.add('visible');
+        aboutView.classList.remove('visible');
+        projectsToggle.textContent = 'Back';
+        projectsToggle.href = window.location.pathname;
+        aboutToggle.textContent = 'Backstory';
+        aboutToggle.href = '#about';
       } else {
         homeView.classList.remove('hidden');
         aboutView.classList.remove('visible');
+        projectsView.classList.remove('visible');
         aboutToggle.textContent = 'Backstory';
         aboutToggle.href = '#about';
+        projectsToggle.textContent = 'Projects';
+        projectsToggle.href = '#projects';
       }
     }
 
@@ -410,9 +508,19 @@
       navigate();
     });
 
-    // Escape key to go back from about view
+    projectsToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (window.location.hash === '#projects') {
+        history.pushState(null, '', window.location.pathname);
+      } else {
+        history.pushState(null, '', '#projects');
+      }
+      navigate();
+    });
+
+    // Escape key to go back from any view
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && window.location.hash === '#about') {
+      if (e.key === 'Escape' && (window.location.hash === '#about' || window.location.hash === '#projects')) {
         history.pushState(null, '', window.location.pathname);
         navigate();
       }
