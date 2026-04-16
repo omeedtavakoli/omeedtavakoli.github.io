@@ -337,6 +337,7 @@
 <body>
   <header>
     <nav class="nav-links">
+      <a class="nav-link" href="/" id="home-link" style="display:none">Home</a>
       <a class="nav-link" href="#about" id="about-toggle">Backstory</a>
       <a class="nav-link" href="#projects" id="projects-toggle">Projects</a>
     </nav>
@@ -466,6 +467,7 @@
     var projectsView = document.getElementById('projects-view');
     var aboutToggle = document.getElementById('about-toggle');
     var projectsToggle = document.getElementById('projects-toggle');
+    var homeLink = document.getElementById('home-link');
 
     function navigate() {
       var hash = window.location.hash;
@@ -474,27 +476,30 @@
         aboutView.classList.add('visible');
         projectsView.classList.remove('visible');
         aboutToggle.classList.add('active');
-        aboutToggle.href = window.location.pathname;
         projectsToggle.classList.remove('active');
-        projectsToggle.href = '#projects';
+        homeLink.style.display = '';
       } else if (hash === '#projects') {
         homeView.classList.add('hidden');
         projectsView.classList.add('visible');
         aboutView.classList.remove('visible');
         projectsToggle.classList.add('active');
-        projectsToggle.href = window.location.pathname;
         aboutToggle.classList.remove('active');
-        aboutToggle.href = '#about';
+        homeLink.style.display = '';
       } else {
         homeView.classList.remove('hidden');
         aboutView.classList.remove('visible');
         projectsView.classList.remove('visible');
         aboutToggle.classList.remove('active');
-        aboutToggle.href = '#about';
         projectsToggle.classList.remove('active');
-        projectsToggle.href = '#projects';
+        homeLink.style.display = 'none';
       }
     }
+
+    homeLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      history.pushState(null, '', window.location.pathname);
+      navigate();
+    });
 
     aboutToggle.addEventListener('click', function(e) {
       e.preventDefault();
