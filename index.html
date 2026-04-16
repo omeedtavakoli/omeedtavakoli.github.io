@@ -477,24 +477,26 @@
         projectsView.classList.remove('visible');
         aboutToggle.textContent = 'Back';
         aboutToggle.href = window.location.pathname;
-        projectsToggle.textContent = 'Projects';
-        projectsToggle.href = '#projects';
+        aboutToggle.style.display = '';
+        projectsToggle.style.display = 'none';
       } else if (hash === '#projects') {
         homeView.classList.add('hidden');
         projectsView.classList.add('visible');
         aboutView.classList.remove('visible');
         projectsToggle.textContent = 'Back';
         projectsToggle.href = window.location.pathname;
-        aboutToggle.textContent = 'Backstory';
-        aboutToggle.href = '#about';
+        projectsToggle.style.display = '';
+        aboutToggle.style.display = 'none';
       } else {
         homeView.classList.remove('hidden');
         aboutView.classList.remove('visible');
         projectsView.classList.remove('visible');
         aboutToggle.textContent = 'Backstory';
         aboutToggle.href = '#about';
+        aboutToggle.style.display = '';
         projectsToggle.textContent = 'Projects';
         projectsToggle.href = '#projects';
+        projectsToggle.style.display = '';
       }
     }
 
