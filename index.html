@@ -302,36 +302,67 @@
 
     /* Experience list */
     .exp-list {
+      list-style: none;
       margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2.2rem;
     }
-    .exp-entry {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
+    .exp-item {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
-    .exp-role-row {
+    .exp-list li:first-child .exp-item {
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .exp-row {
       display: flex;
       align-items: center;
       gap: 0.6rem;
     }
-    .exp-icon {
-      width: 20px;
-      height: 20px;
+    .exp-logo {
+      width: 22px;
+      height: 22px;
       flex-shrink: 0;
-      fill: rgba(255,255,255,0.45);
+      border-radius: 5px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
     }
-    .exp-role {
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
+    .exp-info {
+      flex: 1;
+      font-size: 17px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.9);
     }
-    .exp-meta {
+    .exp-info .exp-sub {
+      color: rgba(255,255,255,0.4);
+    }
+    .exp-toggle {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.35);
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 0.2rem 0;
+      transition: color 0.3s ease;
+      flex-shrink: 0;
+    }
+    .exp-toggle:hover {
+      color: rgba(255,255,255,0.7);
+    }
+    .exp-desc {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+    .exp-desc.open {
+      max-height: 10rem;
+      opacity: 1;
+    }
+    .exp-desc p {
       font-size: 15px;
-      color: rgba(255,255,255,0.45);
-      padding-left: calc(20px + 0.6rem);
+      line-height: 1.65;
+      color: rgba(255,255,255,0.55);
+      padding: 0.75rem 0 0 calc(22px + 0.6rem);
     }
 
     footer {
@@ -363,9 +394,9 @@
       .about-content {
         padding: 1rem 0.5rem 6rem;
       }
-      .exp-role { font-size: 16px; }
-      .exp-meta { font-size: 14px; padding-left: calc(20px + 0.6rem); }
-      .exp-icon { width: 18px; height: 18px; }
+      .exp-info { font-size: 15px; }
+      .exp-logo { width: 20px; height: 20px; }
+      .exp-desc p { font-size: 14px; padding-left: calc(20px + 0.6rem); }
       .about-title { font-size: 22px; }
       footer {
         flex-direction: column;
@@ -417,43 +448,68 @@
     <div class="experience-view" id="experience-view">
       <div class="about-content">
         <h1 class="about-title">Experience</h1>
-        <div class="exp-list">
-          <div class="exp-entry">
-            <div class="exp-role-row">
-              <svg class="exp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-2H9v2H4V9zm9 6v2H11v-2h2zm-8 4v-2h4v1h6v-1h4v2H5z"/></svg>
-              <span class="exp-role">Product &amp; Growth</span>
+        <ul class="exp-list">
+          <li>
+            <div class="exp-item">
+              <div class="exp-row">
+                <div class="exp-logo"></div>
+                <span class="exp-info">Perplexity <span class="exp-sub">· Product &amp; Growth · 2024 – 2025</span></span>
+                <button class="exp-toggle">open</button>
+              </div>
+              <div class="exp-desc">
+                <p>Search meets AI to deliver fast, reliable answers; joined &lt;120 employees.</p>
+              </div>
             </div>
-            <span class="exp-meta">Perplexity, 2024 – 2025</span>
-          </div>
-          <div class="exp-entry">
-            <div class="exp-role-row">
-              <svg class="exp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-2H9v2H4V9zm9 6v2H11v-2h2zm-8 4v-2h4v1h6v-1h4v2H5z"/></svg>
-              <span class="exp-role">Founder</span>
+          </li>
+          <li>
+            <div class="exp-item">
+              <div class="exp-row">
+                <div class="exp-logo"></div>
+                <span class="exp-info">WagerPager <span class="exp-sub">· Founder · 2023 – 2025</span></span>
+                <button class="exp-toggle">open</button>
+              </div>
+              <div class="exp-desc">
+                <p>The top-ranked sports betting jobs site, helping thousands find roles in the industry during global tech layoffs.</p>
+              </div>
             </div>
-            <span class="exp-meta">WagerPager, 2023 – 2025</span>
-          </div>
-          <div class="exp-entry">
-            <div class="exp-role-row">
-              <svg class="exp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-2H9v2H4V9zm9 6v2H11v-2h2zm-8 4v-2h4v1h6v-1h4v2H5z"/></svg>
-              <span class="exp-role">Research</span>
+          </li>
+          <li>
+            <div class="exp-item">
+              <div class="exp-row">
+                <div class="exp-logo"></div>
+                <span class="exp-info">Valente Center <span class="exp-sub">· Research · 2024 – 2025</span></span>
+                <button class="exp-toggle">open</button>
+              </div>
+              <div class="exp-desc">
+                <p>Benchmarks on AI grading of mathematical proofs (paper under publication review).</p>
+              </div>
             </div>
-            <span class="exp-meta">Valente Center, 2024 – 2025</span>
-          </div>
-          <div class="exp-entry">
-            <div class="exp-role-row">
-              <svg class="exp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-2H9v2H4V9zm9 6v2H11v-2h2zm-8 4v-2h4v1h6v-1h4v2H5z"/></svg>
-              <span class="exp-role">Growth</span>
+          </li>
+          <li>
+            <div class="exp-item">
+              <div class="exp-row">
+                <div class="exp-logo"></div>
+                <span class="exp-info">Claim <span class="exp-sub">· Growth · 2024</span></span>
+                <button class="exp-toggle">open</button>
+              </div>
+              <div class="exp-desc">
+                <p>Social-shopping app backed by Sequoia Capital; acquired by Wonder in January 2026.</p>
+              </div>
             </div>
-            <span class="exp-meta">Claim, 2024</span>
-          </div>
-          <div class="exp-entry">
-            <div class="exp-role-row">
-              <svg class="exp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-2H9v2H4V9zm9 6v2H11v-2h2zm-8 4v-2h4v1h6v-1h4v2H5z"/></svg>
-              <span class="exp-role">Research</span>
+          </li>
+          <li>
+            <div class="exp-item">
+              <div class="exp-row">
+                <div class="exp-logo"></div>
+                <span class="exp-info">T. Rowe Price <span class="exp-sub">· Research · 2023</span></span>
+                <button class="exp-toggle">open</button>
+              </div>
+              <div class="exp-desc">
+                <p>Equity research; Media and Entertainment sector.</p>
+              </div>
             </div>
-            <span class="exp-meta">T. Rowe Price, 2023</span>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="projects-view" id="projects-view">
@@ -608,6 +664,16 @@
 
     window.addEventListener('popstate', navigate);
     navigate();
+
+    // Experience expand/collapse
+    document.querySelectorAll('.exp-toggle').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var desc = btn.closest('.exp-item').querySelector('.exp-desc');
+        var isOpen = desc.classList.contains('open');
+        desc.classList.toggle('open');
+        btn.textContent = isOpen ? 'open' : 'close';
+      });
+    });
   </script>
 </body>
 </html>
