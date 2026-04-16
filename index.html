@@ -252,36 +252,44 @@
     /* Projects list */
     .projects-list {
       list-style: none;
-      margin-top: 1.5rem;
+      margin-top: 2rem;
     }
     .project-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 1rem 0;
+      display: block;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
       text-decoration: none;
       color: inherit;
     }
+    .projects-list li:first-child .project-item {
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
     .project-title {
-      font-size: 18px;
-      color: rgba(255,255,255,0.85);
+      font-size: 20px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.9);
       transition: color 0.3s ease;
     }
-    .project-meta {
+    .project-title .project-sub {
+      color: rgba(255,255,255,0.45);
+    }
+    .project-platform {
+      display: block;
       font-size: 11px;
-      color: rgba(255,255,255,0.25);
-      white-space: nowrap;
-      margin-left: 2rem;
-      flex-shrink: 0;
+      color: rgba(255,255,255,0.2);
       letter-spacing: 0.1em;
       text-transform: uppercase;
+      margin-top: 0.3rem;
       transition: color 0.3s ease;
     }
     .project-item:hover .project-title {
       color: red;
     }
-    .project-item:hover .project-meta {
-      color: rgba(255,255,255,0.5);
+    .project-item:hover .project-title .project-sub {
+      color: rgba(255,0,0,0.6);
+    }
+    .project-item:hover .project-platform {
+      color: rgba(255,255,255,0.4);
     }
 
     footer {
@@ -372,26 +380,26 @@
         <ul class="projects-list">
           <li>
             <a class="project-item" href="https://x.com/omeedtavakoli/status/2015214499809337758?s=20" target="_blank" rel="noopener">
-              <span class="project-title">How To Buy Clarity While It's Cheap</span>
-              <span class="project-meta">X</span>
+              <span class="project-title">How To Buy Clarity While It's Cheap <span class="project-sub">(Essay)</span></span>
+              <span class="project-platform">X</span>
             </a>
           </li>
           <li>
             <a class="project-item" href="https://drive.google.com/file/d/1wWxrdxCSKyTXEHgyay6H7A4Pbe9bkJxg/view" target="_blank" rel="noopener">
-              <span class="project-title">AI Math Proofs Research Paper (Draft)</span>
-              <span class="project-meta">PDF</span>
+              <span class="project-title">AI Math Proofs Research Paper <span class="project-sub">(Final Draft, publication review pending)</span></span>
+              <span class="project-platform">PDF</span>
             </a>
           </li>
           <li>
             <a class="project-item" href="https://www.youtube.com/@omeedtavakoli" target="_blank" rel="noopener">
-              <span class="project-title">Interviews with Martial Artists</span>
-              <span class="project-meta">YouTube</span>
+              <span class="project-title">Interviews with Martial Artists <span class="project-sub">(Podcast)</span></span>
+              <span class="project-platform">YouTube</span>
             </a>
           </li>
           <li>
             <a class="project-item" href="https://omeedtavakoli.notion.site/Backpacking-in-Europe-Fall-23-273331aefa948096a271d296166b3f09" target="_blank" rel="noopener">
-              <span class="project-title">Backpacking in Europe — Fall '23</span>
-              <span class="project-meta">Notion</span>
+              <span class="project-title">Backpacking in Europe <span class="project-sub">(Fall 2023, a journal)</span></span>
+              <span class="project-platform">Notion</span>
             </a>
           </li>
         </ul>
