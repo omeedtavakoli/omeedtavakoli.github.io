@@ -337,7 +337,7 @@
 <body>
   <header>
     <nav class="nav-links">
-      <a class="nav-link" href="/" id="home-link" style="display:none">Home</a>
+      <a class="nav-link" href="/" id="home-link">Home</a>
       <a class="nav-link" href="#about" id="about-toggle">Backstory</a>
       <a class="nav-link" href="#projects" id="projects-toggle">Projects</a>
     </nav>
@@ -477,21 +477,18 @@
         projectsView.classList.remove('visible');
         aboutToggle.classList.add('active');
         projectsToggle.classList.remove('active');
-        homeLink.style.display = '';
       } else if (hash === '#projects') {
         homeView.classList.add('hidden');
         projectsView.classList.add('visible');
         aboutView.classList.remove('visible');
         projectsToggle.classList.add('active');
         aboutToggle.classList.remove('active');
-        homeLink.style.display = '';
       } else {
         homeView.classList.remove('hidden');
         aboutView.classList.remove('visible');
         projectsView.classList.remove('visible');
         aboutToggle.classList.remove('active');
         projectsToggle.classList.remove('active');
-        homeLink.style.display = 'none';
       }
     }
 
