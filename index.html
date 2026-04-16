@@ -150,6 +150,7 @@
       justify-content: center;
       position: absolute;
       inset: 0;
+      padding-bottom: 12vh;
       transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .home-view.hidden {
@@ -162,6 +163,7 @@
       color: #fff;
       font-size: 20px;
       letter-spacing: 0.35em;
+      padding-left: 0.35em;
       text-transform: uppercase;
       font-style: bold;
       cursor: pointer;
@@ -192,10 +194,7 @@
     .projects-view {
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 2rem;
+      overflow: hidden;
       transform: translateX(100%);
       opacity: 0;
       pointer-events: none;
@@ -207,6 +206,7 @@
       transform: translateX(0);
       opacity: 1;
       pointer-events: auto;
+      overflow: visible;
     }
     .about-view::after,
     .experience-view::after,
@@ -222,12 +222,16 @@
       z-index: 1;
     }
     .about-content {
-      width: 100%;
-      max-width: 800px;
-      max-height: calc(100vh - 12rem);
+      position: absolute;
+      inset: 0;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      padding-right: 1rem;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
+      padding: 2rem 1rem 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       scrollbar-width: thin;
       scrollbar-color: rgba(255,255,255,0.15) transparent;
     }
@@ -240,6 +244,10 @@
     .about-content::-webkit-scrollbar-thumb {
       background: rgba(255,255,255,0.15);
       border-radius: 2px;
+    }
+    .about-content > * {
+      width: 100%;
+      max-width: 800px;
     }
     .about-title {
       font-size: 28px;
@@ -292,54 +300,38 @@
       color: rgba(255,255,255,0.4);
     }
 
-    /* Experience table */
-    .exp-table {
-      display: grid;
-      grid-template-columns: 160px 1fr 150px 90px;
-      column-gap: 1.25rem;
+    /* Experience list */
+    .exp-list {
       margin-top: 2rem;
-      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
     }
     .exp-entry {
-      display: contents;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
     }
-    .exp-company-cell,
-    .exp-desc-cell,
-    .exp-role-cell,
-    .exp-timeline-cell {
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .exp-company-cell {
+    .exp-role-row {
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      font-size: 17px;
-      color: rgba(255,255,255,0.9);
     }
-    .exp-logo-placeholder {
-      width: 26px;
-      height: 26px;
-      border-radius: 5px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.05);
+    .exp-icon {
+      width: 20px;
+      height: 20px;
       flex-shrink: 0;
+      fill: rgba(255,255,255,0.45);
     }
-    .exp-desc-cell {
-      font-size: 16px;
-      line-height: 1.65;
-      color: rgba(255,255,255,0.8);
+    .exp-role {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
     }
-    .exp-role-cell {
-      font-size: 16px;
-      color: rgba(255,255,255,0.6);
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .exp-timeline-cell {
-      font-size: 16px;
-      color: rgba(255,255,255,0.5);
-      white-space: nowrap;
+    .exp-meta {
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+      padding-left: calc(20px + 0.6rem);
     }
 
     footer {
@@ -368,22 +360,12 @@
         width: 18px;
         height: 18px;
       }
-      .about-view,
-      .experience-view,
-      .projects-view {
-        padding-top: 0.5rem;
-      }
-      .exp-table {
-        grid-template-columns: 1fr 1fr;
-      }
-      .exp-header-row > div:nth-child(2),
-      .exp-desc-cell { display: none; }
-      .exp-timeline-cell { text-align: right; }
       .about-content {
-        max-width: 100%;
-        padding-right: 0;
-        max-height: calc(100dvh - 10rem);
+        padding: 1rem 0.5rem 6rem;
       }
+      .exp-role { font-size: 16px; }
+      .exp-meta { font-size: 14px; padding-left: calc(20px + 0.6rem); }
+      .exp-icon { width: 18px; height: 18px; }
       .about-title { font-size: 22px; }
       footer {
         flex-direction: column;
@@ -435,15 +417,41 @@
     <div class="experience-view" id="experience-view">
       <div class="about-content">
         <h1 class="about-title">Experience</h1>
-        <div class="exp-table">
+        <div class="exp-list">
           <div class="exp-entry">
-            <div class="exp-company-cell">
-              <div class="exp-logo-placeholder"></div>
-              <span>Perplexity</span>
+            <div class="exp-role-row">
+              <svg class="exp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-2H9v2H4V9zm9 6v2H11v-2h2zm-8 4v-2h4v1h6v-1h4v2H5z"/></svg>
+              <span class="exp-role">Head of DevX</span>
             </div>
-            <div class="exp-desc-cell">Search meets AI to deliver fast, reliable answers; joined &lt;120 employees.</div>
-            <div class="exp-role-cell">Product &amp; Growth</div>
-            <div class="exp-timeline-cell">2024 – 2025</div>
+            <span class="exp-meta">Cerebras, Sept 2025 – Present</span>
+          </div>
+          <div class="exp-entry">
+            <div class="exp-role-row">
+              <svg class="exp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-2H9v2H4V9zm9 6v2H11v-2h2zm-8 4v-2h4v1h6v-1h4v2H5z"/></svg>
+              <span class="exp-role">Growth Engineer</span>
+            </div>
+            <span class="exp-meta">Cerebras, Sept 2024 – Sept 2025</span>
+          </div>
+          <div class="exp-entry">
+            <div class="exp-role-row">
+              <svg class="exp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-2H9v2H4V9zm9 6v2H11v-2h2zm-8 4v-2h4v1h6v-1h4v2H5z"/></svg>
+              <span class="exp-role">Investing Scout</span>
+            </div>
+            <span class="exp-meta">Bain Capital Ventures, June 2024 – Present</span>
+          </div>
+          <div class="exp-entry">
+            <div class="exp-role-row">
+              <svg class="exp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-2H9v2H4V9zm9 6v2H11v-2h2zm-8 4v-2h4v1h6v-1h4v2H5z"/></svg>
+              <span class="exp-role">First hire, Growth Engineer</span>
+            </div>
+            <span class="exp-meta">Exa AI (Series A), Sept 2023 – June 2024</span>
+          </div>
+          <div class="exp-entry">
+            <div class="exp-role-row">
+              <svg class="exp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-2H9v2H4V9zm9 6v2H11v-2h2zm-8 4v-2h4v1h6v-1h4v2H5z"/></svg>
+              <span class="exp-role">Cofounder &amp; CEO</span>
+            </div>
+            <span class="exp-meta">Thrifthouse, Dec 2020 – Sept 2022</span>
           </div>
         </div>
       </div>
