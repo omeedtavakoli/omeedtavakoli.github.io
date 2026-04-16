@@ -308,9 +308,15 @@
     .exp-item {
       padding: 1.25rem 0;
       border-bottom: 1px solid rgba(255,255,255,0.07);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s ease;
     }
     .exp-list li:first-child .exp-item {
       border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .exp-item:hover {
+      background: rgba(255,255,255,0.04);
     }
     .exp-row {
       display: flex;
@@ -325,28 +331,35 @@
       border: 1px solid rgba(255,255,255,0.15);
       background: rgba(255,255,255,0.08);
     }
-    .exp-info {
+    .exp-text {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .exp-company {
       font-size: 17px;
       line-height: 1.5;
       color: rgba(255,255,255,0.9);
     }
-    .exp-info .exp-sub {
+    .exp-meta {
+      font-size: 15px;
+      line-height: 1.4;
       color: rgba(255,255,255,0.4);
     }
-    .exp-toggle {
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.35);
-      font-family: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      padding: 0.2rem 0;
-      transition: color 0.3s ease;
+    .exp-arrow {
       flex-shrink: 0;
+      font-size: 18px;
+      color: rgba(255,255,255,0);
+      transition: color 0.3s ease, transform 0.3s ease;
+      user-select: none;
     }
-    .exp-toggle:hover {
-      color: rgba(255,255,255,0.7);
+    .exp-item:hover .exp-arrow {
+      color: rgba(255,255,255,0.4);
+    }
+    .exp-item.open .exp-arrow {
+      color: rgba(255,255,255,0.4);
+      transform: rotate(90deg);
     }
     .exp-desc {
       max-height: 0;
@@ -354,7 +367,7 @@
       transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
       opacity: 0;
     }
-    .exp-desc.open {
+    .exp-item.open .exp-desc {
       max-height: 10rem;
       opacity: 1;
     }
@@ -394,7 +407,8 @@
       .about-content {
         padding: 1rem 0.5rem 6rem;
       }
-      .exp-info { font-size: 15px; }
+      .exp-company { font-size: 15px; }
+      .exp-meta { font-size: 13px; }
       .exp-logo { width: 20px; height: 20px; }
       .exp-desc p { font-size: 14px; padding-left: calc(20px + 0.6rem); }
       .about-title { font-size: 22px; }
@@ -453,8 +467,11 @@
             <div class="exp-item">
               <div class="exp-row">
                 <div class="exp-logo"></div>
-                <span class="exp-info">Perplexity <span class="exp-sub">· Product &amp; Growth · 2024 – 2025</span></span>
-                <button class="exp-toggle">open</button>
+                <div class="exp-text">
+                  <span class="exp-company">Perplexity</span>
+                  <span class="exp-meta">Product &amp; Growth, 2024 – 2025</span>
+                </div>
+                <span class="exp-arrow">→</span>
               </div>
               <div class="exp-desc">
                 <p>Search meets AI to deliver fast, reliable answers; joined &lt;120 employees.</p>
@@ -465,8 +482,11 @@
             <div class="exp-item">
               <div class="exp-row">
                 <div class="exp-logo"></div>
-                <span class="exp-info">WagerPager <span class="exp-sub">· Founder · 2023 – 2025</span></span>
-                <button class="exp-toggle">open</button>
+                <div class="exp-text">
+                  <span class="exp-company">WagerPager</span>
+                  <span class="exp-meta">Founder, 2023 – 2025</span>
+                </div>
+                <span class="exp-arrow">→</span>
               </div>
               <div class="exp-desc">
                 <p>The top-ranked sports betting jobs site, helping thousands find roles in the industry during global tech layoffs.</p>
@@ -477,8 +497,11 @@
             <div class="exp-item">
               <div class="exp-row">
                 <div class="exp-logo"></div>
-                <span class="exp-info">Valente Center <span class="exp-sub">· Research · 2024 – 2025</span></span>
-                <button class="exp-toggle">open</button>
+                <div class="exp-text">
+                  <span class="exp-company">Valente Center</span>
+                  <span class="exp-meta">Research, 2024 – 2025</span>
+                </div>
+                <span class="exp-arrow">→</span>
               </div>
               <div class="exp-desc">
                 <p>Benchmarks on AI grading of mathematical proofs (paper under publication review).</p>
@@ -489,8 +512,11 @@
             <div class="exp-item">
               <div class="exp-row">
                 <div class="exp-logo"></div>
-                <span class="exp-info">Claim <span class="exp-sub">· Growth · 2024 – 2024</span></span>
-                <button class="exp-toggle">open</button>
+                <div class="exp-text">
+                  <span class="exp-company">Claim</span>
+                  <span class="exp-meta">Growth, 2024 – 2024</span>
+                </div>
+                <span class="exp-arrow">→</span>
               </div>
               <div class="exp-desc">
                 <p>Social-shopping app backed by Sequoia Capital; acquired by Wonder in January 2026.</p>
@@ -501,8 +527,11 @@
             <div class="exp-item">
               <div class="exp-row">
                 <div class="exp-logo"></div>
-                <span class="exp-info">T. Rowe Price <span class="exp-sub">· Research · 2023 – 2023</span></span>
-                <button class="exp-toggle">open</button>
+                <div class="exp-text">
+                  <span class="exp-company">T. Rowe Price</span>
+                  <span class="exp-meta">Research, 2023 – 2023</span>
+                </div>
+                <span class="exp-arrow">→</span>
               </div>
               <div class="exp-desc">
                 <p>Equity research; Media and Entertainment sector.</p>
@@ -666,12 +695,9 @@
     navigate();
 
     // Experience expand/collapse
-    document.querySelectorAll('.exp-toggle').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var desc = btn.closest('.exp-item').querySelector('.exp-desc');
-        var isOpen = desc.classList.contains('open');
-        desc.classList.toggle('open');
-        btn.textContent = isOpen ? 'open' : 'close';
+    document.querySelectorAll('.exp-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        item.classList.toggle('open');
       });
     });
   </script>
