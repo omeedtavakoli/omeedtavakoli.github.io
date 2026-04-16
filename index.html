@@ -107,6 +107,13 @@
     .nav-link:hover {
       color: red;
     }
+    .nav-link.active {
+      color: rgba(255,255,255,0.25);
+      cursor: pointer;
+    }
+    .nav-link.active:hover {
+      color: rgba(255,255,255,0.4);
+    }
     .socials {
       display: flex;
       align-items: center;
@@ -465,25 +472,25 @@
         homeView.classList.add('hidden');
         aboutView.classList.add('visible');
         projectsView.classList.remove('visible');
-        aboutToggle.textContent = 'Back';
+        aboutToggle.classList.add('active');
         aboutToggle.href = window.location.pathname;
-        projectsToggle.textContent = 'Projects';
+        projectsToggle.classList.remove('active');
         projectsToggle.href = '#projects';
       } else if (hash === '#projects') {
         homeView.classList.add('hidden');
         projectsView.classList.add('visible');
         aboutView.classList.remove('visible');
-        projectsToggle.textContent = 'Back';
+        projectsToggle.classList.add('active');
         projectsToggle.href = window.location.pathname;
-        aboutToggle.textContent = 'Backstory';
+        aboutToggle.classList.remove('active');
         aboutToggle.href = '#about';
       } else {
         homeView.classList.remove('hidden');
         aboutView.classList.remove('visible');
         projectsView.classList.remove('visible');
-        aboutToggle.textContent = 'Backstory';
+        aboutToggle.classList.remove('active');
         aboutToggle.href = '#about';
-        projectsToggle.textContent = 'Projects';
+        projectsToggle.classList.remove('active');
         projectsToggle.href = '#projects';
       }
     }
