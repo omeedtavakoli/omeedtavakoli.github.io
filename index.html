@@ -291,13 +291,13 @@
       transition: color 0.3s ease;
     }
     .project-title .project-sub {
-      color: rgba(255,255,255,0.4);
+      color: red;
     }
     .project-item:hover .project-title {
       color: red;
     }
     .project-item:hover .project-title .project-sub {
-      color: rgba(255,255,255,0.4);
+      color: red;
     }
 
     /* Experience list */
@@ -306,60 +306,28 @@
       margin-top: 2rem;
     }
     .exp-item {
+      display: block;
       padding: 1.25rem 0;
       border-bottom: 1px solid rgba(255,255,255,0.07);
       cursor: pointer;
-      border-radius: 4px;
-      transition: background 0.3s ease;
     }
     .exp-list li:first-child .exp-item {
       border-top: 1px solid rgba(255,255,255,0.07);
     }
-    .exp-item:hover {
-      background: rgba(255,255,255,0.04);
-    }
-    .exp-row {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .exp-logo {
-      width: 22px;
-      height: 22px;
-      flex-shrink: 0;
-      border-radius: 5px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.08);
-    }
-    .exp-text {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-    .exp-company {
+    .exp-title {
       font-size: 17px;
       line-height: 1.5;
       color: rgba(255,255,255,0.9);
+      transition: color 0.3s ease;
     }
-    .exp-meta {
-      font-size: 15px;
-      line-height: 1.4;
-      color: rgba(255,255,255,0.4);
+    .exp-title .exp-sub {
+      color: red;
     }
-    .exp-arrow {
-      flex-shrink: 0;
-      font-size: 18px;
-      color: rgba(255,255,255,0);
-      transition: color 0.3s ease, transform 0.3s ease;
-      user-select: none;
+    .exp-item:hover .exp-title {
+      color: red;
     }
-    .exp-item:hover .exp-arrow {
-      color: rgba(255,255,255,0.4);
-    }
-    .exp-item.open .exp-arrow {
-      color: rgba(255,255,255,0.4);
-      transform: rotate(90deg);
+    .exp-item:hover .exp-title .exp-sub {
+      color: red;
     }
     .exp-desc {
       max-height: 0;
@@ -372,10 +340,10 @@
       opacity: 1;
     }
     .exp-desc p {
-      font-size: 15px;
-      line-height: 1.65;
-      color: rgba(255,255,255,0.55);
-      padding: 0.75rem 0 0 calc(22px + 0.6rem);
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.8);
+      padding-top: 0.75rem;
     }
 
     footer {
@@ -407,10 +375,8 @@
       .about-content {
         padding: 1rem 0.5rem 6rem;
       }
-      .exp-company { font-size: 15px; }
-      .exp-meta { font-size: 13px; }
-      .exp-logo { width: 20px; height: 20px; }
-      .exp-desc p { font-size: 14px; padding-left: calc(20px + 0.6rem); }
+      .exp-title { font-size: 15px; }
+      .exp-desc p { font-size: 14px; }
       .about-title { font-size: 22px; }
       footer {
         flex-direction: column;
@@ -465,14 +431,7 @@
         <ul class="exp-list">
           <li>
             <div class="exp-item">
-              <div class="exp-row">
-                <div class="exp-logo"></div>
-                <div class="exp-text">
-                  <span class="exp-company">Perplexity</span>
-                  <span class="exp-meta">Product &amp; Growth, 2024 – 2025</span>
-                </div>
-                <span class="exp-arrow">→</span>
-              </div>
+              <span class="exp-title">Perplexity <span class="exp-sub">(Product &amp; Growth, 2024 – 2025)</span></span>
               <div class="exp-desc">
                 <p>Search meets AI to deliver fast, reliable answers; joined &lt;120 employees.</p>
               </div>
@@ -480,14 +439,7 @@
           </li>
           <li>
             <div class="exp-item">
-              <div class="exp-row">
-                <div class="exp-logo"></div>
-                <div class="exp-text">
-                  <span class="exp-company">WagerPager</span>
-                  <span class="exp-meta">Founder, 2023 – 2025</span>
-                </div>
-                <span class="exp-arrow">→</span>
-              </div>
+              <span class="exp-title">WagerPager <span class="exp-sub">(Founder, 2023 – 2025)</span></span>
               <div class="exp-desc">
                 <p>The top-ranked sports betting jobs site, helping thousands find roles in the industry during global tech layoffs.</p>
               </div>
@@ -495,14 +447,7 @@
           </li>
           <li>
             <div class="exp-item">
-              <div class="exp-row">
-                <div class="exp-logo"></div>
-                <div class="exp-text">
-                  <span class="exp-company">Valente Center</span>
-                  <span class="exp-meta">Research, 2024 – 2025</span>
-                </div>
-                <span class="exp-arrow">→</span>
-              </div>
+              <span class="exp-title">Valente Center <span class="exp-sub">(Research, 2024 – 2025)</span></span>
               <div class="exp-desc">
                 <p>Benchmarks on AI grading of mathematical proofs (paper under publication review).</p>
               </div>
@@ -510,14 +455,7 @@
           </li>
           <li>
             <div class="exp-item">
-              <div class="exp-row">
-                <div class="exp-logo"></div>
-                <div class="exp-text">
-                  <span class="exp-company">Claim</span>
-                  <span class="exp-meta">Growth, 2024 – 2024</span>
-                </div>
-                <span class="exp-arrow">→</span>
-              </div>
+              <span class="exp-title">Claim <span class="exp-sub">(Growth, 2024 – 2024)</span></span>
               <div class="exp-desc">
                 <p>Social-shopping app backed by Sequoia Capital; acquired by Wonder in January 2026.</p>
               </div>
@@ -525,14 +463,7 @@
           </li>
           <li>
             <div class="exp-item">
-              <div class="exp-row">
-                <div class="exp-logo"></div>
-                <div class="exp-text">
-                  <span class="exp-company">T. Rowe Price</span>
-                  <span class="exp-meta">Research, 2023 – 2023</span>
-                </div>
-                <span class="exp-arrow">→</span>
-              </div>
+              <span class="exp-title">T. Rowe Price <span class="exp-sub">(Research, 2023 – 2023)</span></span>
               <div class="exp-desc">
                 <p>Equity research; Media and Entertainment sector.</p>
               </div>
