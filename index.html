@@ -186,8 +186,9 @@
       color: #fff;
     }
 
-    /* About & Projects views — shared */
+    /* About, Experience & Projects views — shared */
     .about-view,
+    .experience-view,
     .projects-view {
       position: absolute;
       inset: 0;
@@ -201,12 +202,14 @@
       transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .about-view.visible,
+    .experience-view.visible,
     .projects-view.visible {
       transform: translateX(0);
       opacity: 1;
       pointer-events: auto;
     }
     .about-view::after,
+    .experience-view::after,
     .projects-view::after {
       content: '';
       position: absolute;
@@ -289,6 +292,78 @@
       color: rgba(255,255,255,0.4);
     }
 
+    /* Experience table */
+    .exp-table {
+      width: 100%;
+      margin-top: 2rem;
+    }
+    .exp-entry {
+      display: grid;
+      grid-template-columns: 44px 1fr auto auto;
+      grid-template-areas:
+        "logo company role timeline"
+        "logo desc    desc desc";
+      column-gap: 1.5rem;
+      row-gap: 0.5rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .exp-table .exp-entry:first-child {
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .exp-logo {
+      grid-area: logo;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 2px;
+    }
+    .exp-logo-placeholder {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      flex-shrink: 0;
+    }
+    .exp-company {
+      grid-area: company;
+      font-size: 17px;
+      color: rgba(255,255,255,0.9);
+    }
+    .exp-role {
+      grid-area: role;
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      white-space: nowrap;
+      text-align: right;
+    }
+    .exp-timeline {
+      grid-area: timeline;
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      white-space: nowrap;
+      text-align: right;
+    }
+    .exp-desc {
+      grid-area: desc;
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.45);
+    }
+    @media (max-width: 600px) {
+      .exp-entry {
+        grid-template-columns: 36px 1fr;
+        grid-template-areas:
+          "logo company"
+          ". role"
+          ". timeline"
+          ". desc";
+        column-gap: 1rem;
+      }
+      .exp-role,
+      .exp-timeline { text-align: left; }
+    }
+
     footer {
       display: flex;
       justify-content: space-between;
@@ -316,6 +391,7 @@
         height: 18px;
       }
       .about-view,
+      .experience-view,
       .projects-view {
         padding-top: 0.5rem;
       }
@@ -339,6 +415,7 @@
     <nav class="nav-links">
       <a class="nav-link" href="/" id="home-link">Home</a>
       <a class="nav-link" href="#about" id="about-toggle">Backstory</a>
+      <a class="nav-link" href="#experience" id="experience-toggle">Experience</a>
       <a class="nav-link" href="#projects" id="projects-toggle">Projects</a>
     </nav>
     <div class="socials">
@@ -369,6 +446,22 @@
         <p>That email led me to join Perplexity's ~10 person growth team, where I worked for about a year. I was leading the company's education expansion vertical, and realized startups were what I wanted all along.</p>
         <p>So I packed my bags, left the East Coast, and moved west to get closer to Silicon Valley.</p>
         <p>Coming soon on what's next.</p>
+      </div>
+    </div>
+    <div class="experience-view" id="experience-view">
+      <div class="about-content">
+        <h1 class="about-title">Experience</h1>
+        <div class="exp-table">
+          <div class="exp-entry">
+            <div class="exp-logo">
+              <div class="exp-logo-placeholder"></div>
+            </div>
+            <div class="exp-company">Perplexity</div>
+            <div class="exp-role">Growth &amp; Product</div>
+            <div class="exp-timeline">2024 – 2025</div>
+            <div class="exp-desc">Search meets AI to deliver fast, reliable answers; joined &lt;120 employees.</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="projects-view" id="projects-view">
@@ -464,31 +557,33 @@
     // Hash routing
     var homeView = document.getElementById('home-view');
     var aboutView = document.getElementById('about-view');
+    var experienceView = document.getElementById('experience-view');
     var projectsView = document.getElementById('projects-view');
     var aboutToggle = document.getElementById('about-toggle');
+    var experienceToggle = document.getElementById('experience-toggle');
     var projectsToggle = document.getElementById('projects-toggle');
     var homeLink = document.getElementById('home-link');
 
+    var allViews = [aboutView, experienceView, projectsView];
+    var allToggles = [aboutToggle, experienceToggle, projectsToggle];
+
     function navigate() {
       var hash = window.location.hash;
+      allViews.forEach(function(v) { v.classList.remove('visible'); });
+      allToggles.forEach(function(t) { t.classList.remove('active'); });
+      homeView.classList.add('hidden');
+
       if (hash === '#about') {
-        homeView.classList.add('hidden');
         aboutView.classList.add('visible');
-        projectsView.classList.remove('visible');
         aboutToggle.classList.add('active');
-        projectsToggle.classList.remove('active');
+      } else if (hash === '#experience') {
+        experienceView.classList.add('visible');
+        experienceToggle.classList.add('active');
       } else if (hash === '#projects') {
-        homeView.classList.add('hidden');
         projectsView.classList.add('visible');
-        aboutView.classList.remove('visible');
         projectsToggle.classList.add('active');
-        aboutToggle.classList.remove('active');
       } else {
         homeView.classList.remove('hidden');
-        aboutView.classList.remove('visible');
-        projectsView.classList.remove('visible');
-        aboutToggle.classList.remove('active');
-        projectsToggle.classList.remove('active');
       }
     }
 
@@ -498,29 +593,22 @@
       navigate();
     });
 
-    aboutToggle.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (window.location.hash === '#about') {
-        history.pushState(null, '', window.location.pathname);
-      } else {
-        history.pushState(null, '', '#about');
-      }
-      navigate();
-    });
-
-    projectsToggle.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (window.location.hash === '#projects') {
-        history.pushState(null, '', window.location.pathname);
-      } else {
-        history.pushState(null, '', '#projects');
-      }
-      navigate();
+    [aboutToggle, experienceToggle, projectsToggle].forEach(function(toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = toggle.getAttribute('href');
+        if (window.location.hash === target) {
+          history.pushState(null, '', window.location.pathname);
+        } else {
+          history.pushState(null, '', target);
+        }
+        navigate();
+      });
     });
 
     // Escape key to go back from any view
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && (window.location.hash === '#about' || window.location.hash === '#projects')) {
+      if (e.key === 'Escape' && window.location.hash) {
         history.pushState(null, '', window.location.pathname);
         navigate();
       }
