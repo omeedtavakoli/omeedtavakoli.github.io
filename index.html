@@ -349,14 +349,14 @@
       color: rgba(255,255,255,0.4);
     }
     .exp-desc {
-      max-height: 0;
+      max-height: 10rem;
       overflow: hidden;
       transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-      opacity: 0;
-    }
-    .exp-item.open .exp-desc {
-      max-height: 10rem;
       opacity: 1;
+    }
+    .exp-item.closed .exp-desc {
+      max-height: 0;
+      opacity: 0;
     }
     .exp-desc p {
       font-size: 16px;
@@ -661,10 +661,10 @@
     window.addEventListener('popstate', navigate);
     navigate();
 
-    // Experience expand/collapse
+    // Experience expand/collapse (starts open, click to close)
     document.querySelectorAll('.exp-item').forEach(function(item) {
       item.addEventListener('click', function() {
-        item.classList.toggle('open');
+        item.classList.toggle('closed');
       });
     });
   </script>
