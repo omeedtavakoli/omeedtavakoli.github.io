@@ -221,14 +221,38 @@
       pointer-events: none;
       z-index: 1;
     }
+    .view-header {
+      position: relative;
+      z-index: 2;
+      padding: 2rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .view-header > * {
+      width: 100%;
+      max-width: 800px;
+    }
+    .about-title {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .about-updated {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+    }
     .about-content {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
       touch-action: pan-y;
-      padding: 2rem 1rem 6rem;
+      padding: 6rem 1rem 6rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -248,16 +272,6 @@
     .about-content > * {
       width: 100%;
       max-width: 800px;
-    }
-    .about-title {
-      font-size: 28px;
-      font-weight: 400;
-      margin-bottom: 0.4rem;
-    }
-    .about-updated {
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 2rem;
     }
     .about-content p {
       font-size: 16px;
@@ -398,7 +412,9 @@
       }
       .exp-title { font-size: 15px; }
       .exp-desc p { font-size: 14px; }
-      .about-title { font-size: 22px; }
+      .about-title { font-size: 32px; }
+      .view-header { padding: 1rem 0.5rem 0.75rem; }
+      .about-content { padding-top: 5rem; }
       footer {
         flex-direction: column;
         align-items: flex-start;
@@ -431,9 +447,11 @@
       <a class="name-box" href="mailto:omeedt1234@gmail.com">Omeed Tavakoli</a>
     </div>
     <div class="about-view" id="about-view">
-      <div class="about-content">
+      <div class="view-header">
         <h1 class="about-title">My Backstory</h1>
         <p class="about-updated">Last updated: March 2026</p>
+      </div>
+      <div class="about-content">
         <p>Growing up, my older brother who studied at Babson College had a major impact on me. When I was four, he showed me my first "high tech" toy — the first-gen iPad.</p>
         <p>Around seven, I stumbled onto clips of Jackie Chan, Bruce Lee, and Chuck Norris on YouTube. For more than two years, I couldn't sleep at night because I wanted to be the closest thing to a modern ninja or samurai. I found the nearest martial arts studio in my hometown in Maryland and never stopped.</p>
         <p>When I was 14, my first job was instructing at a small martial arts school. I spent six hours a day preparing for my third-degree black belt test, earned in May 2022, while coaching underbelt students and competing in national tournaments. By 18, I was awarded a black top gi (which I did wear around the house).</p>
@@ -444,8 +462,10 @@
       </div>
     </div>
     <div class="experience-view" id="experience-view">
-      <div class="about-content">
+      <div class="view-header">
         <h1 class="about-title">Experience</h1>
+      </div>
+      <div class="about-content">
         <ul class="exp-list">
           <li>
             <div class="exp-item">
@@ -491,8 +511,10 @@
       </div>
     </div>
     <div class="projects-view" id="projects-view">
-      <div class="about-content">
+      <div class="view-header">
         <h1 class="about-title">Projects</h1>
+      </div>
+      <div class="about-content">
         <ul class="projects-list">
           <li>
             <a class="project-item" href="https://x.com/omeedtavakoli/status/2015214499809337758?s=20" target="_blank" rel="noopener">
