@@ -207,6 +207,19 @@
       pointer-events: auto;
       overflow: visible;
     }
+    .about-view::before,
+    .experience-view::before,
+    .projects-view::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3rem;
+      background: linear-gradient(to bottom, #1a1a1a, transparent);
+      pointer-events: none;
+      z-index: 1;
+    }
     .about-view::after,
     .experience-view::after,
     .projects-view::after {
@@ -394,7 +407,7 @@
         height: 18px;
       }
       .about-content {
-        padding: 1rem 0.5rem 6rem;
+        padding: 1.5rem 0.5rem 6rem;
       }
       .projects-list {
         grid-template-columns: 1fr;
