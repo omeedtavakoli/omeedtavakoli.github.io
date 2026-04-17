@@ -191,10 +191,11 @@
       color: #fff;
     }
 
-    /* About, Experience & Projects views — shared */
+    /* About, Experience, Projects & Interests views — shared */
     .about-view,
     .experience-view,
-    .projects-view {
+    .projects-view,
+    .interests-view {
       position: absolute;
       inset: 0;
       overflow: hidden;
@@ -205,7 +206,8 @@
     }
     .about-view.visible,
     .experience-view.visible,
-    .projects-view.visible {
+    .projects-view.visible,
+    .interests-view.visible {
       transform: translateX(0);
       opacity: 1;
       pointer-events: auto;
@@ -213,7 +215,8 @@
     }
     .about-view::before,
     .experience-view::before,
-    .projects-view::before {
+    .projects-view::before,
+    .interests-view::before {
       content: '';
       position: absolute;
       top: 0;
@@ -226,7 +229,8 @@
     }
     .about-view::after,
     .experience-view::after,
-    .projects-view::after {
+    .projects-view::after,
+    .interests-view::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -385,6 +389,60 @@
       padding-top: 0.75rem;
     }
 
+    /* Interests */
+    .interests-section {
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .interests-heading {
+      font-size: 22px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 1rem;
+    }
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+    .interests-item {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .interests-item:hover {
+      border-color: rgba(255,255,255,0.3);
+      transform: translateY(-3px);
+    }
+    .interests-grid--portrait .interests-item {
+      aspect-ratio: 2 / 3;
+    }
+    .interests-grid--square .interests-item {
+      aspect-ratio: 1 / 1;
+    }
+    .interests-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .interests-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      padding: 0.5rem;
+    }
+
     footer {
       display: flex;
       justify-content: space-between;
@@ -416,6 +474,11 @@
       .projects-list {
         grid-template-columns: 1fr;
       }
+      .interests-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+      }
+      .interests-heading { font-size: 18px; }
       .exp-title { font-size: 17px; }
       .exp-desc p { font-size: 16px; }
       .about-title { font-size: 24px; }
@@ -436,6 +499,7 @@
       <a class="nav-link" href="#about" id="about-toggle">Backstory</a>
       <a class="nav-link" href="#experience" id="experience-toggle">Experience</a>
       <a class="nav-link" href="#projects" id="projects-toggle">Projects</a>
+      <a class="nav-link" href="#interests" id="interests-toggle">Interests</a>
     </nav>
     <div class="socials">
       <a class="social-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener" aria-label="X (Twitter)">
@@ -628,6 +692,52 @@
         </ul>
       </div>
     </div>
+    <div class="interests-view" id="interests-view">
+      <div class="about-content">
+        <h1 class="about-title">Interests</h1>
+        <p class="about-updated">What shaped me from 0 to 18.</p>
+        <section class="interests-section">
+          <h2 class="interests-heading">Books</h2>
+          <div class="interests-grid interests-grid--portrait">
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Book 1"><div class="interests-placeholder">Book 1</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Book 2"><div class="interests-placeholder">Book 2</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Book 3"><div class="interests-placeholder">Book 3</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Book 4"><div class="interests-placeholder">Book 4</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Book 5"><div class="interests-placeholder">Book 5</div></a>
+          </div>
+        </section>
+        <section class="interests-section">
+          <h2 class="interests-heading">Music</h2>
+          <div class="interests-grid interests-grid--square">
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Album 1"><div class="interests-placeholder">Album 1</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Album 2"><div class="interests-placeholder">Album 2</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Album 3"><div class="interests-placeholder">Album 3</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Album 4"><div class="interests-placeholder">Album 4</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Album 5"><div class="interests-placeholder">Album 5</div></a>
+          </div>
+        </section>
+        <section class="interests-section">
+          <h2 class="interests-heading">Movies</h2>
+          <div class="interests-grid interests-grid--portrait">
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Movie 1"><div class="interests-placeholder">Movie 1</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Movie 2"><div class="interests-placeholder">Movie 2</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Movie 3"><div class="interests-placeholder">Movie 3</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Movie 4"><div class="interests-placeholder">Movie 4</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Movie 5"><div class="interests-placeholder">Movie 5</div></a>
+          </div>
+        </section>
+        <section class="interests-section">
+          <h2 class="interests-heading">Podcast Episodes</h2>
+          <div class="interests-grid interests-grid--square">
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Podcast 1"><div class="interests-placeholder">Podcast 1</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Podcast 2"><div class="interests-placeholder">Podcast 2</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Podcast 3"><div class="interests-placeholder">Podcast 3</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Podcast 4"><div class="interests-placeholder">Podcast 4</div></a>
+            <a class="interests-item" href="#" target="_blank" rel="noopener" title="Podcast 5"><div class="interests-placeholder">Podcast 5</div></a>
+          </div>
+        </section>
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -696,13 +806,15 @@
     var aboutView = document.getElementById('about-view');
     var experienceView = document.getElementById('experience-view');
     var projectsView = document.getElementById('projects-view');
+    var interestsView = document.getElementById('interests-view');
     var aboutToggle = document.getElementById('about-toggle');
     var experienceToggle = document.getElementById('experience-toggle');
     var projectsToggle = document.getElementById('projects-toggle');
+    var interestsToggle = document.getElementById('interests-toggle');
     var homeLink = document.getElementById('home-link');
 
-    var allViews = [aboutView, experienceView, projectsView];
-    var allToggles = [aboutToggle, experienceToggle, projectsToggle];
+    var allViews = [aboutView, experienceView, projectsView, interestsView];
+    var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
 
     function navigate() {
       var hash = window.location.hash;
@@ -719,6 +831,9 @@
       } else if (hash === '#projects') {
         projectsView.classList.add('visible');
         projectsToggle.classList.add('active');
+      } else if (hash === '#interests') {
+        interestsView.classList.add('visible');
+        interestsToggle.classList.add('active');
       } else {
         homeView.classList.remove('hidden');
       }
@@ -730,7 +845,7 @@
       navigate();
     });
 
-    [aboutToggle, experienceToggle, projectsToggle].forEach(function(toggle) {
+    [aboutToggle, experienceToggle, projectsToggle, interestsToggle].forEach(function(toggle) {
       toggle.addEventListener('click', function(e) {
         e.preventDefault();
         var target = toggle.getAttribute('href');
