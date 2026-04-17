@@ -273,16 +273,35 @@
     .projects-list {
       list-style: none;
       margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
     .project-item {
-      display: block;
-      padding: 1.25rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
       text-decoration: none;
       color: inherit;
+      padding: 1rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
     }
-    .projects-list li:first-child .project-item {
-      border-top: 1px solid rgba(255,255,255,0.07);
+    .project-item:hover {
+      background: rgba(255,255,255,0.04);
+    }
+    .project-thumb {
+      width: 200px;
+      height: 120px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
     }
     .project-title {
       font-size: 17px;
@@ -373,6 +392,15 @@
       }
       .about-content {
         padding: 1rem 0.5rem 6rem;
+      }
+      .project-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .project-thumb {
+        width: 100%;
+        height: 160px;
       }
       .exp-title { font-size: 15px; }
       .exp-desc p { font-size: 14px; }
@@ -474,22 +502,34 @@
         <ul class="projects-list">
           <li>
             <a class="project-item" href="https://x.com/omeedtavakoli/status/2015214499809337758?s=20" target="_blank" rel="noopener">
-              <span class="project-title">How To Buy Clarity While It's Cheap <span class="project-sub">(essay)</span></span>
+              <img class="project-thumb" src="essay.png" alt="How To Buy Clarity While It's Cheap">
+              <div class="project-info">
+                <span class="project-title">How To Buy Clarity While It's Cheap <span class="project-sub">(essay)</span></span>
+              </div>
             </a>
           </li>
           <li>
             <a class="project-item" href="https://drive.google.com/file/d/1wWxrdxCSKyTXEHgyay6H7A4Pbe9bkJxg/view" target="_blank" rel="noopener">
-              <span class="project-title">AI Math Proofs Research Paper <span class="project-sub">(under publication review)</span></span>
+              <img class="project-thumb" src="proofs.png" alt="AI Math Proofs Research Paper">
+              <div class="project-info">
+                <span class="project-title">AI Math Proofs Research Paper <span class="project-sub">(under publication review)</span></span>
+              </div>
             </a>
           </li>
           <li>
             <a class="project-item" href="https://www.youtube.com/@omeedtavakoli" target="_blank" rel="noopener">
-              <span class="project-title">Interviews with Martial Artists <span class="project-sub">(podcast)</span></span>
+              <img class="project-thumb" src="podcasts.png" alt="Interviews with Martial Artists">
+              <div class="project-info">
+                <span class="project-title">Interviews with Martial Artists <span class="project-sub">(podcast)</span></span>
+              </div>
             </a>
           </li>
           <li>
             <a class="project-item" href="https://omeedtavakoli.notion.site/Backpacking-in-Europe-Fall-23-273331aefa948096a271d296166b3f09" target="_blank" rel="noopener">
-              <span class="project-title">Backpacking in Europe <span class="project-sub">(fall 2023)</span></span>
+              <img class="project-thumb" src="backpacking.png" alt="Backpacking in Europe">
+              <div class="project-info">
+                <span class="project-title">Backpacking in Europe <span class="project-sub">(fall 2023)</span></span>
+              </div>
             </a>
           </li>
         </ul>
