@@ -86,10 +86,33 @@
 
     header {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: flex-start;
       position: relative;
       z-index: 2;
+    }
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+    .nav-link {
+      color: #fff;
+      text-decoration: none;
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.4s ease;
+    }
+    .nav-link:hover {
+      color: red;
+    }
+    .nav-link.active {
+      color: rgba(255,255,255,0.25);
+      cursor: pointer;
+    }
+    .nav-link.active:hover {
+      color: rgba(255,255,255,0.4);
     }
     .socials {
       display: flex;
@@ -110,29 +133,6 @@
       width: 22px;
       height: 22px;
       fill: currentColor;
-    }
-    .nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      align-items: flex-start;
-    }
-    .nav-link {
-      color: #fff;
-      text-decoration: none;
-      font-size: 20px;
-      cursor: pointer;
-      transition: color 0.4s ease;
-    }
-    .nav-link:hover {
-      color: red;
-    }
-    .nav-link.active {
-      color: rgba(255,255,255,0.25);
-      cursor: pointer;
-    }
-    .nav-link.active:hover {
-      color: rgba(255,255,255,0.4);
     }
     .center {
       flex: 1;
@@ -353,13 +353,7 @@
       position: relative;
       z-index: 2;
     }
-    .footer-clock {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 2px;
-    }
-    .footer-clock span {
+    footer span {
       font-size: 20px;
       font-weight: 400;
       letter-spacing: 0.01em;
@@ -383,12 +377,23 @@
       .exp-title { font-size: 15px; }
       .exp-desc p { font-size: 14px; }
       .about-title { font-size: 22px; }
-      .footer-clock span { font-size: 14px; }
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+      }
+      footer span { font-size: 14px; }
     }
   </style>
 </head>
 <body>
   <header>
+    <nav class="nav-links">
+      <a class="nav-link" href="/" id="home-link">Home</a>
+      <a class="nav-link" href="#about" id="about-toggle">Backstory</a>
+      <a class="nav-link" href="#experience" id="experience-toggle">Experience</a>
+      <a class="nav-link" href="#projects" id="projects-toggle">Projects</a>
+    </nav>
     <div class="socials">
       <a class="social-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener" aria-label="X (Twitter)">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -493,16 +498,8 @@
   </div>
 
   <footer>
-    <nav class="nav-links">
-      <a class="nav-link" href="/" id="home-link">Home</a>
-      <a class="nav-link" href="#about" id="about-toggle">Backstory</a>
-      <a class="nav-link" href="#experience" id="experience-toggle">Experience</a>
-      <a class="nav-link" href="#projects" id="projects-toggle">Projects</a>
-    </nav>
-    <div class="footer-clock">
-      <span id="time"></span>
-      <span id="date"></span>
-    </div>
+    <span id="time"></span>
+    <span id="date"></span>
   </footer>
 
   <script>
