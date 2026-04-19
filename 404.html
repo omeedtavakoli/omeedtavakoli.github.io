@@ -7,6 +7,9 @@
   <meta name="description" content="This page doesn't exist.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="theme-color" content="#1a1a1a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -24,36 +27,27 @@
       text-align: center;
     }
     .big {
-      font-size: 120px;
-      letter-spacing: 0.05em;
+      font-family: 'Dancing Script', cursive;
+      font-size: 140px;
       line-height: 1;
       margin-bottom: 1rem;
     }
     .line {
-      font-size: 22px;
-      color: rgba(255,255,255,0.6);
+      font-family: 'Dancing Script', cursive;
+      font-size: 30px;
+      color: rgba(255,255,255,0.7);
       margin-bottom: 2.5rem;
     }
     .back {
       color: #fff;
       text-decoration: none;
       font-size: 22px;
-      position: relative;
       transition: color 0.4s ease;
-    }
-    .back::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 100%;
-      height: 1px;
-      background: red;
     }
     .back:hover { color: red; }
     @media (max-width: 600px) {
-      .big { font-size: 72px; }
-      .line { font-size: 18px; }
+      .big { font-size: 96px; }
+      .line { font-size: 22px; }
       .back { font-size: 18px; }
     }
   </style>
