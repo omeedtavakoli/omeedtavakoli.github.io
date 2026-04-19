@@ -49,7 +49,10 @@
   <meta name="twitter:image" content="https://omeedtavakoli.github.io/og-image.png">
 
   <style>
+    /* The usual reset ceremony. */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Dark. That is the mood. */
     body {
       background: #1a1a1a;
       color: #fff;
@@ -70,7 +73,7 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Page entrance animation */
+    /* Fade in. Slowly enough to feel deliberate. */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -113,6 +116,7 @@
       }
     }
 
+    /* Header. Name, nav, and the obligatory socials. */
     header {
       display: flex;
       justify-content: space-between;
@@ -172,7 +176,7 @@
       overflow: hidden;
     }
 
-    /* Home view */
+    /* Home. Just a name. Anything more would be bragging. */
     .home-view {
       display: flex;
       align-items: center;
@@ -216,7 +220,7 @@
       color: #fff;
     }
 
-    /* About, Experience, Projects & Interests views — shared */
+    /* Four views, one stylesheet. DRY enough. */
     .about-view,
     .experience-view,
     .projects-view,
@@ -317,7 +321,7 @@
       margin-bottom: 0;
     }
 
-    /* Projects grid */
+    /* Projects. Finished side quests. */
     .projects-list {
       list-style: none;
       margin-top: 2rem;
@@ -371,7 +375,7 @@
       color: rgba(255,255,255,0.4);
     }
 
-    /* Experience list */
+    /* Experience. Resume-adjacent. */
     .exp-list {
       list-style: none;
       margin-top: 2rem;
@@ -417,7 +421,7 @@
       padding-top: 0.75rem;
     }
 
-    /* Interests */
+    /* Interests. The part recruiters skim. */
     .interests-section {
       margin-top: 2rem;
       margin-bottom: 0.5rem;
@@ -471,6 +475,7 @@
       padding: 0.5rem;
     }
 
+    /* Footer. Date and time — the two hardest things in computing. */
     footer {
       display: flex;
       justify-content: space-between;
@@ -484,6 +489,7 @@
       letter-spacing: 0.01em;
       font-variant-numeric: tabular-nums;
     }
+    /* Phones exist. */
     @media (max-width: 600px) {
       body {
         padding: 1.75rem 1.5rem;
@@ -825,7 +831,7 @@
       if (!document.hidden) underlineReset();
     });
 
-    // Clock
+    // Clock. Updates every second, whether you asked or not.
     function update() {
       var now = new Date();
       document.getElementById('date').textContent = now.toLocaleDateString('en-US', {
@@ -838,7 +844,7 @@
     update();
     setInterval(update, 1000);
 
-    // Hash routing
+    // Hash routing. A single-page app on a single page.
     var homeView = document.getElementById('home-view');
     var aboutView = document.getElementById('about-view');
     var experienceView = document.getElementById('experience-view');
@@ -895,7 +901,7 @@
       });
     });
 
-    // Escape key to go back from any view
+    // Escape goes home. Like real life.
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && window.location.hash) {
         history.pushState(null, '', window.location.pathname);
@@ -913,6 +919,7 @@
       });
     });
 
+    // For the curious who made it this far.
     console.log(
       '%c  Contact via X - @omeedtavakoli  ',
       'font-family: "Times New Roman", Times, serif; font-size: 18px; color: #ffffff; background: #1a1a1a; padding: 12px 20px;'
