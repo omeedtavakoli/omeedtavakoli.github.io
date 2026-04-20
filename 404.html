@@ -38,16 +38,21 @@
       margin-bottom: 2rem;
       letter-spacing: 0.05em;
     }
-    @keyframes redglow {
-      0%, 100% { color: #fff; text-shadow: none; }
-      50% { color: #ff2222; text-shadow: 0 0 8px #ff2222, 0 0 20px #ff000088; }
+    @keyframes sweep {
+      0%   { background-position: 200% center; }
+      100% { background-position: -100% center; }
     }
     .back {
       text-decoration: none;
       font-family: 'Courier New', Courier, monospace;
       font-size: clamp(12px, 1.5vw, 18px);
       letter-spacing: 0.05em;
-      animation: redglow 4s ease-in-out infinite;
+      background: linear-gradient(90deg, #fff 30%, #ff2222 50%, #fff 70%);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: sweep 5s linear infinite;
     }
   </style>
 </head>
