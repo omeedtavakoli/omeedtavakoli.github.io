@@ -232,7 +232,8 @@
     .about-view,
     .experience-view,
     .projects-view,
-    .interests-view {
+    .interests-view,
+    .blog-view {
       position: absolute;
       inset: 0;
       overflow: hidden;
@@ -247,7 +248,8 @@
     .about-view.visible,
     .experience-view.visible,
     .projects-view.visible,
-    .interests-view.visible {
+    .interests-view.visible,
+    .blog-view.visible {
       transform: translate3d(0, 0, 0);
       opacity: 1;
       pointer-events: auto;
@@ -256,7 +258,8 @@
     .about-view::before,
     .experience-view::before,
     .projects-view::before,
-    .interests-view::before {
+    .interests-view::before,
+    .blog-view::before {
       content: '';
       position: absolute;
       top: 0;
@@ -270,7 +273,8 @@
     .about-view::after,
     .experience-view::after,
     .projects-view::after,
-    .interests-view::after {
+    .interests-view::after,
+    .blog-view::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -381,6 +385,47 @@
     }
     .project-item:hover .project-title .project-sub {
       color: rgba(255,255,255,0.4);
+    }
+
+    /* Blog. Core truths. */
+    .blog-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+    .blog-item {
+      display: block;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .blog-list li:first-child .blog-item {
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .blog-date {
+      display: block;
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+    .blog-title {
+      display: block;
+      font-size: 22px;
+      line-height: 1.4;
+      color: rgba(255,255,255,0.9);
+      transition: color 0.3s ease;
+    }
+    .blog-item:hover .blog-title {
+      color: red;
+    }
+    .blog-item--upcoming {
+      cursor: default;
+      opacity: 0.6;
+    }
+    .blog-item--upcoming:hover .blog-title {
+      color: rgba(255,255,255,0.9);
     }
 
     /* Experience. Resume-adjacent. */
@@ -541,6 +586,7 @@
       <a class="nav-link" href="#about" id="about-toggle">Backstory</a>
       <a class="nav-link" href="#experience" id="experience-toggle">Experience</a>
       <a class="nav-link" href="#projects" id="projects-toggle">Projects</a>
+      <a class="nav-link" href="#blog" id="blog-toggle">Blog</a>
       <a class="nav-link" href="#interests" id="interests-toggle">Interests</a>
     </nav>
     <div class="socials">
@@ -629,7 +675,7 @@
                 <img decoding="async" class="project-thumb" src="essay.jpg" alt="How To Buy Clarity While It's Cheap">
               </div>
               <div class="project-info">
-                <span class="project-title">How To Buy Clarity While It's Cheap <span class="project-sub">(Essay)</span></span>
+                <span class="project-title">How To Buy Clarity While It's Cheap <span class="project-sub">(Op-Ed)</span></span>
               </div>
             </a>
           </li>
@@ -742,6 +788,20 @@
                 <span class="project-title">Grappling Technique Analytics Project <span class="project-sub">(First ever coding project)</span></span>
               </div>
             </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="blog-view" id="blog-view">
+      <div class="about-content">
+        <h1 class="about-title">Blog</h1>
+        <p class="about-updated">Core truths and personal philosophy.</p>
+        <ul class="blog-list">
+          <li>
+            <div class="blog-item blog-item--upcoming">
+              <span class="blog-date">Coming soon</span>
+              <span class="blog-title">Recursive Truths</span>
+            </div>
           </li>
         </ul>
       </div>
@@ -868,14 +928,16 @@
     var experienceView = document.getElementById('experience-view');
     var projectsView = document.getElementById('projects-view');
     var interestsView = document.getElementById('interests-view');
+    var blogView = document.getElementById('blog-view');
     var aboutToggle = document.getElementById('about-toggle');
     var experienceToggle = document.getElementById('experience-toggle');
     var projectsToggle = document.getElementById('projects-toggle');
     var interestsToggle = document.getElementById('interests-toggle');
+    var blogToggle = document.getElementById('blog-toggle');
     var homeLink = document.getElementById('home-link');
 
-    var allViews = [aboutView, experienceView, projectsView, interestsView];
-    var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
+    var allViews = [aboutView, experienceView, projectsView, interestsView, blogView];
+    var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle, blogToggle];
 
     function navigate() {
       var hash = window.location.hash;
@@ -895,6 +957,9 @@
       } else if (hash === '#interests') {
         interestsView.classList.add('visible');
         interestsToggle.classList.add('active');
+      } else if (hash === '#blog') {
+        blogView.classList.add('visible');
+        blogToggle.classList.add('active');
       } else {
         homeView.classList.remove('hidden');
       }
@@ -906,7 +971,7 @@
       navigate();
     });
 
-    [aboutToggle, experienceToggle, projectsToggle, interestsToggle].forEach(function(toggle) {
+    [aboutToggle, experienceToggle, projectsToggle, interestsToggle, blogToggle].forEach(function(toggle) {
       toggle.addEventListener('click', function(e) {
         e.preventDefault();
         var target = toggle.getAttribute('href');
