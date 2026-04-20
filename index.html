@@ -389,43 +389,34 @@
 
     /* Blog. Core truths. */
     .blog-list {
-      list-style: none;
       margin-top: 2rem;
+      padding-left: 1.5rem;
+    }
+    .blog-list li {
+      margin-bottom: 0.6rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 19px;
+      line-height: 1.5;
     }
     .blog-item {
-      display: block;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      cursor: pointer;
+      color: rgba(255,255,255,0.9);
       text-decoration: none;
-      color: inherit;
+      transition: color 0.3s ease;
+      cursor: pointer;
     }
-    .blog-list li:first-child .blog-item {
-      border-top: 1px solid rgba(255,255,255,0.07);
+    .blog-item:hover {
+      color: red;
     }
     .blog-date {
-      display: block;
-      font-size: 14px;
       color: rgba(255,255,255,0.4);
-      margin-bottom: 0.4rem;
-      letter-spacing: 0.02em;
-    }
-    .blog-title {
-      display: block;
-      font-size: 22px;
-      line-height: 1.4;
-      color: rgba(255,255,255,0.9);
-      transition: color 0.3s ease;
-    }
-    .blog-item:hover .blog-title {
-      color: red;
+      margin-left: 0.35rem;
     }
     .blog-item--upcoming {
       cursor: default;
-      opacity: 0.6;
+      color: rgba(255,255,255,0.5);
     }
-    .blog-item--upcoming:hover .blog-title {
-      color: rgba(255,255,255,0.9);
+    .blog-item--upcoming:hover {
+      color: rgba(255,255,255,0.5);
     }
 
     /* Experience. Resume-adjacent. */
@@ -804,10 +795,7 @@
         <p class="about-updated">Core truths and personal philosophy.</p>
         <ul class="blog-list">
           <li>
-            <div class="blog-item blog-item--upcoming">
-              <span class="blog-date">Coming soon</span>
-              <span class="blog-title">Recursive Truths</span>
-            </div>
+            <span class="blog-item blog-item--upcoming">Recursive Truths</span><span class="blog-date">— Coming soon</span>
           </li>
         </ul>
       </div>
