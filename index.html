@@ -536,6 +536,12 @@
       position: relative;
       z-index: 2;
     }
+    .footer-clock {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.1rem;
+    }
     footer span {
       font-size: 22px;
       font-weight: 400;
@@ -571,9 +577,10 @@
       .about-title { font-size: 24px; }
       .about-content { padding: 1rem 0.5rem 6rem; }
       footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.2rem;
+        align-items: flex-end;
+      }
+      .footer-clock {
+        gap: 0.1rem;
       }
       footer span { font-size: 16px; }
     }
@@ -587,7 +594,6 @@
       <a class="nav-link" href="#experience" id="experience-toggle">Experience</a>
       <a class="nav-link" href="#projects" id="projects-toggle">Projects</a>
       <a class="nav-link" href="#blog" id="blog-toggle">Blog</a>
-      <a class="nav-link" href="#interests" id="interests-toggle">Interests</a>
     </nav>
     <div class="socials">
       <a class="social-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener" aria-label="X (Twitter)">
@@ -862,8 +868,11 @@
   </div>
 
   <footer>
-    <span id="time"></span>
-    <span id="date"></span>
+    <a class="nav-link" href="#interests" id="interests-toggle">Interests</a>
+    <div class="footer-clock">
+      <span id="time"></span>
+      <span id="date"></span>
+    </div>
   </footer>
 
   <script>
