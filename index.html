@@ -232,8 +232,7 @@
     .about-view,
     .experience-view,
     .projects-view,
-    .interests-view,
-    .blog-view {
+    .interests-view {
       position: absolute;
       inset: 0;
       overflow: hidden;
@@ -248,8 +247,7 @@
     .about-view.visible,
     .experience-view.visible,
     .projects-view.visible,
-    .interests-view.visible,
-    .blog-view.visible {
+    .interests-view.visible {
       transform: translate3d(0, 0, 0);
       opacity: 1;
       pointer-events: auto;
@@ -258,8 +256,7 @@
     .about-view::before,
     .experience-view::before,
     .projects-view::before,
-    .interests-view::before,
-    .blog-view::before {
+    .interests-view::before {
       content: '';
       position: absolute;
       top: 0;
@@ -273,8 +270,7 @@
     .about-view::after,
     .experience-view::after,
     .projects-view::after,
-    .interests-view::after,
-    .blog-view::after {
+    .interests-view::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -387,27 +383,6 @@
       color: rgba(255,255,255,0.4);
     }
 
-    /* Blog. Core truths. */
-    .blog-list {
-      list-style: none;
-      margin-top: 2rem;
-      padding-left: 0;
-    }
-    .blog-list li {
-      margin-bottom: 0.6rem;
-      font-size: 19px;
-      line-height: 1.5;
-    }
-    .blog-item {
-      color: rgba(255,255,255,0.9);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      transition: color 0.3s ease;
-    }
-    .blog-item:hover {
-      color: red;
-    }
-
     /* Experience. Resume-adjacent. */
     .exp-list {
       list-style: none;
@@ -516,12 +491,6 @@
       position: relative;
       z-index: 2;
     }
-    .footer-clock {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.1rem;
-    }
     footer span {
       font-size: 22px;
       font-weight: 400;
@@ -557,10 +526,9 @@
       .about-title { font-size: 24px; }
       .about-content { padding: 1rem 0.5rem 6rem; }
       footer {
-        align-items: flex-end;
-      }
-      .footer-clock {
-        gap: 0.1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
       }
       footer span { font-size: 16px; }
     }
@@ -571,8 +539,8 @@
     <nav class="nav-links">
       <a class="nav-link" href="/" id="home-link">Home</a>
       <a class="nav-link" href="#about" id="about-toggle">Backstory</a>
+      <a class="nav-link" href="#experience" id="experience-toggle">Resume</a>
       <a class="nav-link" href="#projects" id="projects-toggle">Projects</a>
-      <a class="nav-link" href="#blog" id="blog-toggle">Blog</a>
       <a class="nav-link" href="#interests" id="interests-toggle">Interests</a>
     </nav>
     <div class="socials">
@@ -778,17 +746,6 @@
         </ul>
       </div>
     </div>
-    <div class="blog-view" id="blog-view">
-      <div class="about-content">
-        <h1 class="about-title">Blog</h1>
-        <p class="about-updated">Essays.</p>
-        <ul class="blog-list">
-          <li>
-            <a class="blog-item" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener">Recursive Truths</a>
-          </li>
-        </ul>
-      </div>
-    </div>
     <div class="interests-view" id="interests-view">
       <div class="about-content">
         <h1 class="about-title">Interests</h1>
@@ -845,11 +802,8 @@
   </div>
 
   <footer>
-    <a class="nav-link" href="#experience" id="experience-toggle">Resume</a>
-    <div class="footer-clock">
-      <span id="time"></span>
-      <span id="date"></span>
-    </div>
+    <span id="time"></span>
+    <span id="date"></span>
   </footer>
 
   <script>
@@ -914,16 +868,14 @@
     var experienceView = document.getElementById('experience-view');
     var projectsView = document.getElementById('projects-view');
     var interestsView = document.getElementById('interests-view');
-    var blogView = document.getElementById('blog-view');
     var aboutToggle = document.getElementById('about-toggle');
     var experienceToggle = document.getElementById('experience-toggle');
     var projectsToggle = document.getElementById('projects-toggle');
     var interestsToggle = document.getElementById('interests-toggle');
-    var blogToggle = document.getElementById('blog-toggle');
     var homeLink = document.getElementById('home-link');
 
-    var allViews = [aboutView, experienceView, projectsView, interestsView, blogView];
-    var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle, blogToggle];
+    var allViews = [aboutView, experienceView, projectsView, interestsView];
+    var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
 
     function navigate() {
       var hash = window.location.hash;
@@ -943,9 +895,6 @@
       } else if (hash === '#interests') {
         interestsView.classList.add('visible');
         interestsToggle.classList.add('active');
-      } else if (hash === '#blog') {
-        blogView.classList.add('visible');
-        blogToggle.classList.add('active');
       } else {
         homeView.classList.remove('hidden');
       }
@@ -957,7 +906,7 @@
       navigate();
     });
 
-    [aboutToggle, experienceToggle, projectsToggle, interestsToggle, blogToggle].forEach(function(toggle) {
+    [aboutToggle, experienceToggle, projectsToggle, interestsToggle].forEach(function(toggle) {
       toggle.addEventListener('click', function(e) {
         e.preventDefault();
         var target = toggle.getAttribute('href');
