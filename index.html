@@ -389,34 +389,23 @@
 
     /* Blog. Core truths. */
     .blog-list {
+      list-style: none;
       margin-top: 2rem;
-      padding-left: 1.5rem;
+      padding-left: 0;
     }
     .blog-list li {
       margin-bottom: 0.6rem;
-      color: rgba(255,255,255,0.5);
       font-size: 19px;
       line-height: 1.5;
     }
     .blog-item {
       color: rgba(255,255,255,0.9);
-      text-decoration: none;
+      text-decoration: underline;
+      text-underline-offset: 3px;
       transition: color 0.3s ease;
-      cursor: pointer;
     }
     .blog-item:hover {
       color: red;
-    }
-    .blog-date {
-      color: rgba(255,255,255,0.4);
-      margin-left: 0.35rem;
-    }
-    .blog-item--upcoming {
-      cursor: default;
-      color: rgba(255,255,255,0.5);
-    }
-    .blog-item--upcoming:hover {
-      color: rgba(255,255,255,0.5);
     }
 
     /* Experience. Resume-adjacent. */
@@ -795,7 +784,7 @@
         <p class="about-updated">Essays.</p>
         <ul class="blog-list">
           <li>
-            <span class="blog-item blog-item--upcoming">Recursive Truths</span><span class="blog-date">— Coming soon</span>
+            <a class="blog-item" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener">Recursive Truths</a>
           </li>
         </ul>
       </div>
