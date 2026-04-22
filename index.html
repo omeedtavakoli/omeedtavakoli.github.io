@@ -55,7 +55,7 @@
   <meta name="twitter:description" content="technologist">
   <meta name="twitter:site" content="@omeedtavakoli">
   <meta name="twitter:image" content="https://omeedtavakoli.github.io/og-image.png">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Nastaliq+Urdu&family=Vazirmatn:wght@500;600&display=swap" rel="stylesheet">
   <style>
     /* The usual reset ceremony. */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -347,6 +347,12 @@
     .project-item:hover {
       transform: translateY(-3px);
     }
+    .project-item.pending {
+      cursor: default;
+    }
+    .project-item.pending:hover {
+      transform: none;
+    }
     .project-thumb-wrap {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -363,6 +369,49 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+    .project-placeholder {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, transparent 48%, rgba(201,169,97,0.28) 49%, rgba(201,169,97,0.28) 51%, transparent 52%) 0 38% / 100% 1px no-repeat,
+        linear-gradient(150deg, #f6edd8 0%, #ede3c8 100%);
+    }
+    .project-placeholder::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(201,169,97,0.38);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+    .project-placeholder-copy {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      padding-top: 1.3rem;
+      text-align: center;
+    }
+    .project-placeholder-title {
+      font-family: 'Cormorant Garamond', 'Times New Roman', Times, serif;
+      font-size: 58px;
+      font-weight: 600;
+      line-height: 1;
+      color: #2c3e6b;
+      letter-spacing: 0;
+    }
+    .project-placeholder-fa {
+      font-family: 'Noto Nastaliq Urdu', 'Vazirmatn', Tahoma, Arial, sans-serif;
+      font-size: 27px;
+      line-height: 1.55;
+      font-weight: 400;
+      color: rgba(44,62,107,0.72);
     }
     .project-info {
       padding: 0.75rem 0.25rem;
@@ -524,6 +573,8 @@
       .exp-title { font-size: 17px; }
       .exp-desc p { font-size: 16px; }
       .about-title { font-size: 24px; }
+      .project-placeholder-title { font-size: 42px; }
+      .project-placeholder-fa { font-size: 19px; }
       .about-content { padding: 1rem 0.5rem 6rem; }
       footer {
         flex-direction: column;
@@ -623,6 +674,21 @@
         <h1 class="about-title">Projects</h1>
         <p class="about-updated">Side quests.</p>
         <ul class="projects-list">
+          <li>
+            <div class="project-item pending">
+              <div class="project-thumb-wrap">
+                <div id="family-tree-image-tavakoli" class="project-placeholder" role="img" aria-label="Tavakoli Family Tree coming soon preview">
+                  <div class="project-placeholder-copy">
+                    <span class="project-placeholder-title">Tavakoli Family</span>
+                    <span class="project-placeholder-fa" lang="fa" dir="rtl">خانواده توکلی</span>
+                  </div>
+                </div>
+              </div>
+              <div class="project-info">
+                <span class="project-title">Tavakoli Family Tree <span class="project-sub">(Coming soon)</span></span>
+              </div>
+            </div>
+          </li>
           <li>
             <a class="project-item" href="https://x.com/omeedtavakoli/status/2015214499809337758?s=20" target="_blank" rel="noopener">
               <div class="project-thumb-wrap">
