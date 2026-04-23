@@ -241,7 +241,8 @@
     .about-view,
     .experience-view,
     .projects-view,
-    .interests-view {
+    .interests-view,
+    .about-me-view {
       position: absolute;
       inset: 0;
       overflow: hidden;
@@ -256,7 +257,8 @@
     .about-view.visible,
     .experience-view.visible,
     .projects-view.visible,
-    .interests-view.visible {
+    .interests-view.visible,
+    .about-me-view.visible {
       transform: translate3d(0, 0, 0);
       opacity: 1;
       pointer-events: auto;
@@ -265,7 +267,8 @@
     .about-view::before,
     .experience-view::before,
     .projects-view::before,
-    .interests-view::before {
+    .interests-view::before,
+    .about-me-view::before {
       content: '';
       position: absolute;
       top: 0;
@@ -279,7 +282,8 @@
     .about-view::after,
     .experience-view::after,
     .projects-view::after,
-    .interests-view::after {
+    .interests-view::after,
+    .about-me-view::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -534,6 +538,12 @@
       margin-top: 0.35rem;
     }
 
+    .about-me-placeholder {
+      width: 100%;
+      height: 100%;
+      background: #222;
+    }
+
     /* Interests. The part recruiters skim. */
     .interests-section {
       margin-top: 2rem;
@@ -779,6 +789,16 @@
             </div>
           </li>
           <li>
+            <div class="project-item" id="about-me-toggle" style="cursor: pointer;">
+              <div class="project-thumb-wrap">
+                <div class="about-me-placeholder" role="img" aria-label="About Me"></div>
+              </div>
+              <div class="project-info">
+                <span class="project-title">About Me</span>
+              </div>
+            </div>
+          </li>
+          <li>
             <a class="project-item" href="https://x.com/omeedtavakoli/status/2015214499809337758?s=20" target="_blank" rel="noopener">
               <div class="project-thumb-wrap">
                 <img decoding="async" loading="lazy" class="project-thumb" src="images/essay.jpg" alt="How To Buy Clarity While It's Cheap">
@@ -954,6 +974,13 @@
         </section>
       </div>
     </div>
+    <div class="about-me-view" id="about-me-view">
+      <div class="about-content">
+        <h1 class="about-title">About Me</h1>
+        <p class="about-updated">A few things worth knowing.</p>
+        <p style="font-size: 18px; line-height: 1.85; color: rgba(255,255,255,0.85); margin-top: 1.5rem;">I'm currently at USC. Before this I was on the growth and product team at Perplexity. I'm Iranian-American, I like martial arts (BJJ, Muay Thai, third degree black belt in TKD), and I moved to the West Coast to figure out what's next.</p>
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -1023,6 +1050,7 @@
     var experienceView = document.getElementById('experience-view');
     var projectsView = document.getElementById('projects-view');
     var interestsView = document.getElementById('interests-view');
+    var aboutMeView = document.getElementById('about-me-view');
     var aboutToggle = document.getElementById('about-toggle');
     var experienceToggle = document.getElementById('experience-toggle');
     var projectsToggle = document.getElementById('projects-toggle');
@@ -1030,7 +1058,7 @@
     var homeLink = document.getElementById('home-link');
     var githubLink = document.getElementById('github-link');
 
-    var allViews = [aboutView, experienceView, projectsView, interestsView];
+    var allViews = [aboutView, experienceView, projectsView, interestsView, aboutMeView];
     var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
 
     function navigate() {
@@ -1051,6 +1079,8 @@
       } else if (hash === '#interests') {
         interestsView.classList.add('visible');
         interestsToggle.classList.add('active');
+      } else if (hash === '#about-me') {
+        aboutMeView.classList.add('visible');
       } else {
         homeView.classList.remove('hidden');
       }
@@ -1086,6 +1116,11 @@
 
     window.addEventListener('popstate', navigate);
     navigate();
+
+    document.getElementById('about-me-toggle').addEventListener('click', function() {
+      history.pushState(null, '', '#about-me');
+      navigate();
+    });
 
     // Experience expand/collapse (starts open, click to close)
     document.querySelectorAll('.exp-item').forEach(function(item) {
