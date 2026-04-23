@@ -451,16 +451,15 @@
     /* Experience. Resume-adjacent. */
     .exp-list {
       list-style: none;
-      margin-top: 2rem;
+      margin-top: 0;
     }
     .exp-item {
       display: block;
-      padding: 1.25rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0.75rem 0 1.25rem;
       cursor: pointer;
     }
     .exp-list li:first-child .exp-item {
-      border-top: 1px solid rgba(255,255,255,0.07);
+      border-top: none;
     }
     .exp-title {
       font-size: 19px;
@@ -495,30 +494,34 @@
     }
 
     .exp-section-label {
-      font-size: 13px;
+      font-size: 26px;
       font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.9);
       margin-top: 2.5rem;
-      margin-bottom: 0;
+      margin-bottom: 1.25rem;
+      letter-spacing: normal;
+      text-transform: none;
+    }
+    .exp-sub-line {
+      font-size: 16px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 0.2rem;
     }
     .edu-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.25rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0.75rem 0 1.5rem;
     }
     .edu-logo {
-      height: 48px;
+      height: 90px;
       width: auto;
       opacity: 0.85;
       flex-shrink: 0;
       margin-left: 1.5rem;
     }
     .edu-list li:first-child .edu-item {
-      border-top: 1px solid rgba(255,255,255,0.07);
+      border-top: none;
     }
     .edu-degree {
       font-size: 19px;
@@ -697,7 +700,8 @@
         <ul class="exp-list">
           <li>
             <div class="exp-item">
-              <span class="exp-title">Perplexity <span class="exp-sub">(Product &amp; Growth, 2024 – 2025)</span></span>
+              <div class="exp-title">Perplexity</div>
+              <div class="exp-sub-line">Product &amp; Growth, 2024 – 2025</div>
               <div class="exp-desc">
                 <p>Search meets AI to deliver fast, reliable answers; joined &lt;120 employees.</p>
               </div>
@@ -705,7 +709,8 @@
           </li>
           <li>
             <div class="exp-item">
-              <span class="exp-title">WagerPager <span class="exp-sub">(Founder, 2023 – 2025)</span></span>
+              <div class="exp-title">WagerPager</div>
+              <div class="exp-sub-line">Founder, 2023 – 2025</div>
               <div class="exp-desc">
                 <p>The top-ranked sports betting jobs site, helping thousands find roles in the industry during global tech layoffs.</p>
               </div>
@@ -713,7 +718,8 @@
           </li>
           <li>
             <div class="exp-item">
-              <span class="exp-title">Valente Center <span class="exp-sub">(Research, 2024 – 2025)</span></span>
+              <div class="exp-title">Valente Center</div>
+              <div class="exp-sub-line">Research, 2024 – 2025</div>
               <div class="exp-desc">
                 <p>Benchmarks on AI grading of mathematical proofs (paper under publication review).</p>
               </div>
@@ -721,7 +727,8 @@
           </li>
           <li>
             <div class="exp-item">
-              <span class="exp-title">Claim <span class="exp-sub">(Growth, 2024 – 2024)</span></span>
+              <div class="exp-title">Claim</div>
+              <div class="exp-sub-line">Growth, 2024 – 2024</div>
               <div class="exp-desc">
                 <p>Social-shopping app backed by Sequoia Capital; acquired by Wonder in January 2026.</p>
               </div>
@@ -729,7 +736,8 @@
           </li>
           <li>
             <div class="exp-item">
-              <span class="exp-title">T. Rowe Price <span class="exp-sub">(Research, 2023 – 2023)</span></span>
+              <div class="exp-title">T. Rowe Price</div>
+              <div class="exp-sub-line">Research, 2023 – 2023</div>
               <div class="exp-desc">
                 <p>Equity research; Media and Entertainment sector.</p>
               </div>
