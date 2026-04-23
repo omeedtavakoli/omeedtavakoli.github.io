@@ -611,9 +611,29 @@
       }
       footer span { font-size: 16px; }
     }
+    .stream-line {
+      position: fixed;
+      top: 0;
+      left: 10rem;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 12%,
+        rgba(255, 255, 255, 0.1) 88%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+    @media (max-width: 600px) {
+      .stream-line { display: none; }
+    }
   </style>
 </head>
 <body>
+  <div class="stream-line" aria-hidden="true"></div>
   <header>
     <nav class="nav-links">
       <a class="nav-link" href="/" id="home-link">Home</a>
