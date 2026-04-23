@@ -535,32 +535,47 @@
     }
 
     .backstory-toggle {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
       margin-top: 1.25rem;
       margin-bottom: 1.5rem;
     }
-    .backstory-toggle-btn {
+    .toggle-pill {
+      position: relative;
+      display: inline-flex;
+      background: rgba(255,255,255,0.08);
+      border-radius: 100px;
+      padding: 3px;
+    }
+    .toggle-slider {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: calc(50% - 3px);
+      height: calc(100% - 6px);
+      background: rgba(255,255,255,0.9);
+      border-radius: 100px;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    .toggle-pill.long .toggle-slider {
+      transform: translateX(100%);
+    }
+    .toggle-option {
+      position: relative;
+      z-index: 1;
       background: none;
       border: none;
       cursor: pointer;
       font-family: Arial, sans-serif;
-      font-size: 14px;
-      color: rgba(255,255,255,0.3);
-      padding: 0;
-      transition: color 0.2s;
-    }
-    .backstory-toggle-btn.active {
-      color: rgba(255,255,255,0.9);
-    }
-    .backstory-toggle-btn:hover {
-      color: rgba(255,255,255,0.7);
-    }
-    .backstory-toggle-sep {
-      color: rgba(255,255,255,0.2);
-      font-size: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.35);
+      padding: 5px 18px;
+      border-radius: 100px;
+      transition: color 0.25s;
       user-select: none;
+    }
+    .toggle-option.active {
+      color: #1a1a1a;
     }
 
     /* Interests. The part recruiters skim. */
@@ -713,9 +728,11 @@
         <h1 class="about-title">My Backstory</h1>
         <p class="about-updated">Updated April 2026</p>
         <div class="backstory-toggle">
-          <button class="backstory-toggle-btn active" id="backstory-short-btn">Short</button>
-          <span class="backstory-toggle-sep">·</span>
-          <button class="backstory-toggle-btn" id="backstory-long-btn">Long</button>
+          <div class="toggle-pill" id="backstory-toggle-pill">
+            <div class="toggle-slider"></div>
+            <button class="toggle-option active" id="backstory-short-btn">Short</button>
+            <button class="toggle-option" id="backstory-long-btn">Long</button>
+          </div>
         </div>
         <div id="backstory-short">
           <p>I'm currently XXX. Before this I was on the growth and product team at Perplexity. I'm Iranian-American, I like martial arts (BJJ, Muay Thai, third degree black belt in TKD), and I moved to the West Coast to figure out what's next.</p>
@@ -1129,12 +1146,14 @@
 
     // Backstory short/long toggle
     document.getElementById('backstory-short-btn').addEventListener('click', function() {
+      document.getElementById('backstory-toggle-pill').classList.remove('long');
       document.getElementById('backstory-short').style.display = '';
       document.getElementById('backstory-long').style.display = 'none';
       this.classList.add('active');
       document.getElementById('backstory-long-btn').classList.remove('active');
     });
     document.getElementById('backstory-long-btn').addEventListener('click', function() {
+      document.getElementById('backstory-toggle-pill').classList.add('long');
       document.getElementById('backstory-short').style.display = 'none';
       document.getElementById('backstory-long').style.display = '';
       this.classList.add('active');
