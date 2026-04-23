@@ -494,6 +494,43 @@
       padding-top: 0.75rem;
     }
 
+    .exp-section-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-top: 2.5rem;
+      margin-bottom: 0;
+    }
+    .edu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .edu-logo {
+      height: 48px;
+      width: auto;
+      opacity: 0.85;
+      flex-shrink: 0;
+      margin-left: 1.5rem;
+    }
+    .edu-list li:first-child .edu-item {
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .edu-degree {
+      font-size: 19px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.9);
+    }
+    .edu-school {
+      font-size: 16px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 0.35rem;
+    }
+
     /* Interests. The part recruiters skim. */
     .interests-section {
       margin-top: 2rem;
@@ -656,6 +693,7 @@
       <div class="about-content">
         <h1 class="about-title">Resume</h1>
         <p class="about-updated">Building products across consumer and prosumer.</p>
+        <h2 class="exp-section-label">Entrepreneurship</h2>
         <ul class="exp-list">
           <li>
             <div class="exp-item">
@@ -695,6 +733,18 @@
               <div class="exp-desc">
                 <p>Equity research; Media and Entertainment sector.</p>
               </div>
+            </div>
+          </li>
+        </ul>
+        <h2 class="exp-section-label">Education</h2>
+        <ul class="exp-list edu-list">
+          <li>
+            <div class="edu-item">
+              <div>
+                <div class="edu-degree">&#127891; Bachelors degree, Economics &amp; Computer Science</div>
+                <div class="edu-school">University of Southern California</div>
+              </div>
+              <img class="edu-logo" src="images/USC_Trojans_logo.svg.png" alt="University of Southern California">
             </div>
           </li>
         </ul>
