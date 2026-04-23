@@ -241,8 +241,7 @@
     .about-view,
     .experience-view,
     .projects-view,
-    .interests-view,
-    .about-me-view {
+    .interests-view {
       position: absolute;
       inset: 0;
       overflow: hidden;
@@ -257,8 +256,7 @@
     .about-view.visible,
     .experience-view.visible,
     .projects-view.visible,
-    .interests-view.visible,
-    .about-me-view.visible {
+    .interests-view.visible {
       transform: translate3d(0, 0, 0);
       opacity: 1;
       pointer-events: auto;
@@ -267,8 +265,7 @@
     .about-view::before,
     .experience-view::before,
     .projects-view::before,
-    .interests-view::before,
-    .about-me-view::before {
+    .interests-view::before {
       content: '';
       position: absolute;
       top: 0;
@@ -282,8 +279,7 @@
     .about-view::after,
     .experience-view::after,
     .projects-view::after,
-    .interests-view::after,
-    .about-me-view::after {
+    .interests-view::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -538,10 +534,33 @@
       margin-top: 0.35rem;
     }
 
-    .about-me-placeholder {
-      width: 100%;
-      height: 100%;
-      background: #222;
+    .backstory-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .backstory-toggle-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.3);
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .backstory-toggle-btn.active {
+      color: rgba(255,255,255,0.9);
+    }
+    .backstory-toggle-btn:hover {
+      color: rgba(255,255,255,0.7);
+    }
+    .backstory-toggle-sep {
+      color: rgba(255,255,255,0.2);
+      font-size: 14px;
+      user-select: none;
     }
 
     /* Interests. The part recruiters skim. */
@@ -692,15 +711,25 @@
     <div class="about-view" id="about-view">
       <div class="about-content">
         <h1 class="about-title">My Backstory</h1>
-        <p class="about-updated">Last updated: April 2026</p>
-        <p>Growing up, my older brother who studied at Babson College had a major impact on me. When I was four, he showed me my first "high tech" toy (the first-gen iPad).</p>
-        <p>Around seven, I stumbled onto clips of Jackie Chan, Bruce Lee, and Chuck Norris on YouTube. For more than two years, I couldn't sleep at night because I wanted to be the closest thing to a modern ninja or samurai. I found a martial arts studio in my hometown in Maryland and never stopped.</p>
-        <p>When I was 14, my first job was instructing at a small martial arts school. At that time, I spent six hours a day preparing for my third-degree black belt test while coaching underbelt students and competing in tournaments. By 18, I was awarded a black top gi (which I did wear around the house).</p>
-        <p>For months (to be specific, 17 months) I'd been telling my brother I hadn't figured out what I wanted to do as a career (or let alone pick a college major).</p>
-        <p>But I kept tinkering with every AI tool I could get my hands on. One day my brother sent me a link to a startup called Perplexity with a short text: "might be worth sending a cold email."</p>
-        <p>That email eventually led me to join Perplexity's ~10-person growth team, where I worked for about a year. I was leading the company's consumer verticals (mainly education expansion), and realized startups were what I wanted all along.</p>
-        <p>So I packed my bags, left the East Coast, and moved west to get closer to Silicon Valley.</p>
-        <p>Coming soon on what's next.</p>
+        <p class="about-updated">Updated April 2026</p>
+        <div class="backstory-toggle">
+          <button class="backstory-toggle-btn active" id="backstory-short-btn">Short</button>
+          <span class="backstory-toggle-sep">·</span>
+          <button class="backstory-toggle-btn" id="backstory-long-btn">Long</button>
+        </div>
+        <div id="backstory-short">
+          <p>I'm currently XXX. Before this I was on the growth and product team at Perplexity. I'm Iranian-American, I like martial arts (BJJ, Muay Thai, third degree black belt in TKD), and I moved to the West Coast to figure out what's next.</p>
+        </div>
+        <div id="backstory-long" style="display:none;">
+          <p>Growing up, my older brother who studied at Babson College had a major impact on me. When I was four, he showed me my first "high tech" toy (the first-gen iPad).</p>
+          <p>Around seven, I stumbled onto clips of Jackie Chan, Bruce Lee, and Chuck Norris on YouTube. For more than two years, I couldn't sleep at night because I wanted to be the closest thing to a modern ninja or samurai. I found a martial arts studio in my hometown in Maryland and never stopped.</p>
+          <p>When I was 14, my first job was instructing at a small martial arts school. At that time, I spent six hours a day preparing for my third-degree black belt test while coaching underbelt students and competing in tournaments. By 18, I was awarded a black top gi (which I did wear around the house).</p>
+          <p>For months (to be specific, 17 months) I'd been telling my brother I hadn't figured out what I wanted to do as a career (or let alone pick a college major).</p>
+          <p>But I kept tinkering with every AI tool I could get my hands on. One day my brother sent me a link to a startup called Perplexity with a short text: "might be worth sending a cold email."</p>
+          <p>That email eventually led me to join Perplexity's ~10-person growth team, where I worked for about a year. I was leading the company's consumer verticals (mainly education expansion), and realized startups were what I wanted all along.</p>
+          <p>So I packed my bags, left the East Coast, and moved west to get closer to Silicon Valley.</p>
+          <p>Coming soon on what's next.</p>
+        </div>
       </div>
     </div>
     <div class="experience-view" id="experience-view">
@@ -786,16 +815,6 @@
               </div>
               <div class="project-info">
                 <span class="project-title">Tavakoli Family Tree <span class="project-sub">(Coming soon)</span></span>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="project-item" id="about-me-toggle" style="cursor: pointer;">
-              <div class="project-thumb-wrap">
-                <div class="about-me-placeholder" role="img" aria-label="About Me"></div>
-              </div>
-              <div class="project-info">
-                <span class="project-title">About Me</span>
               </div>
             </div>
           </li>
@@ -975,13 +994,6 @@
         </section>
       </div>
     </div>
-    <div class="about-me-view" id="about-me-view">
-      <div class="about-content">
-        <h1 class="about-title">About Me</h1>
-        <p class="about-updated">A few things worth knowing.</p>
-        <p style="font-size: 18px; line-height: 1.85; color: rgba(255,255,255,0.85); margin-top: 1.5rem;">I'm currently at USC. Before this I was on the growth and product team at Perplexity. I'm Iranian-American, I like martial arts (BJJ, Muay Thai, third degree black belt in TKD), and I moved to the West Coast to figure out what's next.</p>
-      </div>
-    </div>
   </div>
 
   <footer>
@@ -1051,7 +1063,6 @@
     var experienceView = document.getElementById('experience-view');
     var projectsView = document.getElementById('projects-view');
     var interestsView = document.getElementById('interests-view');
-    var aboutMeView = document.getElementById('about-me-view');
     var aboutToggle = document.getElementById('about-toggle');
     var experienceToggle = document.getElementById('experience-toggle');
     var projectsToggle = document.getElementById('projects-toggle');
@@ -1059,7 +1070,7 @@
     var homeLink = document.getElementById('home-link');
     var githubLink = document.getElementById('github-link');
 
-    var allViews = [aboutView, experienceView, projectsView, interestsView, aboutMeView];
+    var allViews = [aboutView, experienceView, projectsView, interestsView];
     var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
 
     function navigate() {
@@ -1080,8 +1091,6 @@
       } else if (hash === '#interests') {
         interestsView.classList.add('visible');
         interestsToggle.classList.add('active');
-      } else if (hash === '#about-me') {
-        aboutMeView.classList.add('visible');
       } else {
         homeView.classList.remove('hidden');
       }
@@ -1118,9 +1127,18 @@
     window.addEventListener('popstate', navigate);
     navigate();
 
-    document.getElementById('about-me-toggle').addEventListener('click', function() {
-      history.pushState(null, '', '#about-me');
-      navigate();
+    // Backstory short/long toggle
+    document.getElementById('backstory-short-btn').addEventListener('click', function() {
+      document.getElementById('backstory-short').style.display = '';
+      document.getElementById('backstory-long').style.display = 'none';
+      this.classList.add('active');
+      document.getElementById('backstory-long-btn').classList.remove('active');
+    });
+    document.getElementById('backstory-long-btn').addEventListener('click', function() {
+      document.getElementById('backstory-short').style.display = 'none';
+      document.getElementById('backstory-long').style.display = '';
+      this.classList.add('active');
+      document.getElementById('backstory-short-btn').classList.remove('active');
     });
 
     // Experience expand/collapse (starts open, click to close)
