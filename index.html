@@ -541,23 +541,24 @@
     .toggle-pill {
       position: relative;
       display: inline-flex;
-      background: rgba(255,255,255,0.08);
-      border-radius: 100px;
-      padding: 3px;
+      align-items: center;
+      gap: 1.4rem;
+      padding-bottom: 0.45rem;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
     }
     .toggle-slider {
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: calc(50% - 3px);
-      height: calc(100% - 6px);
-      background: rgba(255,255,255,0.9);
-      border-radius: 100px;
-      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      left: 0;
+      bottom: -1px;
+      width: 48px;
+      height: 1px;
+      background: rgba(255,255,255,0.92);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
       pointer-events: none;
     }
     .toggle-pill.long .toggle-slider {
-      transform: translateX(100%);
+      transform: translateX(58px);
+      width: 41px;
     }
     .toggle-option {
       position: relative;
@@ -566,16 +567,23 @@
       border: none;
       cursor: pointer;
       font-family: Arial, sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.35);
-      padding: 5px 18px;
-      border-radius: 100px;
-      transition: color 0.25s;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+      padding: 0;
+      transition: color 0.25s ease, opacity 0.25s ease;
       user-select: none;
     }
+    .toggle-option:hover {
+      color: rgba(255,255,255,0.72);
+    }
+    .toggle-option:focus-visible {
+      outline: none;
+      color: rgba(255,255,255,0.92);
+    }
     .toggle-option.active {
-      color: #1a1a1a;
+      color: rgba(255,255,255,0.96);
     }
 
     /* Interests. The part recruiters skim. */
@@ -730,8 +738,8 @@
         <div class="backstory-toggle">
           <div class="toggle-pill" id="backstory-toggle-pill">
             <div class="toggle-slider"></div>
-            <button class="toggle-option active" id="backstory-short-btn">Short</button>
-            <button class="toggle-option" id="backstory-long-btn">Long</button>
+            <button class="toggle-option active" id="backstory-short-btn" type="button" aria-pressed="true">Short</button>
+            <button class="toggle-option" id="backstory-long-btn" type="button" aria-pressed="false">Long</button>
           </div>
         </div>
         <div id="backstory-short">
@@ -1150,14 +1158,18 @@
       document.getElementById('backstory-short').style.display = '';
       document.getElementById('backstory-long').style.display = 'none';
       this.classList.add('active');
+      this.setAttribute('aria-pressed', 'true');
       document.getElementById('backstory-long-btn').classList.remove('active');
+      document.getElementById('backstory-long-btn').setAttribute('aria-pressed', 'false');
     });
     document.getElementById('backstory-long-btn').addEventListener('click', function() {
       document.getElementById('backstory-toggle-pill').classList.add('long');
       document.getElementById('backstory-short').style.display = 'none';
       document.getElementById('backstory-long').style.display = '';
       this.classList.add('active');
+      this.setAttribute('aria-pressed', 'true');
       document.getElementById('backstory-short-btn').classList.remove('active');
+      document.getElementById('backstory-short-btn').setAttribute('aria-pressed', 'false');
     });
 
     // Experience expand/collapse (starts open, click to close)
