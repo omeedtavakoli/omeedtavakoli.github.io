@@ -541,10 +541,23 @@
     .toggle-pill {
       position: relative;
       display: inline-flex;
-      gap: 1.25rem;
+    }
+    .toggle-slider {
+      position: absolute;
+      bottom: 0;
+      left: 18px;
+      width: 28px;
+      height: 1px;
+      background: rgba(255,255,255,0.92);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    .toggle-pill.long .toggle-slider {
+      transform: translateX(64px);
     }
     .toggle-option {
       position: relative;
+      z-index: 1;
       background: none;
       border: none;
       cursor: pointer;
@@ -553,21 +566,11 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.42);
-      padding: 0 0 0.5rem;
+      padding: 0 0 0.6rem;
+      flex: 0 0 64px;
+      text-align: center;
       transition: color 0.25s ease;
       user-select: none;
-    }
-    .toggle-option::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 1px;
-      background: rgba(255,255,255,0.92);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .toggle-option:hover {
       color: rgba(255,255,255,0.72);
@@ -578,9 +581,6 @@
     }
     .toggle-option.active {
       color: rgba(255,255,255,0.96);
-    }
-    .toggle-option.active::after {
-      transform: scaleX(1);
     }
 
     /* Interests. The part recruiters skim. */
@@ -736,6 +736,7 @@
           <div class="toggle-pill" id="backstory-toggle-pill">
             <button class="toggle-option active" id="backstory-short-btn" type="button" aria-pressed="true">Short</button>
             <button class="toggle-option" id="backstory-long-btn" type="button" aria-pressed="false">Long</button>
+            <div class="toggle-slider"></div>
           </div>
         </div>
         <div id="backstory-short">
