@@ -572,6 +572,18 @@
     .toggle-option.active {
       color: rgba(255,255,255,0.96);
     }
+    #backstory-short, #backstory-long {
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: opacity, transform;
+    }
+    #backstory-short.swoop-out, #backstory-long.swoop-out {
+      opacity: 0;
+      transform: translateX(-28px);
+    }
+    #backstory-short.swoop-in, #backstory-long.swoop-in {
+      opacity: 0;
+      transform: translateX(28px);
+    }
 
     /* Interests. The part recruiters skim. */
     .interests-section {
@@ -1139,25 +1151,47 @@
     window.addEventListener('popstate', navigate);
     navigate();
 
-    // Backstory short/long toggle
-    document.getElementById('backstory-short-btn').addEventListener('click', function() {
-      document.getElementById('backstory-toggle-pill').classList.remove('long');
-      document.getElementById('backstory-short').style.display = '';
-      document.getElementById('backstory-long').style.display = 'none';
-      this.classList.add('active');
-      this.setAttribute('aria-pressed', 'true');
-      document.getElementById('backstory-long-btn').classList.remove('active');
-      document.getElementById('backstory-long-btn').setAttribute('aria-pressed', 'false');
-    });
-    document.getElementById('backstory-long-btn').addEventListener('click', function() {
-      document.getElementById('backstory-toggle-pill').classList.add('long');
-      document.getElementById('backstory-short').style.display = 'none';
-      document.getElementById('backstory-long').style.display = '';
-      this.classList.add('active');
-      this.setAttribute('aria-pressed', 'true');
-      document.getElementById('backstory-short-btn').classList.remove('active');
-      document.getElementById('backstory-short-btn').setAttribute('aria-pressed', 'false');
-    });
+    // Backstory short/long toggle with swoop animation
+    (function() {
+      var pill = document.getElementById('backstory-toggle-pill');
+      var shortEl = document.getElementById('backstory-short');
+      var longEl = document.getElementById('backstory-long');
+      var shortBtn = document.getElementById('backstory-short-btn');
+      var longBtn = document.getElementById('backstory-long-btn');
+      var busy = false;
+
+      function swap(toShort) {
+        var activeBtn = toShort ? shortBtn : longBtn;
+        if (busy || activeBtn.classList.contains('active')) return;
+        busy = true;
+
+        var showEl = toShort ? shortEl : longEl;
+        var hideEl = toShort ? longEl : shortEl;
+
+        pill.classList.toggle('long', !toShort);
+        shortBtn.classList.toggle('active', toShort);
+        shortBtn.setAttribute('aria-pressed', toShort ? 'true' : 'false');
+        longBtn.classList.toggle('active', !toShort);
+        longBtn.setAttribute('aria-pressed', toShort ? 'false' : 'true');
+
+        hideEl.classList.add('swoop-out');
+        setTimeout(function() {
+          hideEl.style.display = 'none';
+          hideEl.classList.remove('swoop-out');
+          showEl.classList.add('swoop-in');
+          showEl.style.display = '';
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              showEl.classList.remove('swoop-in');
+              busy = false;
+            });
+          });
+        }, 400);
+      }
+
+      shortBtn.addEventListener('click', function() { swap(true); });
+      longBtn.addEventListener('click', function() { swap(false); });
+    })();
 
     // Experience expand/collapse (starts open, click to close)
     document.querySelectorAll('.exp-item').forEach(function(item) {
