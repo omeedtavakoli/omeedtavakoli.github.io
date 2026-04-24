@@ -539,25 +539,17 @@
       margin-bottom: 1.5rem;
     }
     .toggle-pill {
-      position: relative;
       display: inline-flex;
+      align-items: baseline;
+      gap: 0.55rem;
     }
-    .toggle-slider {
-      position: absolute;
-      bottom: 0;
-      left: 18px;
-      width: 28px;
-      height: 1px;
-      background: rgba(255,255,255,0.92);
-      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-      pointer-events: none;
-    }
-    .toggle-pill.long .toggle-slider {
-      transform: translateX(64px);
+    .toggle-sep {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.22);
+      user-select: none;
     }
     .toggle-option {
-      position: relative;
-      z-index: 1;
       background: none;
       border: none;
       cursor: pointer;
@@ -566,9 +558,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.42);
-      padding: 0 0 0.6rem;
-      flex: 0 0 64px;
-      text-align: center;
+      padding: 0;
       transition: color 0.25s ease;
       user-select: none;
     }
@@ -735,8 +725,8 @@
         <div class="backstory-toggle">
           <div class="toggle-pill" id="backstory-toggle-pill">
             <button class="toggle-option active" id="backstory-short-btn" type="button" aria-pressed="true">Short</button>
+            <span class="toggle-sep" aria-hidden="true">/</span>
             <button class="toggle-option" id="backstory-long-btn" type="button" aria-pressed="false">Long</button>
-            <div class="toggle-slider"></div>
           </div>
         </div>
         <div id="backstory-short">
