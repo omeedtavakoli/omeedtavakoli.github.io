@@ -665,9 +665,6 @@
         width: 18px;
         height: 18px;
       }
-      .about-content {
-        padding: 1.5rem 0.5rem 6rem;
-      }
       .projects-list {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -725,7 +722,7 @@
     </div>
   </header>
 
-  <div class="center">
+  <main class="center">
     <div class="home-view" id="home-view">
       <a class="name-box" href="mailto:omeedt1234@gmail.com">Omeed Tavakoli</a>
     </div>
@@ -812,7 +809,7 @@
           <li>
             <div class="edu-item">
               <div>
-                <div class="edu-degree">Bachelors degree, Economics &amp; Computer Science</div>
+                <div class="edu-degree">Bachelor's degree, Economics &amp; Computer Science</div>
                 <div class="edu-school">University of Southern California</div>
               </div>
               <img class="edu-logo" src="images/USC_Trojans_logo.svg.png" alt="University of Southern California">
@@ -829,7 +826,7 @@
           <li>
             <div class="project-item pending">
               <div class="project-thumb-wrap">
-                <div id="family-tree-image-tavakoli" class="project-placeholder" role="img" aria-label="Tavakoli Family Tree coming soon preview">
+                <div class="project-placeholder" role="img" aria-label="Tavakoli Family Tree coming soon preview">
                   <div class="project-placeholder-copy">
                     <span class="project-placeholder-title">Tavakoli Family</span>
                     <span class="project-placeholder-fa" lang="fa" dir="rtl">خانواده تواکلی</span>
@@ -1017,7 +1014,7 @@
         </section>
       </div>
     </div>
-  </div>
+  </main>
 
   <footer>
     <span id="time"></span>
@@ -1120,7 +1117,12 @@
       githubLink.classList.toggle('visible', hash === '#projects');
     }
 
+    function isModifierClick(e) {
+      return e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1;
+    }
+
     homeLink.addEventListener('click', function(e) {
+      if (isModifierClick(e)) return;
       e.preventDefault();
       history.pushState(null, '', window.location.pathname);
       navigate();
@@ -1128,6 +1130,7 @@
 
     [aboutToggle, experienceToggle, projectsToggle, interestsToggle].forEach(function(toggle) {
       toggle.addEventListener('click', function(e) {
+        if (isModifierClick(e)) return;
         e.preventDefault();
         var target = toggle.getAttribute('href');
         if (window.location.hash === target) {
@@ -1141,10 +1144,11 @@
 
     // Escape goes home. Like real life.
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && window.location.hash) {
-        history.pushState(null, '', window.location.pathname);
-        navigate();
-      }
+      if (e.key !== 'Escape' || !window.location.hash) return;
+      var ae = document.activeElement;
+      if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.isContentEditable)) return;
+      history.pushState(null, '', window.location.pathname);
+      navigate();
     });
 
     window.addEventListener('popstate', navigate);
