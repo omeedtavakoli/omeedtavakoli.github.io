@@ -19,7 +19,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Omeed Tavakoli</title>
   <meta name="description" content="Omeed Tavakoli — building products across consumer and prosumer. Previously on Perplexity's growth team.">
 
@@ -55,7 +55,7 @@
   <meta name="twitter:description" content="Building products across consumer and prosumer. Previously on Perplexity's growth team.">
   <meta name="twitter:site" content="@omeedtavakoli">
   <meta name="twitter:image" content="https://omeedtavakoli.github.io/images/og-image.png">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Nastaliq+Urdu&family=Vazirmatn:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@500;600&display=swap" rel="stylesheet">
   <style>
     /* The usual reset ceremony. */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -71,12 +71,10 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 2.5rem 3rem;
+      padding: 2.5rem 3rem calc(2.5rem + env(safe-area-inset-bottom, 0px));
       -webkit-font-smoothing: antialiased;
       cursor: default;
       overflow: hidden;
-      /* Fix iOS Safari scroll-locking */
-      -webkit-overflow-scrolling: touch;
       /* Remove tap highlight on iOS */
       -webkit-tap-highlight-color: transparent;
     }
@@ -215,7 +213,7 @@
       letter-spacing: 0.35em;
       text-transform: uppercase;
       font-family: 'Times New Roman', Times, serif;
-      font-style: bold;
+      font-weight: bold;
       cursor: pointer;
       background: transparent;
       border: none;
@@ -261,7 +259,7 @@
       transform: translate3d(0, 0, 0);
       opacity: 1;
       pointer-events: auto;
-      overflow: visible;
+      overflow: hidden;
     }
     .about-view::before,
     .experience-view::before,
@@ -657,7 +655,7 @@
     /* Phones exist. */
     @media (max-width: 600px) {
       body {
-        padding: 1.75rem 1.5rem;
+        padding: 1.75rem 1.5rem calc(1.75rem + env(safe-area-inset-bottom, 0px));
         font-size: 18px;
       }
       .nav-link {
