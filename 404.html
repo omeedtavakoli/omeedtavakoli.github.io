@@ -12,15 +12,20 @@
     body {
       background: #1a1a1a;
       color: #fff;
-      font-family: monospace;
+      font-family: Arial, sans-serif;
       min-height: 100vh;
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 2.5rem 3rem;
       -webkit-font-smoothing: antialiased;
+      cursor: default;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
     pre {
       font-family: 'Courier New', Courier, monospace;
@@ -30,29 +35,30 @@
       color: #fff;
       margin-bottom: 2rem;
       text-align: left;
+      animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
     }
     .sub {
-      font-family: 'Courier New', Courier, monospace;
+      font-family: Arial, sans-serif;
       font-size: clamp(11px, 1.5vw, 18px);
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.45);
       margin-bottom: 2rem;
-      letter-spacing: 0.05em;
-    }
-    @keyframes sweep {
-      0%   { background-position: 200% center; }
-      100% { background-position: -100% center; }
+      letter-spacing: 0.01em;
+      animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.3s both;
     }
     .back {
       text-decoration: none;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: Arial, sans-serif;
       font-size: clamp(12px, 1.5vw, 18px);
-      letter-spacing: 0.05em;
-      background: linear-gradient(90deg, #fff 30%, #ff2222 50%, #fff 70%);
-      background-size: 300% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: sweep 10s linear infinite;
+      letter-spacing: 0.01em;
+      color: rgba(255,255,255,0.9);
+      transition: color 0.4s ease;
+      animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.5s both;
+    }
+    .back:hover {
+      color: red;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      pre, .sub, .back { animation: none; opacity: 1; }
     }
   </style>
 </head>

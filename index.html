@@ -541,24 +541,20 @@
     .toggle-pill {
       position: relative;
       display: inline-flex;
-      align-items: center;
-      gap: 1.4rem;
-      padding-bottom: 0.45rem;
       border-bottom: 1px solid rgba(255,255,255,0.12);
     }
     .toggle-slider {
       position: absolute;
-      left: 0;
       bottom: -1px;
-      width: 48px;
+      left: 0;
+      width: 50%;
       height: 1px;
       background: rgba(255,255,255,0.92);
-      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
       pointer-events: none;
     }
     .toggle-pill.long .toggle-slider {
-      transform: translateX(58px);
-      width: 41px;
+      transform: translateX(100%);
     }
     .toggle-option {
       position: relative;
@@ -571,8 +567,10 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.42);
-      padding: 0;
-      transition: color 0.25s ease, opacity 0.25s ease;
+      padding: 0 0 0.5rem;
+      width: 52px;
+      text-align: center;
+      transition: color 0.25s ease;
       user-select: none;
     }
     .toggle-option:hover {
