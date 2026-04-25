@@ -113,7 +113,14 @@ function navigate() {
   var hash = window.location.hash;
   allViews.forEach(function(v) { v.classList.remove('visible'); });
   allToggles.forEach(function(t) { t.classList.remove('active'); });
-  homeView.classList.add('hidden');
+
+  var inSection =
+    hash === '#about' ||
+    hash === '#experience' ||
+    hash === '#projects' ||
+    hash === '#interests';
+
+  homeView.classList.toggle('hidden', inSection);
 
   if (hash === '#about') {
     aboutView.classList.add('visible');
@@ -127,8 +134,6 @@ function navigate() {
   } else if (hash === '#interests') {
     interestsView.classList.add('visible');
     interestsToggle.classList.add('active');
-  } else {
-    homeView.classList.remove('hidden');
   }
   focusAfterNav();
 }
