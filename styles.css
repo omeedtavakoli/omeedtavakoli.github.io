@@ -16,6 +16,7 @@ body {
   -webkit-font-smoothing: antialiased;
   cursor: default;
   overflow: hidden;
+  position: relative;
   /* Remove tap highlight on iOS */
   -webkit-tap-highlight-color: transparent;
 }
@@ -110,7 +111,10 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 3rem;
+  transform: translateY(-50%);
   z-index: 2;
 }
 .nav-links {
@@ -641,6 +645,9 @@ footer span {
   body {
     padding: 1.75rem 1.5rem calc(1.75rem + env(safe-area-inset-bottom, 0px));
     font-size: 18px;
+  }
+  header {
+    left: 1.5rem;
   }
   .nav-link {
     font-size: 18px;
