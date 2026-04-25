@@ -194,6 +194,15 @@ button.nav-link {
   opacity: 0;
   pointer-events: none;
 }
+
+/* Avoid flicker on hard refresh: disable transitions during initial boot only. */
+.booting .home-view,
+.booting .about-view,
+.booting .experience-view,
+.booting .projects-view,
+.booting .interests-view {
+  transition: none !important;
+}
 .name-box {
   text-decoration: none;
   color: #fff;

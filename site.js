@@ -185,6 +185,13 @@ document.addEventListener('keydown', function(e) {
 window.addEventListener('popstate', navigate);
 navigate();
 
+// Remove boot class after first route has rendered.
+requestAnimationFrame(function() {
+  requestAnimationFrame(function() {
+    document.documentElement.classList.remove('booting');
+  });
+});
+
 // Backstory short/long toggle with swoop animation
 (function() {
   var shortEl = document.getElementById('backstory-short');
