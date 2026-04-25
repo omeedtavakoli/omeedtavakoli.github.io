@@ -676,7 +676,7 @@ footer span {
     font-size: 14px;
   }
   .media-assets-link {
-    font-size: 16px;
+    font-size: 18px;
     top: 1.75rem;
     right: 1.5rem;
   }
@@ -711,5 +711,5 @@ footer span {
     align-items: flex-start;
     gap: 0.2rem;
   }
-  footer span { font-size: 16px; }
+  footer span { font-size: 18px; }
 }
