@@ -1,0 +1,681 @@
+/* The usual reset ceremony. */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Dark. That is the mood. */
+body {
+  background: #1a1a1a;
+  color: #fff;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 22px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem 3rem calc(2.5rem + env(safe-area-inset-bottom, 0px));
+  -webkit-font-smoothing: antialiased;
+  cursor: default;
+  overflow: hidden;
+  /* Remove tap highlight on iOS */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Skip to main: hidden until :focus (keyboard) */
+.skip-link {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+  padding: 0.45rem 0.9rem;
+  background: #1a1a1a;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-size: 16px;
+  line-height: 1.2;
+  text-decoration: none;
+  font-family: 'Times New Roman', Times, serif;
+  transform: translateY(-100%);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid #f00;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}
+
+/* Section h1: programmatic focus from routing */
+.about-title:focus {
+  outline: none;
+}
+.about-title:focus-visible {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.45);
+  border-radius: 2px;
+}
+
+/* Fade in. Slowly enough to feel deliberate. */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes underlineSwoosh {
+  0%   { transform: scaleX(0); }
+  50%  { transform: scaleX(1); }
+  100% { transform: scaleX(0); }
+}
+@keyframes underlineIn {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes underlineOut {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}
+.name-box {
+  animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
+  animation-delay: 0s;
+}
+.name-box.is-entering::after {
+  animation: underlineSwoosh 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.4s forwards;
+}
+.name-box.underline-in::after {
+  animation: underlineIn 0.7s cubic-bezier(.77, 0, .175, 1) forwards;
+}
+.name-box.underline-out::after {
+  animation: underlineOut 0.7s cubic-bezier(.77, 0, .175, 1) forwards;
+}
+header, footer {
+  animation: fadeIn 1.05s cubic-bezier(0.7, 0, 0.3, 1) both;
+  animation-delay: 1.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header, footer, .name-box {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Header. Name, nav, and the obligatory socials. */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+}
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 22px;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+.nav-link:hover,
+.nav-link:active {
+  color: red;
+}
+.nav-link.active {
+  color: red;
+  cursor: pointer;
+}
+.nav-link.active:hover {
+  color: red;
+}
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+.social-link:hover,
+.social-link:active {
+  color: red;
+}
+.social-link svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+.social-link--github {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, color 0.4s ease;
+}
+.social-link--github.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.center {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Home. Just a name. Anything more would be bragging. */
+.home-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+  padding-bottom: 12vh;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.home-view.hidden {
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.name-box {
+  text-decoration: none;
+  color: #fff;
+  font-size: 22px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: normal;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0 0 0 0.35em;
+  transition: color 0.4s ease;
+  position: relative;
+}
+.name-box::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: red;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.name-box:hover {
+  color: #fff;
+}
+
+/* Four views, one stylesheet. DRY enough. */
+.about-view,
+.experience-view,
+.projects-view,
+.interests-view {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform: translate3d(100%, 0, 0);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.about-view.visible,
+.experience-view.visible,
+.projects-view.visible,
+.interests-view.visible {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  pointer-events: auto;
+  overflow: hidden;
+}
+.about-view::before,
+.experience-view::before,
+.projects-view::before,
+.interests-view::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3rem;
+  background: linear-gradient(to bottom, #1a1a1a, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+.about-view::after,
+.experience-view::after,
+.projects-view::after,
+.interests-view::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5rem;
+  background: linear-gradient(to bottom, transparent, #1a1a1a);
+  pointer-events: none;
+  z-index: 1;
+}
+.about-title {
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+}
+.about-updated {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 2rem;
+}
+.about-content {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  padding: 2rem 1rem 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+}
+.about-content::-webkit-scrollbar {
+  width: 4px;
+}
+.about-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.about-content::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+}
+.about-content > * {
+  width: 100%;
+  max-width: 1100px;
+}
+.about-content p {
+  font-size: 18px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 1.2rem;
+}
+.about-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Projects. Finished side quests. */
+.projects-list {
+  list-style: none;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+.project-item {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease;
+}
+.project-item:hover {
+  transform: translateY(-3px);
+}
+.project-item.pending {
+  cursor: not-allowed;
+}
+.project-item.pending:hover {
+  transform: none;
+}
+.project-thumb-wrap {
+  flex: 0 0 min(42%, 440px);
+  width: min(42%, 440px);
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+.project-item:hover .project-thumb-wrap {
+  border-color: rgba(255,255,255,0.25);
+}
+.project-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.project-placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 48%, rgba(201,169,97,0.28) 49%, rgba(201,169,97,0.28) 51%, transparent 52%) 0 38% / 100% 1px no-repeat,
+    linear-gradient(150deg, #f6edd8 0%, #ede3c8 100%);
+}
+.project-placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(201,169,97,0.38);
+  border-radius: 6px;
+  pointer-events: none;
+}
+.project-placeholder-copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding-top: 1.3rem;
+  text-align: center;
+}
+.project-placeholder-title {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 58px;
+  font-weight: 600;
+  line-height: 1;
+  color: #2c3e6b;
+  letter-spacing: 0;
+}
+.project-placeholder-fa {
+  font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
+  font-size: 27px;
+  line-height: 1.55;
+  font-weight: 400;
+  color: rgba(44,62,107,0.72);
+}
+.project-info {
+  flex: 1;
+  padding: 0;
+}
+.project-title {
+  font-size: 25px;
+  line-height: 1.25;
+  color: rgba(255,255,255,0.9);
+  transition: color 0.3s ease;
+}
+.project-title .project-sub {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 18px;
+  line-height: 1.3;
+  color: rgba(255,255,255,0.4);
+}
+.project-item:hover .project-title {
+  color: red;
+}
+.project-item:hover .project-title .project-sub {
+  color: rgba(255,255,255,0.4);
+}
+
+/* Experience. Resume-adjacent. */
+.exp-list {
+  list-style: none;
+  margin-top: 0;
+}
+.exp-item {
+  display: block;
+  padding: 0.75rem 0 1.25rem;
+  cursor: pointer;
+}
+.exp-list li:first-child .exp-item {
+  border-top: none;
+}
+.exp-title {
+  font-size: 19px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.9);
+  transition: color 0.3s ease;
+}
+.exp-title .exp-sub {
+  color: rgba(255,255,255,0.4);
+}
+.exp-item:hover .exp-title {
+  color: red;
+}
+.exp-item:hover .exp-title .exp-sub {
+  color: rgba(255,255,255,0.4);
+}
+.exp-desc {
+  max-height: 10rem;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  opacity: 1;
+}
+.exp-item.closed .exp-desc {
+  max-height: 0;
+  opacity: 0;
+}
+.exp-desc p {
+  font-size: 18px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.8);
+  padding-top: 0.75rem;
+}
+
+.exp-section-label {
+  font-size: 26px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.exp-sub-line {
+  font-size: 16px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.2rem;
+}
+.edu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0 1.5rem;
+}
+.edu-logo {
+  height: 90px;
+  width: auto;
+  opacity: 0.85;
+  flex-shrink: 0;
+  margin-left: 1.5rem;
+}
+.edu-list li:first-child .edu-item {
+  border-top: none;
+}
+.edu-degree {
+  font-size: 19px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.9);
+}
+.edu-school {
+  font-size: 16px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 0.35rem;
+}
+
+.backstory-toggle {
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.toggle-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+.toggle-sep {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.22);
+  user-select: none;
+}
+.toggle-option {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
+  padding: 0;
+  transition: color 0.25s ease;
+  user-select: none;
+}
+.toggle-option:hover {
+  color: rgba(255,255,255,0.72);
+}
+.toggle-option:focus-visible {
+  outline: none;
+  color: rgba(255,255,255,0.92);
+}
+.toggle-option.active {
+  color: rgba(255,255,255,0.96);
+}
+#backstory-short, #backstory-long {
+  transition: opacity 0.13s cubic-bezier(0.4, 0, 0.2, 1), transform 0.13s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+#backstory-short.swoop-out, #backstory-long.swoop-out {
+  opacity: 0;
+  transform: translateX(-28px);
+}
+#backstory-short.swoop-in, #backstory-long.swoop-in {
+  opacity: 0;
+  transform: translateX(28px);
+}
+
+/* Interests. The part recruiters skim. */
+.interests-section {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+.interests-heading {
+  font-size: 22px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 1rem;
+}
+.interests-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+.interests-item {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.interests-item:hover {
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-3px);
+}
+.interests-grid--portrait .interests-item {
+  aspect-ratio: 2 / 3;
+}
+.interests-grid--square .interests-item {
+  aspect-ratio: 1 / 1;
+}
+.interests-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.interests-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  padding: 0.5rem;
+}
+
+/* Footer. Date and time — the two hardest things in computing. */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 2;
+}
+footer span {
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+/* Phones exist. */
+@media (max-width: 600px) {
+  body {
+    padding: 1.75rem 1.5rem calc(1.75rem + env(safe-area-inset-bottom, 0px));
+    font-size: 18px;
+  }
+  .nav-link {
+    font-size: 18px;
+  }
+  .social-link svg {
+    width: 18px;
+    height: 18px;
+  }
+  .projects-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .project-item {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+  }
+  .project-thumb-wrap {
+    flex-basis: auto;
+    width: 100%;
+  }
+  .interests-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+  .interests-heading { font-size: 18px; }
+  .project-title { font-size: 19px; line-height: 1.5; }
+  .project-title .project-sub { display: inline; margin-top: 0; font-size: inherit; line-height: inherit; }
+  .exp-title { font-size: 17px; }
+  .exp-desc p { font-size: 16px; }
+  .about-title { font-size: 24px; }
+  .project-placeholder-title { font-size: 42px; }
+  .project-placeholder-fa { font-size: 19px; }
+  .about-content { padding: 1rem 0.5rem 6rem; }
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+  footer span { font-size: 16px; }
+}

@@ -57,653 +57,10 @@
   <meta name="twitter:site" content="@omeedtavakoli">
   <meta name="twitter:image" content="https://omeedtavakoli.github.io/images/og-image.png">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@500;600&display=swap" rel="stylesheet">
-  <style>
-    /* The usual reset ceremony. */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    /* Dark. That is the mood. */
-    body {
-      background: #1a1a1a;
-      color: #fff;
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 22px;
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 2.5rem 3rem calc(2.5rem + env(safe-area-inset-bottom, 0px));
-      -webkit-font-smoothing: antialiased;
-      cursor: default;
-      overflow: hidden;
-      /* Remove tap highlight on iOS */
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* Fade in. Slowly enough to feel deliberate. */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes underlineSwoosh {
-      0%   { transform: scaleX(0); }
-      50%  { transform: scaleX(1); }
-      100% { transform: scaleX(0); }
-    }
-    @keyframes underlineIn {
-      from { transform: scaleX(0); }
-      to   { transform: scaleX(1); }
-    }
-    @keyframes underlineOut {
-      from { transform: scaleX(1); }
-      to   { transform: scaleX(0); }
-    }
-    .name-box {
-      animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
-      animation-delay: 0s;
-    }
-    .name-box.is-entering::after {
-      animation: underlineSwoosh 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.4s forwards;
-    }
-    .name-box.underline-in::after {
-      animation: underlineIn 0.7s cubic-bezier(.77, 0, .175, 1) forwards;
-    }
-    .name-box.underline-out::after {
-      animation: underlineOut 0.7s cubic-bezier(.77, 0, .175, 1) forwards;
-    }
-    header, footer {
-      animation: fadeIn 1.05s cubic-bezier(0.7, 0, 0.3, 1) both;
-      animation-delay: 1.3s;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      header, footer, .name-box {
-        animation: none;
-        opacity: 1;
-      }
-    }
-
-    /* Header. Name, nav, and the obligatory socials. */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      position: relative;
-      z-index: 2;
-    }
-    .nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-start;
-    }
-    .nav-link {
-      color: #fff;
-      text-decoration: none;
-      font-size: 22px;
-      cursor: pointer;
-      transition: color 0.4s ease;
-    }
-    .nav-link:hover,
-    .nav-link:active {
-      color: red;
-    }
-    .nav-link.active {
-      color: red;
-      cursor: pointer;
-    }
-    .nav-link.active:hover {
-      color: red;
-    }
-    .socials {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-    }
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      color: #fff;
-      cursor: pointer;
-      transition: color 0.4s ease;
-    }
-    .social-link:hover,
-    .social-link:active {
-      color: red;
-    }
-    .social-link svg {
-      width: 22px;
-      height: 22px;
-      fill: currentColor;
-    }
-    .social-link--github {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease, color 0.4s ease;
-    }
-    .social-link--github.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .center {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Home. Just a name. Anything more would be bragging. */
-    .home-view {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      inset: 0;
-      padding-bottom: 12vh;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .home-view.hidden {
-      transform: translateX(-100%);
-      opacity: 0;
-      pointer-events: none;
-    }
-    .name-box {
-      text-decoration: none;
-      color: #fff;
-      font-size: 22px;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      font-family: 'Times New Roman', Times, serif;
-      font-weight: normal;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      padding: 0 0 0 0.35em;
-      transition: color 0.4s ease;
-      position: relative;
-    }
-    .name-box::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 100%;
-      height: 1px;
-      background: red;
-      transform: scaleX(0);
-      transform-origin: left;
-    }
-    .name-box:hover {
-      color: #fff;
-    }
-
-    /* Four views, one stylesheet. DRY enough. */
-    .about-view,
-    .experience-view,
-    .projects-view,
-    .interests-view {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      transform: translate3d(100%, 0, 0);
-      opacity: 0;
-      pointer-events: none;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform, opacity;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-    }
-    .about-view.visible,
-    .experience-view.visible,
-    .projects-view.visible,
-    .interests-view.visible {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-      pointer-events: auto;
-      overflow: hidden;
-    }
-    .about-view::before,
-    .experience-view::before,
-    .projects-view::before,
-    .interests-view::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3rem;
-      background: linear-gradient(to bottom, #1a1a1a, transparent);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .about-view::after,
-    .experience-view::after,
-    .projects-view::after,
-    .interests-view::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 5rem;
-      background: linear-gradient(to bottom, transparent, #1a1a1a);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .about-title {
-      font-size: 30px;
-      font-weight: 400;
-      margin-bottom: 0.4rem;
-    }
-    .about-updated {
-      font-size: 16px;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 2rem;
-    }
-    .about-content {
-      position: absolute;
-      inset: 0;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior: contain;
-      touch-action: pan-y;
-      padding: 2rem 1rem 6rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,0.15) transparent;
-    }
-    .about-content::-webkit-scrollbar {
-      width: 4px;
-    }
-    .about-content::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .about-content::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.15);
-      border-radius: 2px;
-    }
-    .about-content > * {
-      width: 100%;
-      max-width: 1100px;
-    }
-    .about-content p {
-      font-size: 18px;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.8);
-      margin-bottom: 1.2rem;
-    }
-    .about-content p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Projects. Finished side quests. */
-    .projects-list {
-      list-style: none;
-      margin-top: 2rem;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-    .project-item {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.3s ease;
-    }
-    .project-item:hover {
-      transform: translateY(-3px);
-    }
-    .project-item.pending {
-      cursor: not-allowed;
-    }
-    .project-item.pending:hover {
-      transform: none;
-    }
-    .project-thumb-wrap {
-      flex: 0 0 min(42%, 440px);
-      width: min(42%, 440px);
-      aspect-ratio: 16 / 9;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.1);
-      overflow: hidden;
-      transition: border-color 0.3s ease;
-    }
-    .project-item:hover .project-thumb-wrap {
-      border-color: rgba(255,255,255,0.25);
-    }
-    .project-thumb {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .project-placeholder {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      background:
-        linear-gradient(90deg, transparent 48%, rgba(201,169,97,0.28) 49%, rgba(201,169,97,0.28) 51%, transparent 52%) 0 38% / 100% 1px no-repeat,
-        linear-gradient(150deg, #f6edd8 0%, #ede3c8 100%);
-    }
-    .project-placeholder::before {
-      content: "";
-      position: absolute;
-      inset: 12px;
-      border: 1px solid rgba(201,169,97,0.38);
-      border-radius: 6px;
-      pointer-events: none;
-    }
-    .project-placeholder-copy {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.35rem;
-      padding-top: 1.3rem;
-      text-align: center;
-    }
-    .project-placeholder-title {
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 58px;
-      font-weight: 600;
-      line-height: 1;
-      color: #2c3e6b;
-      letter-spacing: 0;
-    }
-    .project-placeholder-fa {
-      font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
-      font-size: 27px;
-      line-height: 1.55;
-      font-weight: 400;
-      color: rgba(44,62,107,0.72);
-    }
-    .project-info {
-      flex: 1;
-      padding: 0;
-    }
-    .project-title {
-      font-size: 25px;
-      line-height: 1.25;
-      color: rgba(255,255,255,0.9);
-      transition: color 0.3s ease;
-    }
-    .project-title .project-sub {
-      display: block;
-      margin-top: 0.25rem;
-      font-size: 18px;
-      line-height: 1.3;
-      color: rgba(255,255,255,0.4);
-    }
-    .project-item:hover .project-title {
-      color: red;
-    }
-    .project-item:hover .project-title .project-sub {
-      color: rgba(255,255,255,0.4);
-    }
-
-    /* Experience. Resume-adjacent. */
-    .exp-list {
-      list-style: none;
-      margin-top: 0;
-    }
-    .exp-item {
-      display: block;
-      padding: 0.75rem 0 1.25rem;
-      cursor: pointer;
-    }
-    .exp-list li:first-child .exp-item {
-      border-top: none;
-    }
-    .exp-title {
-      font-size: 19px;
-      line-height: 1.5;
-      color: rgba(255,255,255,0.9);
-      transition: color 0.3s ease;
-    }
-    .exp-title .exp-sub {
-      color: rgba(255,255,255,0.4);
-    }
-    .exp-item:hover .exp-title {
-      color: red;
-    }
-    .exp-item:hover .exp-title .exp-sub {
-      color: rgba(255,255,255,0.4);
-    }
-    .exp-desc {
-      max-height: 10rem;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-      opacity: 1;
-    }
-    .exp-item.closed .exp-desc {
-      max-height: 0;
-      opacity: 0;
-    }
-    .exp-desc p {
-      font-size: 18px;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.8);
-      padding-top: 0.75rem;
-    }
-
-    .exp-section-label {
-      font-size: 26px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.9);
-      margin-top: 2.5rem;
-      margin-bottom: 1.25rem;
-      letter-spacing: normal;
-      text-transform: none;
-    }
-    .exp-sub-line {
-      font-size: 16px;
-      color: rgba(255,255,255,0.4);
-      margin-top: 0.2rem;
-    }
-    .edu-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 0 1.5rem;
-    }
-    .edu-logo {
-      height: 90px;
-      width: auto;
-      opacity: 0.85;
-      flex-shrink: 0;
-      margin-left: 1.5rem;
-    }
-    .edu-list li:first-child .edu-item {
-      border-top: none;
-    }
-    .edu-degree {
-      font-size: 19px;
-      line-height: 1.5;
-      color: rgba(255,255,255,0.9);
-    }
-    .edu-school {
-      font-size: 16px;
-      color: rgba(255,255,255,0.45);
-      margin-top: 0.35rem;
-    }
-
-    .backstory-toggle {
-      margin-top: 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-    .toggle-pill {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 0.55rem;
-    }
-    .toggle-sep {
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 14px;
-      color: rgba(255,255,255,0.22);
-      user-select: none;
-    }
-    .toggle-option {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.42);
-      padding: 0;
-      transition: color 0.25s ease;
-      user-select: none;
-    }
-    .toggle-option:hover {
-      color: rgba(255,255,255,0.72);
-    }
-    .toggle-option:focus-visible {
-      outline: none;
-      color: rgba(255,255,255,0.92);
-    }
-    .toggle-option.active {
-      color: rgba(255,255,255,0.96);
-    }
-    #backstory-short, #backstory-long {
-      transition: opacity 0.13s cubic-bezier(0.4, 0, 0.2, 1), transform 0.13s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: opacity, transform;
-    }
-    #backstory-short.swoop-out, #backstory-long.swoop-out {
-      opacity: 0;
-      transform: translateX(-28px);
-    }
-    #backstory-short.swoop-in, #backstory-long.swoop-in {
-      opacity: 0;
-      transform: translateX(28px);
-    }
-
-    /* Interests. The part recruiters skim. */
-    .interests-section {
-      margin-top: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    .interests-heading {
-      font-size: 22px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.9);
-      margin-bottom: 1rem;
-    }
-    .interests-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 1rem;
-    }
-    .interests-item {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      border-radius: 4px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.03);
-      transition: border-color 0.3s ease, transform 0.3s ease;
-    }
-    .interests-item:hover {
-      border-color: rgba(255,255,255,0.3);
-      transform: translateY(-3px);
-    }
-    .interests-grid--portrait .interests-item {
-      aspect-ratio: 2 / 3;
-    }
-    .interests-grid--square .interests-item {
-      aspect-ratio: 1 / 1;
-    }
-    .interests-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .interests-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      color: rgba(255,255,255,0.3);
-      text-align: center;
-      padding: 0.5rem;
-    }
-
-    /* Footer. Date and time — the two hardest things in computing. */
-    footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      position: relative;
-      z-index: 2;
-    }
-    footer span {
-      font-size: 22px;
-      font-weight: 400;
-      letter-spacing: 0.01em;
-      font-variant-numeric: tabular-nums;
-    }
-    /* Phones exist. */
-    @media (max-width: 600px) {
-      body {
-        padding: 1.75rem 1.5rem calc(1.75rem + env(safe-area-inset-bottom, 0px));
-        font-size: 18px;
-      }
-      .nav-link {
-        font-size: 18px;
-      }
-      .social-link svg {
-        width: 18px;
-        height: 18px;
-      }
-      .projects-list {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-      .project-item {
-        align-items: stretch;
-        flex-direction: column;
-        gap: 0;
-      }
-      .project-thumb-wrap {
-        flex-basis: auto;
-        width: 100%;
-      }
-      .interests-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
-      }
-      .interests-heading { font-size: 18px; }
-      .project-title { font-size: 19px; line-height: 1.5; }
-      .project-title .project-sub { display: inline; margin-top: 0; font-size: inherit; line-height: inherit; }
-      .exp-title { font-size: 17px; }
-      .exp-desc p { font-size: 16px; }
-      .about-title { font-size: 24px; }
-      .project-placeholder-title { font-size: 42px; }
-      .project-placeholder-fa { font-size: 19px; }
-      .about-content { padding: 1rem 0.5rem 6rem; }
-      footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.2rem;
-      }
-      footer span { font-size: 16px; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header>
     <nav class="nav-links">
       <a class="nav-link" href="/" id="home-link">Home</a>
@@ -725,13 +82,13 @@
     </div>
   </header>
 
-  <main class="center">
+  <main class="center" id="main-content" tabindex="-1">
     <div class="home-view" id="home-view">
       <a class="name-box" href="mailto:omeedt1234@gmail.com">Omeed Tavakoli</a>
     </div>
     <div class="about-view" id="about-view">
       <div class="about-content">
-        <h1 class="about-title">My Backstory</h1>
+        <h1 class="about-title" id="section-heading-about" tabindex="-1">My Backstory</h1>
         <p class="about-updated">Updated April 2026</p>
         <div class="backstory-toggle">
           <div class="toggle-pill" id="backstory-toggle-pill">
@@ -757,7 +114,7 @@
     </div>
     <div class="experience-view" id="experience-view">
       <div class="about-content">
-        <h1 class="about-title">Resume</h1>
+        <h1 class="about-title" id="section-heading-experience" tabindex="-1">Resume</h1>
         <p class="about-updated">Building products across consumer and prosumer.</p>
         <h2 class="exp-section-label">Entrepreneurship</h2>
         <ul class="exp-list">
@@ -823,7 +180,7 @@
     </div>
     <div class="projects-view" id="projects-view">
       <div class="about-content">
-        <h1 class="about-title">Projects</h1>
+        <h1 class="about-title" id="section-heading-projects" tabindex="-1">Projects</h1>
         <p class="about-updated">A few trails I’ve followed outside the main road.</p>
         <ul class="projects-list">
           <li>
@@ -966,53 +323,53 @@
     </div>
     <div class="interests-view" id="interests-view">
       <div class="about-content">
-        <h1 class="about-title">Interests</h1>
+        <h1 class="about-title" id="section-heading-interests" tabindex="-1">Interests</h1>
         <p class="about-updated">What shaped me growing up.</p>
         <section class="interests-section">
           <h2 class="interests-heading">Books</h2>
           <div class="interests-grid interests-grid--portrait">
-            <div class="interests-item" title="Papillon by Henri Charrière (1969)"><img decoding="async" loading="lazy" src="images/papillon.jpg" alt="Papillon by Henri Charrière"></div>
-            <div class="interests-item" title="Zero to One by Peter Thiel (2014)"><img decoding="async" loading="lazy" src="images/zero_to_one_peter_thiel.jpg" alt="Zero to One by Peter Thiel"></div>
-            <div class="interests-item" title="The Outsiders by S. E. Hinton (1967)"><img decoding="async" loading="lazy" src="images/Outsiders.jpg" alt="The Outsiders by S. E. Hinton"></div>
-            <div class="interests-item" title="Range: Why Generalists Triumph in a Specialized World by David Epstein (2019)"><img decoding="async" loading="lazy" src="images/range.jpg" alt="Range by David Epstein"></div>
-            <div class="interests-item" title="Invent and Wander: The Collected Writings of Jeff Bezos by Walter Isaacson (2020)"><img decoding="async" loading="lazy" src="images/inventandwonder_bezos.jpg" alt="Invent and Wander by Walter Isaacson"></div>
+            <div class="interests-item" title="Papillon by Henri Charrière (1969)"><img decoding="async" loading="lazy" src="images/papillon.jpg" alt="Papillon by Henri Charrière (1969)"></div>
+            <div class="interests-item" title="Zero to One by Peter Thiel (2014)"><img decoding="async" loading="lazy" src="images/zero_to_one_peter_thiel.jpg" alt="Zero to One by Peter Thiel (2014)"></div>
+            <div class="interests-item" title="The Outsiders by S. E. Hinton (1967)"><img decoding="async" loading="lazy" src="images/Outsiders.jpg" alt="The Outsiders by S. E. Hinton (1967)"></div>
+            <div class="interests-item" title="Range: Why Generalists Triumph in a Specialized World by David Epstein (2019)"><img decoding="async" loading="lazy" src="images/range.jpg" alt="Range: Why Generalists Triumph in a Specialized World by David Epstein (2019)"></div>
+            <div class="interests-item" title="Invent and Wander: The Collected Writings of Jeff Bezos by Walter Isaacson (2020)"><img decoding="async" loading="lazy" src="images/inventandwonder_bezos.jpg" alt="Invent and Wander: The Collected Writings of Jeff Bezos by Walter Isaacson (2020)"></div>
           </div>
         </section>
         <section class="interests-section">
           <h2 class="interests-heading">Albums</h2>
           <div class="interests-grid interests-grid--square">
-            <div class="interests-item" title="Yellow Submarine by The Beatles (1969)"><img decoding="async" loading="lazy" src="images/Yellow_Sub.png" alt="Yellow Submarine by The Beatles"></div>
-            <div class="interests-item" title="Abbey Road by The Beatles (1969)"><img decoding="async" loading="lazy" src="images/abby-road-beatles.png" alt="Abbey Road by The Beatles"></div>
-            <div class="interests-item" title="Bad Blood by Bastille (2013)"><img decoding="async" loading="lazy" src="images/Bastille.png" alt="Bad Blood by Bastille"></div>
-            <div class="interests-item" title="News of the World by Queen (1977)"><img decoding="async" loading="lazy" src="images/queen.jpg" alt="News of the World by Queen"></div>
-            <div class="interests-item" title="No.6 Collaborations Project by Ed Sheeran (2019)"><img decoding="async" loading="lazy" src="images/ed.png" alt="No.6 Collaborations Project by Ed Sheeran"></div>
+            <div class="interests-item" title="Yellow Submarine by The Beatles (1969)"><img decoding="async" loading="lazy" src="images/Yellow_Sub.png" alt="Yellow Submarine by The Beatles (1969)"></div>
+            <div class="interests-item" title="Abbey Road by The Beatles (1969)"><img decoding="async" loading="lazy" src="images/abby-road-beatles.png" alt="Abbey Road by The Beatles (1969)"></div>
+            <div class="interests-item" title="Bad Blood by Bastille (2013)"><img decoding="async" loading="lazy" src="images/Bastille.png" alt="Bad Blood by Bastille (2013)"></div>
+            <div class="interests-item" title="News of the World by Queen (1977)"><img decoding="async" loading="lazy" src="images/queen.jpg" alt="News of the World by Queen (1977)"></div>
+            <div class="interests-item" title="No.6 Collaborations Project by Ed Sheeran (2019)"><img decoding="async" loading="lazy" src="images/ed.png" alt="No.6 Collaborations Project by Ed Sheeran (2019)"></div>
           </div>
         </section>
         <section class="interests-section">
           <h2 class="interests-heading">Movies</h2>
           <div class="interests-grid interests-grid--portrait">
-            <div class="interests-item" title="The Karate Kid (1984)"><img decoding="async" loading="lazy" src="images/karate_kid_1.jpg" alt="The Karate Kid"></div>
-            <div class="interests-item" title="Dead Poets Society (1989)"><img decoding="async" loading="lazy" src="images/dead_poets.jpg" alt="Dead Poets Society"></div>
-            <div class="interests-item" title="One Flew Over the Cuckoo's Nest (1975)"><img decoding="async" loading="lazy" src="images/flew_over_cu.jpg" alt="One Flew Over the Cuckoo's Nest"></div>
-            <div class="interests-item" title="Good Will Hunting (1997)"><img decoding="async" loading="lazy" src="images/good_will.jpg" alt="Good Will Hunting"></div>
-            <div class="interests-item" title="21 (2008)"><img decoding="async" loading="lazy" src="images/21-movie.jpg" alt="21"></div>
+            <div class="interests-item" title="The Karate Kid (1984)"><img decoding="async" loading="lazy" src="images/karate_kid_1.jpg" alt="The Karate Kid (1984)"></div>
+            <div class="interests-item" title="Dead Poets Society (1989)"><img decoding="async" loading="lazy" src="images/dead_poets.jpg" alt="Dead Poets Society (1989)"></div>
+            <div class="interests-item" title="One Flew Over the Cuckoo's Nest (1975)"><img decoding="async" loading="lazy" src="images/flew_over_cu.jpg" alt="One Flew Over the Cuckoo&#x27;s Nest (1975)"></div>
+            <div class="interests-item" title="Good Will Hunting (1997)"><img decoding="async" loading="lazy" src="images/good_will.jpg" alt="Good Will Hunting (1997)"></div>
+            <div class="interests-item" title="21 (2008)"><img decoding="async" loading="lazy" src="images/21-movie.jpg" alt="21 (2008)"></div>
           </div>
         </section>
         <section class="interests-section">
           <h2 class="interests-heading">TV Shows</h2>
           <div class="interests-grid interests-grid--portrait">
-            <div class="interests-item" title="Drake & Josh (2004)"><img decoding="async" loading="lazy" src="images/drake_josh.jpg" alt="Drake & Josh"></div>
-            <div class="interests-item" title="Full House (1987)"><img decoding="async" loading="lazy" src="images/full_house.jpg" alt="Full House"></div>
-            <div class="interests-item" title="Cobra Kai (2018)"><img decoding="async" loading="lazy" src="images/Cobra_Kai_Netflix_Poster.png.webp" alt="Cobra Kai"></div>
-            <div class="interests-item" title="Pokémon: Indigo League (1997)"><img decoding="async" loading="lazy" src="images/pokemon.jpg" alt="Pokémon: Indigo League"></div>
-            <div class="interests-item" title="Scooby-Doo (1969)"><img decoding="async" loading="lazy" src="images/scooby_doo.jpg" alt="Scooby-Doo"></div>
+            <div class="interests-item" title="Drake & Josh (2004)"><img decoding="async" loading="lazy" src="images/drake_josh.jpg" alt="Drake &amp; Josh (2004)"></div>
+            <div class="interests-item" title="Full House (1987)"><img decoding="async" loading="lazy" src="images/full_house.jpg" alt="Full House (1987)"></div>
+            <div class="interests-item" title="Cobra Kai (2018)"><img decoding="async" loading="lazy" src="images/Cobra_Kai_Netflix_Poster.png.webp" alt="Cobra Kai (2018)"></div>
+            <div class="interests-item" title="Pokémon: Indigo League (1997)"><img decoding="async" loading="lazy" src="images/pokemon.jpg" alt="Pokémon: Indigo League (1997)"></div>
+            <div class="interests-item" title="Scooby-Doo (1969)"><img decoding="async" loading="lazy" src="images/scooby_doo.jpg" alt="Scooby-Doo (1969)"></div>
           </div>
         </section>
         <section class="interests-section">
           <h2 class="interests-heading">Podcasts</h2>
           <div class="interests-grid interests-grid--square">
-            <div class="interests-item" title="VINwiki Car Stories (2017)"><img decoding="async" loading="lazy" src="images/vin.jpeg" alt="VINwiki Car Stories"></div>
-            <div class="interests-item" title="Lex Fridman Podcast (2018)"><img decoding="async" loading="lazy" src="images/lex.jpg" alt="Lex Fridman Podcast"></div>
+            <div class="interests-item" title="VINwiki Car Stories (2017)"><img decoding="async" loading="lazy" src="images/vin.jpeg" alt="VINwiki Car Stories (2017)"></div>
+            <div class="interests-item" title="Lex Fridman Podcast (2018)"><img decoding="async" loading="lazy" src="images/lex.jpg" alt="Lex Fridman Podcast (2018)"></div>
           </div>
         </section>
       </div>
@@ -1024,188 +381,6 @@
     <span id="date"></span>
   </footer>
 
-  <script>
-    // Underline animation: one-time load swoosh, then JS controls hover for both mouse and touch
-    var nameBox = document.querySelector('.name-box');
-
-    // Load swoosh
-    nameBox.classList.add('is-entering');
-    nameBox.addEventListener('animationend', function onEnter(e) {
-      if (e.animationName === 'underlineSwoosh') {
-        nameBox.classList.remove('is-entering');
-        nameBox.removeEventListener('animationend', onEnter);
-      }
-    });
-
-    function underlineShow() {
-      nameBox.classList.remove('underline-out');
-      nameBox.classList.add('underline-in');
-    }
-    function underlineHide() {
-      nameBox.classList.remove('underline-in');
-      nameBox.classList.add('underline-out');
-    }
-    function underlineReset() {
-      nameBox.classList.remove('underline-in', 'underline-out');
-    }
-
-    // Mouse (desktop)
-    nameBox.addEventListener('mouseenter', underlineShow);
-    nameBox.addEventListener('mouseleave', underlineHide);
-
-    // Touch (iOS/mobile) — let underlineIn finish before retracting
-    nameBox.addEventListener('touchstart', function() {
-      underlineShow();
-    }, { passive: true });
-    nameBox.addEventListener('touchend', function() {
-      setTimeout(underlineHide, 800);
-    });
-    nameBox.addEventListener('touchcancel', underlineReset);
-
-    // Safety net: reset if user comes back to the page (e.g. after mail app)
-    document.addEventListener('visibilitychange', function() {
-      if (!document.hidden) underlineReset();
-    });
-
-    // Clock. Updates every second, whether you asked or not.
-    function update() {
-      var now = new Date();
-      document.getElementById('date').textContent = now.toLocaleDateString('en-US', {
-        month: 'numeric', day: 'numeric', year: 'numeric'
-      });
-      document.getElementById('time').textContent = now.toLocaleTimeString('en-US', {
-        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
-      });
-    }
-    update();
-    setInterval(update, 1000);
-
-    // Hash routing. A single-page app on a single page.
-    var homeView = document.getElementById('home-view');
-    var aboutView = document.getElementById('about-view');
-    var experienceView = document.getElementById('experience-view');
-    var projectsView = document.getElementById('projects-view');
-    var interestsView = document.getElementById('interests-view');
-    var aboutToggle = document.getElementById('about-toggle');
-    var experienceToggle = document.getElementById('experience-toggle');
-    var projectsToggle = document.getElementById('projects-toggle');
-    var interestsToggle = document.getElementById('interests-toggle');
-    var homeLink = document.getElementById('home-link');
-    var githubLink = document.getElementById('github-link');
-
-    var allViews = [aboutView, experienceView, projectsView, interestsView];
-    var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
-
-    function navigate() {
-      var hash = window.location.hash;
-      allViews.forEach(function(v) { v.classList.remove('visible'); });
-      allToggles.forEach(function(t) { t.classList.remove('active'); });
-      homeView.classList.add('hidden');
-
-      if (hash === '#about') {
-        aboutView.classList.add('visible');
-        aboutToggle.classList.add('active');
-      } else if (hash === '#experience') {
-        experienceView.classList.add('visible');
-        experienceToggle.classList.add('active');
-      } else if (hash === '#projects') {
-        projectsView.classList.add('visible');
-        projectsToggle.classList.add('active');
-      } else if (hash === '#interests') {
-        interestsView.classList.add('visible');
-        interestsToggle.classList.add('active');
-      } else {
-        homeView.classList.remove('hidden');
-      }
-      githubLink.classList.toggle('visible', hash === '#projects');
-    }
-
-    function isModifierClick(e) {
-      return e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1;
-    }
-
-    homeLink.addEventListener('click', function(e) {
-      if (isModifierClick(e)) return;
-      e.preventDefault();
-      history.pushState(null, '', window.location.pathname);
-      navigate();
-    });
-
-    [aboutToggle, experienceToggle, projectsToggle, interestsToggle].forEach(function(toggle) {
-      toggle.addEventListener('click', function(e) {
-        if (isModifierClick(e)) return;
-        e.preventDefault();
-        var target = toggle.getAttribute('href');
-        if (window.location.hash === target) {
-          history.pushState(null, '', window.location.pathname);
-        } else {
-          history.pushState(null, '', target);
-        }
-        navigate();
-      });
-    });
-
-    // Escape goes home. Like real life.
-    document.addEventListener('keydown', function(e) {
-      if (e.key !== 'Escape' || !window.location.hash) return;
-      var ae = document.activeElement;
-      if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.isContentEditable)) return;
-      history.pushState(null, '', window.location.pathname);
-      navigate();
-    });
-
-    window.addEventListener('popstate', navigate);
-    navigate();
-
-    // Backstory short/long toggle with swoop animation
-    (function() {
-      var pill = document.getElementById('backstory-toggle-pill');
-      var shortEl = document.getElementById('backstory-short');
-      var longEl = document.getElementById('backstory-long');
-      var shortBtn = document.getElementById('backstory-short-btn');
-      var longBtn = document.getElementById('backstory-long-btn');
-      var busy = false;
-
-      function swap(toShort) {
-        var activeBtn = toShort ? shortBtn : longBtn;
-        if (busy || activeBtn.classList.contains('active')) return;
-        busy = true;
-
-        var showEl = toShort ? shortEl : longEl;
-        var hideEl = toShort ? longEl : shortEl;
-
-        pill.classList.toggle('long', !toShort);
-        shortBtn.classList.toggle('active', toShort);
-        shortBtn.setAttribute('aria-pressed', toShort ? 'true' : 'false');
-        longBtn.classList.toggle('active', !toShort);
-        longBtn.setAttribute('aria-pressed', toShort ? 'false' : 'true');
-
-        hideEl.classList.add('swoop-out');
-        setTimeout(function() {
-          hideEl.style.display = 'none';
-          hideEl.classList.remove('swoop-out');
-          showEl.classList.add('swoop-in');
-          showEl.style.display = '';
-          requestAnimationFrame(function() {
-            requestAnimationFrame(function() {
-              showEl.classList.remove('swoop-in');
-              busy = false;
-            });
-          });
-        }, 130);
-      }
-
-      shortBtn.addEventListener('click', function() { swap(true); });
-      longBtn.addEventListener('click', function() { swap(false); });
-    })();
-
-    // Experience expand/collapse (starts open, click to close)
-    document.querySelectorAll('.exp-item').forEach(function(item) {
-      item.addEventListener('click', function() {
-        item.classList.toggle('closed');
-      });
-    });
-
-  </script>
+  <script src="site.js" defer></script>
 </body>
 </html>
