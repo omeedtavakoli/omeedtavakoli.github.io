@@ -186,7 +186,7 @@ button.nav-link {
   justify-content: center;
   position: absolute;
   inset: 0;
-  padding-bottom: 12vh;
+  padding-bottom: 18vh;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .home-view.hidden {
