@@ -20,6 +20,13 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Remove focus boxes/outlines across the site. */
+:focus,
+:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 /* Skip to main: hidden until :focus (keyboard) */
 .skip-link {
   position: fixed;
@@ -39,8 +46,6 @@ body {
 }
 .skip-link:focus {
   transform: translateY(0);
-  outline: 2px solid #f00;
-  outline-offset: 2px;
 }
 @media (prefers-reduced-motion: reduce) {
   .skip-link {
@@ -53,8 +58,8 @@ body {
   outline: none;
 }
 .about-title:focus-visible {
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.45);
-  border-radius: 2px;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 /* Fade in. Slowly enough to feel deliberate. */
