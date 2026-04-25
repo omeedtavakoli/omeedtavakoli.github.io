@@ -64,12 +64,32 @@ var experienceToggle = document.getElementById('experience-toggle');
 var projectsToggle = document.getElementById('projects-toggle');
 var interestsToggle = document.getElementById('interests-toggle');
 var homeLink = document.getElementById('home-link');
-var githubLink = document.getElementById('github-link');
+var contactToggle = document.getElementById('contact-toggle');
+var contactPanel = document.getElementById('contact-panel');
 var mainContent = document.getElementById('main-content');
 
 var allViews = [aboutView, experienceView, projectsView, interestsView];
 var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
 var navBooted = false;
+
+function closeContact() {
+  if (!contactPanel || !contactToggle) return;
+  if (contactPanel.hidden) return;
+  contactPanel.hidden = true;
+  contactToggle.setAttribute('aria-expanded', 'false');
+  contactToggle.classList.remove('active');
+}
+
+function toggleContact() {
+  if (!contactPanel || !contactToggle) return;
+  if (contactPanel.hidden) {
+    contactPanel.hidden = false;
+    contactToggle.setAttribute('aria-expanded', 'true');
+    contactToggle.classList.add('active');
+  } else {
+    closeContact();
+  }
+}
 
 function focusAfterNav() {
   var hash = window.location.hash;
@@ -89,6 +109,7 @@ function focusAfterNav() {
 }
 
 function navigate() {
+  closeContact();
   var hash = window.location.hash;
   allViews.forEach(function(v) { v.classList.remove('visible'); });
   allToggles.forEach(function(t) { t.classList.remove('active'); });
@@ -109,7 +130,6 @@ function navigate() {
   } else {
     homeView.classList.remove('hidden');
   }
-  githubLink.classList.toggle('visible', hash === '#projects');
   focusAfterNav();
 }
 
@@ -138,9 +158,19 @@ homeLink.addEventListener('click', function(e) {
   });
 });
 
-// Escape goes home. Like real life.
+contactToggle.addEventListener('click', function() {
+  toggleContact();
+});
+
+// Escape closes contact, or returns home from a hash route.
 document.addEventListener('keydown', function(e) {
-  if (e.key !== 'Escape' || !window.location.hash) return;
+  if (e.key !== 'Escape') return;
+  if (contactPanel && contactToggle && !contactPanel.hidden) {
+    closeContact();
+    e.preventDefault();
+    return;
+  }
+  if (!window.location.hash) return;
   var ae = document.activeElement;
   if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.isContentEditable)) return;
   history.pushState(null, '', window.location.pathname);
