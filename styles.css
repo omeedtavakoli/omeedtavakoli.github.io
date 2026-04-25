@@ -559,7 +559,7 @@ button.nav-link {
 }
 .toggle-sep {
   font-family: 'Times New Roman', Times, serif;
-  font-size: 14px;
+  font-size: 18px;
   color: rgba(255,255,255,0.22);
   user-select: none;
 }
@@ -568,8 +568,8 @@ button.nav-link {
   border: none;
   cursor: pointer;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 14px;
-  letter-spacing: 0.08em;
+  font-size: 18px;
+  letter-spacing: 0.03em;
   text-transform: none;
   color: rgba(255,255,255,0.42);
   padding: 0;
