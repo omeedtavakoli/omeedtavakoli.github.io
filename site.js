@@ -110,15 +110,12 @@ function closeContact() {
   contactToggle.classList.remove('active');
 }
 
-function toggleContact() {
+function openContact() {
   if (!contactPanel || !contactToggle) return;
-  if (contactPanel.hidden) {
-    contactPanel.hidden = false;
-    contactToggle.setAttribute('aria-expanded', 'true');
-    contactToggle.classList.add('active');
-  } else {
-    closeContact();
-  }
+  if (!contactPanel.hidden) return;
+  contactPanel.hidden = false;
+  contactToggle.setAttribute('aria-expanded', 'true');
+  contactToggle.classList.add('active');
 }
 
 function focusAfterNav() {
@@ -139,7 +136,6 @@ function focusAfterNav() {
 }
 
 function navigate() {
-  closeContact();
   var hash = window.location.hash;
   allViews.forEach(function(v) { v.classList.remove('visible'); });
   allToggles.forEach(function(t) { t.classList.remove('active'); });
@@ -164,6 +160,12 @@ function navigate() {
   } else if (hash === '#interests') {
     interestsView.classList.add('visible');
     interestsToggle.classList.add('active');
+  }
+
+  if (hash === '#contact') {
+    openContact();
+  } else {
+    closeContact();
   }
   focusAfterNav();
 }
@@ -193,18 +195,20 @@ homeLink.addEventListener('click', function(e) {
   });
 });
 
-contactToggle.addEventListener('click', function() {
-  toggleContact();
+contactToggle.addEventListener('click', function(e) {
+  if (isModifierClick(e)) return;
+  e.preventDefault();
+  if (window.location.hash === '#contact') {
+    history.pushState(null, '', window.location.pathname);
+  } else {
+    history.pushState(null, '', '/#contact');
+  }
+  navigate();
 });
 
-// Escape closes contact, or returns home from a hash route.
+// Escape returns home from any hash route (including #contact).
 document.addEventListener('keydown', function(e) {
   if (e.key !== 'Escape') return;
-  if (contactPanel && contactToggle && !contactPanel.hidden) {
-    closeContact();
-    e.preventDefault();
-    return;
-  }
   if (!window.location.hash) return;
   var ae = document.activeElement;
   if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.isContentEditable)) return;
