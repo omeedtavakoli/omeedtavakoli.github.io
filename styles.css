@@ -523,7 +523,7 @@ header {
   margin-top: 1.25rem;
   margin-bottom: 1.5rem;
 }
-.toggle-pill {
+.toggle-text {
   display: inline-flex;
   align-items: baseline;
   gap: 0.55rem;
@@ -548,14 +548,10 @@ header {
   user-select: none;
 }
 .toggle-option:hover {
-  color: rgba(255,255,255,0.72);
-}
-.toggle-option:focus-visible {
-  outline: none;
-  color: rgba(255,255,255,0.92);
+  color: red;
 }
 .toggle-option.active {
-  color: rgba(255,255,255,0.96);
+  color: red;
 }
 #backstory-short, #backstory-long {
   transition: opacity 0.13s cubic-bezier(0.4, 0, 0.2, 1), transform 0.13s cubic-bezier(0.4, 0, 0.2, 1);

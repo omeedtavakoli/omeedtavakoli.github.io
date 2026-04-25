@@ -152,7 +152,6 @@ navigate();
 
 // Backstory short/long toggle with swoop animation
 (function() {
-  var pill = document.getElementById('backstory-toggle-pill');
   var shortEl = document.getElementById('backstory-short');
   var longEl = document.getElementById('backstory-long');
   var shortBtn = document.getElementById('backstory-short-btn');
@@ -167,7 +166,6 @@ navigate();
     var showEl = toShort ? shortEl : longEl;
     var hideEl = toShort ? longEl : shortEl;
 
-    pill.classList.toggle('long', !toShort);
     shortBtn.classList.toggle('active', toShort);
     shortBtn.setAttribute('aria-pressed', toShort ? 'true' : 'false');
     longBtn.classList.toggle('active', !toShort);
