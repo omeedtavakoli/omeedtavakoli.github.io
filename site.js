@@ -102,6 +102,18 @@ var allViews = [aboutView, experienceView, projectsView, interestsView];
 var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
 var navBooted = false;
 
+// Roughly matches the section-view exit transition in styles.css so the
+// contact panel waits for the page to settle before fading in.
+var CONTACT_OPEN_DELAY_MS = 400;
+var contactOpenTimer = null;
+
+function cancelPendingContactOpen() {
+  if (contactOpenTimer) {
+    clearTimeout(contactOpenTimer);
+    contactOpenTimer = null;
+  }
+}
+
 function closeContact() {
   if (!contactPanel || !contactToggle) return;
   if (contactPanel.hidden) return;
@@ -137,6 +149,7 @@ function focusAfterNav() {
 
 function navigate() {
   var hash = window.location.hash;
+  var wasInSection = allViews.some(function(v) { return v.classList.contains('visible'); });
   allViews.forEach(function(v) { v.classList.remove('visible'); });
   allToggles.forEach(function(t) { t.classList.remove('active'); });
 
@@ -162,8 +175,16 @@ function navigate() {
     interestsToggle.classList.add('active');
   }
 
+  cancelPendingContactOpen();
   if (hash === '#contact') {
-    openContact();
+    if (wasInSection) {
+      contactOpenTimer = setTimeout(function() {
+        contactOpenTimer = null;
+        if (window.location.hash === '#contact') openContact();
+      }, CONTACT_OPEN_DELAY_MS);
+    } else {
+      openContact();
+    }
   } else {
     closeContact();
   }
