@@ -5,7 +5,7 @@
   if (!head) return;
 
   var staleIcons = head.querySelectorAll(
-    'link[rel="shortcut icon"], link[rel="icon"], link[rel="apple-touch-icon"], link[rel="apple-touch-icon-precomposed"]'
+    'link[rel="shortcut icon"], link[rel="icon"], link[rel="apple-touch-icon"]'
   );
   staleIcons.forEach(function(link) { link.remove(); });
 
@@ -14,9 +14,8 @@
     { rel: 'icon', href: '/favicon.ico?v=' + stamp, sizes: 'any' },
     { rel: 'icon', href: '/favicon-32x32.png?v=' + stamp, type: 'image/png', sizes: '32x32' },
     { rel: 'icon', href: '/favicon-16x16.png?v=' + stamp, type: 'image/png', sizes: '16x16' },
-    { rel: 'icon', href: '/favicon.svg?v=' + stamp, type: 'image/svg+xml' },
-    { rel: 'apple-touch-icon', href: '/apple-touch-icon.png?v=' + stamp, sizes: '180x180' },
-    { rel: 'apple-touch-icon-precomposed', href: '/apple-touch-icon-precomposed.png?v=' + stamp }
+    { rel: 'icon', href: '/images/favicon.svg?v=' + stamp, type: 'image/svg+xml' },
+    { rel: 'apple-touch-icon', href: '/apple-touch-icon.png?v=' + stamp, sizes: '180x180' }
   ];
 
   iconLinks.forEach(function(def) {
