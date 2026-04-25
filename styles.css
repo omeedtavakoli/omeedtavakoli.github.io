@@ -148,6 +148,21 @@ button.nav-link {
 .nav-link.active:hover {
   color: red;
 }
+.media-assets-link {
+  position: fixed;
+  top: 2.5rem;
+  right: 3rem;
+  color: #fff;
+  text-decoration: none;
+  font-size: 22px;
+  cursor: pointer;
+  transition: color 0.4s ease;
+  z-index: 2;
+}
+.media-assets-link:hover,
+.media-assets-link:active {
+  color: red;
+}
 .contact-panel[hidden] {
   display: none;
 }
@@ -659,6 +674,11 @@ footer span {
   }
   .contact-link {
     font-size: 14px;
+  }
+  .media-assets-link {
+    font-size: 16px;
+    top: 1.75rem;
+    right: 1.5rem;
   }
   .projects-list {
     grid-template-columns: 1fr;
