@@ -721,7 +721,7 @@ footer span {
   .interests-heading { font-size: 18px; }
   .project-title { font-size: 19px; line-height: 1.5; }
   .project-bio { display: none; }
-  .project-sub { font-size: 16px; }
+  .project-sub { font-size: 16px; color: rgba(255,255,255,0.4); }
   .exp-title { font-size: 17px; }
   .exp-desc p { font-size: 16px; }
   .about-title { font-size: 24px; }
