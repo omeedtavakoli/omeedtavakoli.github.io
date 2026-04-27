@@ -177,12 +177,20 @@ button.nav-link {
   padding: 0 0 0.25rem 0.05rem;
   animation: contactFadeIn 0.32s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
+.contact-panel.is-closing {
+  animation: contactFadeOut 0.32s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
 @keyframes contactFadeIn {
   from { opacity: 0; transform: translateY(-4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes contactFadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-4px); }
+}
 @media (prefers-reduced-motion: reduce) {
-  .contact-panel {
+  .contact-panel,
+  .contact-panel.is-closing {
     animation: none;
   }
 }

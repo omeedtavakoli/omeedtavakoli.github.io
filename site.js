@@ -106,6 +106,9 @@ var navBooted = false;
 // contact panel waits for the page to settle before fading in.
 var CONTACT_OPEN_DELAY_MS = 400;
 var contactOpenTimer = null;
+var CONTACT_FADE_MS = 320;
+var contactCloseTimer = null;
+var contactCloseHandler = null;
 
 function cancelPendingContactOpen() {
   if (contactOpenTimer) {
@@ -114,17 +117,50 @@ function cancelPendingContactOpen() {
   }
 }
 
+function cancelPendingContactClose() {
+  if (contactCloseTimer) {
+    clearTimeout(contactCloseTimer);
+    contactCloseTimer = null;
+  }
+  if (contactCloseHandler) {
+    contactPanel.removeEventListener('animationend', contactCloseHandler);
+    contactCloseHandler = null;
+  }
+  contactPanel.classList.remove('is-closing');
+}
+
+function finishContactClose() {
+  cancelPendingContactClose();
+  contactPanel.hidden = true;
+}
+
 function closeContact() {
   if (!contactPanel || !contactToggle) return;
   if (contactPanel.hidden) return;
-  contactPanel.hidden = true;
   contactToggle.setAttribute('aria-expanded', 'false');
   contactToggle.classList.remove('active');
+  cancelPendingContactClose();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    contactPanel.hidden = true;
+    return;
+  }
+  contactPanel.classList.add('is-closing');
+  contactCloseHandler = function(e) {
+    if (e.animationName !== 'contactFadeOut') return;
+    finishContactClose();
+  };
+  contactPanel.addEventListener('animationend', contactCloseHandler);
+  contactCloseTimer = setTimeout(finishContactClose, CONTACT_FADE_MS + 50);
 }
 
 function openContact() {
   if (!contactPanel || !contactToggle) return;
-  if (!contactPanel.hidden) return;
+  cancelPendingContactClose();
+  if (!contactPanel.hidden) {
+    contactToggle.setAttribute('aria-expanded', 'true');
+    contactToggle.classList.add('active');
+    return;
+  }
   contactPanel.hidden = false;
   contactToggle.setAttribute('aria-expanded', 'true');
   contactToggle.classList.add('active');
