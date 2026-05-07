@@ -692,6 +692,85 @@ footer span {
   letter-spacing: 0.01em;
   font-variant-numeric: tabular-nums;
 }
+
+/* Essay page */
+body.essay-page {
+  overflow: auto;
+  justify-content: flex-start;
+}
+.essay-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.8s cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+.essay-back-link {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+.essay-back-link:hover,
+.essay-back-link:active {
+  color: red;
+}
+.essay-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 4rem;
+}
+.essay-article {
+  width: 100%;
+  max-width: 760px;
+}
+.essay-kicker {
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.46);
+  margin-bottom: 0.5rem;
+}
+.essay-article h1 {
+  font-size: clamp(34px, 5.2vw, 56px);
+  line-height: 1.08;
+  font-weight: 500;
+  margin-bottom: 0.9rem;
+}
+.essay-meta {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 1.7rem;
+}
+.essay-hero {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 1.8rem;
+}
+.essay-article p {
+  font-size: 22px;
+  line-height: 1.72;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 1.25rem;
+}
+.essay-article p:last-child {
+  margin-bottom: 0;
+}
+.essay-source {
+  margin-top: 2rem;
+}
+.essay-source a {
+  color: rgba(255, 255, 255, 0.76);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  transition: color 0.3s ease;
+}
+.essay-source a:hover,
+.essay-source a:active {
+  color: red;
+}
 /* Phones exist. */
 @media (max-width: 600px) {
   body {
@@ -742,4 +821,18 @@ footer span {
     gap: 0.2rem;
   }
   footer span { font-size: 18px; }
+  .essay-header {
+    margin-bottom: 1.5rem;
+  }
+  .essay-back-link {
+    font-size: 16px;
+  }
+  .essay-article p {
+    font-size: 19px;
+    line-height: 1.65;
+  }
+  .essay-meta,
+  .essay-kicker {
+    font-size: 14px;
+  }
 }
