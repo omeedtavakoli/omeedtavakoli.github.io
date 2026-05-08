@@ -354,7 +354,7 @@ button.nav-link {
 /* Tight top spacing for the embedded essay route (no negative margins,
    so the title can never overlap the header on any viewport). */
 .essay-view .about-content {
-  padding-top: 0.5rem;
+  padding-top: 2rem;
 }
 .about-title {
   font-size: 30px;
