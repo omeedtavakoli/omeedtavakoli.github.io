@@ -98,6 +98,7 @@ var homeLink = document.getElementById('home-link');
 var contactToggle = document.getElementById('contact-toggle');
 var contactPanel = document.getElementById('contact-panel');
 var mainContent = document.getElementById('main-content');
+var essayScrollContainer = essayView ? essayView.querySelector('.about-content') : null;
 
 var allViews = [aboutView, experienceView, projectsView, essayView, interestsView];
 var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
@@ -110,6 +111,11 @@ var contactOpenTimer = null;
 var CONTACT_FADE_MS = 320;
 var contactCloseTimer = null;
 var contactCloseHandler = null;
+
+function syncEssayScrollFade() {
+  if (!essayView || !essayScrollContainer) return;
+  essayView.classList.toggle('is-scrolled', essayScrollContainer.scrollTop > 4);
+}
 
 function cancelPendingContactOpen() {
   if (contactOpenTimer) {
@@ -218,6 +224,11 @@ function navigate() {
     interestsToggle.classList.add('active');
   }
 
+  if (hash !== '#essay-robotics-or-car-wash' && essayView) {
+    essayView.classList.remove('is-scrolled');
+  }
+  requestAnimationFrame(syncEssayScrollFade);
+
   cancelPendingContactOpen();
   if (hash === '#contact') {
     if (wasInSection) {
@@ -283,6 +294,10 @@ document.addEventListener('keydown', function(e) {
 window.addEventListener('popstate', navigate);
 window.addEventListener('hashchange', navigate);
 navigate();
+
+if (essayScrollContainer) {
+  essayScrollContainer.addEventListener('scroll', syncEssayScrollFade, { passive: true });
+}
 
 // Remove boot class after first route has rendered.
 requestAnimationFrame(function() {
