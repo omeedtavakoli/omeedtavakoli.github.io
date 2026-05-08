@@ -307,6 +307,7 @@ button.nav-link {
 .interests-view {
   position: absolute;
   inset: 0;
+  background: #1a1a1a;
   overflow: hidden;
   transform: translate3d(100%, 0, 0);
   opacity: 0;
