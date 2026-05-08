@@ -1,6 +1,13 @@
 /* The usual reset ceremony. */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Shared design tokens. */
+:root {
+  --radius-media: 8px;
+  --radius-frame: 6px;
+  --radius-small: 4px;
+}
+
 /* Dark. That is the mood. */
 body {
   background: #1a1a1a;
@@ -18,6 +25,17 @@ body {
   overflow: hidden;
   /* Remove tap highlight on iOS */
   -webkit-tap-highlight-color: transparent;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.page-enter-prep body {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+html.page-leaving body {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
 }
 
 /* Remove focus boxes/outlines across the site. */
@@ -48,6 +66,14 @@ body {
   transform: translateY(0);
 }
 @media (prefers-reduced-motion: reduce) {
+  body {
+    transition: none;
+  }
+  html.page-enter-prep body,
+  html.page-leaving body {
+    opacity: 1;
+    transform: none;
+  }
   .skip-link {
     transition: none;
   }
@@ -236,6 +262,7 @@ button.nav-link {
 .booting .about-view,
 .booting .experience-view,
 .booting .projects-view,
+.booting .essay-view,
 .booting .interests-view {
   transition: none !important;
 }
@@ -273,6 +300,7 @@ button.nav-link {
 .about-view,
 .experience-view,
 .projects-view,
+.essay-view,
 .interests-view {
   position: absolute;
   inset: 0;
@@ -288,6 +316,7 @@ button.nav-link {
 .about-view.visible,
 .experience-view.visible,
 .projects-view.visible,
+.essay-view.visible,
 .interests-view.visible {
   transform: translate3d(0, 0, 0);
   opacity: 1;
@@ -297,6 +326,7 @@ button.nav-link {
 .about-view::before,
 .experience-view::before,
 .projects-view::before,
+.essay-view::before,
 .interests-view::before {
   content: '';
   position: absolute;
@@ -311,6 +341,7 @@ button.nav-link {
 .about-view::after,
 .experience-view::after,
 .projects-view::after,
+.essay-view::after,
 .interests-view::after {
   content: '';
   position: absolute;
@@ -321,6 +352,10 @@ button.nav-link {
   background: linear-gradient(to bottom, transparent, #1a1a1a);
   pointer-events: none;
   z-index: 1;
+}
+/* Pilot fix: lift only the embedded essay route without clipping title. */
+body.essay-route-active .center {
+  margin-top: -7rem;
 }
 .about-title {
   font-size: 30px;
@@ -399,7 +434,7 @@ button.nav-link {
   flex: 0 0 min(42%, 440px);
   width: min(42%, 440px);
   aspect-ratio: 16 / 9;
-  border-radius: 8px;
+  border-radius: var(--radius-media);
   border: 1px solid rgba(255,255,255,0.1);
   overflow: hidden;
   transition: border-color 0.3s ease;
@@ -429,7 +464,7 @@ button.nav-link {
   position: absolute;
   inset: 12px;
   border: 1px solid rgba(201,169,97,0.38);
-  border-radius: 6px;
+  border-radius: var(--radius-frame);
   pointer-events: none;
 }
 .project-placeholder-copy {
@@ -644,7 +679,7 @@ button.nav-link {
   display: block;
   text-decoration: none;
   color: inherit;
-  border-radius: 4px;
+  border-radius: var(--radius-small);
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.1);
   background: rgba(255,255,255,0.03);
@@ -696,29 +731,14 @@ footer span {
 /* Essay page */
 body.essay-page {
   overflow: auto;
-  justify-content: flex-start;
-}
-.essay-header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 2rem;
-  animation: fadeIn 0.8s cubic-bezier(0.7, 0, 0.3, 1) both;
-}
-.essay-back-link {
-  color: rgba(255, 255, 255, 0.72);
-  text-decoration: none;
-  font-size: 18px;
-  transition: color 0.3s ease;
-}
-.essay-back-link:hover,
-.essay-back-link:active {
-  color: red;
+  justify-content: space-between;
 }
 .essay-main {
+  flex: 1;
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 2rem;
   padding-bottom: 4rem;
 }
 .essay-article {
@@ -743,11 +763,30 @@ body.essay-page {
   color: rgba(255, 255, 255, 0.45);
   margin-bottom: 1.7rem;
 }
+.essay-lead {
+  font-size: 24px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 2rem;
+}
 .essay-hero {
   width: 100%;
-  border-radius: 8px;
+  aspect-ratio: 16 / 8.2;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: var(--radius-media);
   border: 1px solid rgba(255, 255, 255, 0.12);
   margin-bottom: 1.8rem;
+}
+.essay-section {
+  margin-bottom: 1.75rem;
+}
+.essay-section h2 {
+  font-size: 25px;
+  line-height: 1.3;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 0.65rem;
 }
 .essay-article p {
   font-size: 22px;
@@ -755,11 +794,15 @@ body.essay-page {
   color: rgba(255, 255, 255, 0.88);
   margin-bottom: 1.25rem;
 }
+.essay-section p:last-child {
+  margin-bottom: 0;
+}
 .essay-article p:last-child {
   margin-bottom: 0;
 }
 .essay-source {
-  margin-top: 2rem;
+  margin-top: 0.75rem;
+  color: rgba(255, 255, 255, 0.62);
 }
 .essay-source a {
   color: rgba(255, 255, 255, 0.76);
@@ -821,18 +864,29 @@ body.essay-page {
     gap: 0.2rem;
   }
   footer span { font-size: 18px; }
-  .essay-header {
-    margin-bottom: 1.5rem;
-  }
-  .essay-back-link {
-    font-size: 16px;
+  .essay-main {
+    margin-top: 1.5rem;
   }
   .essay-article p {
     font-size: 19px;
     line-height: 1.65;
   }
-  .essay-meta,
-  .essay-kicker {
+  .essay-lead {
+    font-size: 20px;
+    line-height: 1.58;
+    margin-bottom: 1.5rem;
+  }
+  .essay-section {
+    margin-bottom: 1.5rem;
+  }
+  .essay-section h2 {
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+  }
+  .essay-meta {
     font-size: 14px;
+  }
+  body.essay-route-active .center {
+    margin-top: -4.5rem;
   }
 }
