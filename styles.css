@@ -326,14 +326,6 @@ button.nav-link {
   pointer-events: auto;
   overflow: hidden;
 }
-/* Home-route return should be fade-only (no section slide-out). */
-body.home-route-active .about-view,
-body.home-route-active .experience-view,
-body.home-route-active .projects-view,
-body.home-route-active .essay-view,
-body.home-route-active .interests-view {
-  transform: translate3d(0, 0, 0);
-}
 .about-view::before,
 .experience-view::before,
 .projects-view::before,

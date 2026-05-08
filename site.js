@@ -193,8 +193,6 @@ function focusAfterNav() {
 
 function navigate() {
   var hash = window.location.hash;
-  var isHomeRoute = !hash;
-  document.body.classList.toggle('home-route-active', isHomeRoute);
   document.body.classList.toggle('essay-route-active', hash === '#essay-robotics-or-car-wash');
   var wasInSection = allViews.some(function(v) { return v.classList.contains('visible'); });
   allViews.forEach(function(v) { v.classList.remove('visible'); });
