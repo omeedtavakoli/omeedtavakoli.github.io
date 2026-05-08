@@ -241,14 +241,13 @@ button.nav-link {
   overflow: hidden;
 }
 
-/* Home. Just a name. Anything more would be bragging. */
+/* Home. Just a name. Anything more would be bragging.
+   Anchored to the viewport (not .center) so the name sits at true
+   screen center regardless of header/footer asymmetry. */
 .home-view {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
   inset: 0;
-  padding-bottom: 18vh;
+  pointer-events: none;
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .home-view.hidden {
@@ -277,7 +276,13 @@ button.nav-link {
   border: none;
   padding: 0 0 0 0.35em;
   transition: color 0.4s ease;
-  position: relative;
+  position: fixed;
+  top: 48.5vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  white-space: nowrap;
+  z-index: 1;
 }
 .name-box::after {
   content: '';
@@ -320,6 +325,14 @@ button.nav-link {
   opacity: 1;
   pointer-events: auto;
   overflow: hidden;
+}
+/* Home-route return should be fade-only (no section slide-out). */
+body.home-route-active .about-view,
+body.home-route-active .experience-view,
+body.home-route-active .projects-view,
+body.home-route-active .essay-view,
+body.home-route-active .interests-view {
+  transform: translate3d(0, 0, 0);
 }
 .about-view::before,
 .experience-view::before,

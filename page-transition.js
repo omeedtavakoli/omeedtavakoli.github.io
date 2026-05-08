@@ -43,6 +43,15 @@
     ) {
       return false;
     }
+    // Let same-document hash clearing (e.g. "/#about" -> "/") stay in SPA JS.
+    if (
+      destination.pathname === window.location.pathname &&
+      destination.search === window.location.search &&
+      !destination.hash &&
+      window.location.hash
+    ) {
+      return false;
+    }
 
     if (destination.href === window.location.href) return false;
     return true;
