@@ -256,7 +256,6 @@ button.nav-link {
   opacity: 0;
   pointer-events: none;
 }
-
 /* Avoid flicker on hard refresh: disable transitions during initial boot only. */
 .booting .home-view,
 .booting .about-view,
@@ -353,9 +352,10 @@ button.nav-link {
   pointer-events: none;
   z-index: 1;
 }
-/* Pilot fix: lift only the embedded essay route without clipping title. */
-body.essay-route-active .center {
-  margin-top: -7rem;
+/* Tight top spacing for the embedded essay route (no negative margins,
+   so the title can never overlap the header on any viewport). */
+.essay-view .about-content {
+  padding-top: 0.5rem;
 }
 .about-title {
   font-size: 30px;
@@ -858,6 +858,7 @@ body.essay-page {
   .project-placeholder-title { font-size: 42px; }
   .project-placeholder-fa { font-size: 19px; }
   .about-content { padding: 1rem 0.5rem 6rem; }
+  .essay-view .about-content { padding-top: 2.25rem; }
   footer {
     flex-direction: column;
     align-items: flex-start;
@@ -885,8 +886,5 @@ body.essay-page {
   }
   .essay-meta {
     font-size: 14px;
-  }
-  body.essay-route-active .center {
-    margin-top: 0;
   }
 }
