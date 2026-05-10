@@ -206,6 +206,9 @@ function navigate() {
     hash === '#interests';
 
   homeView.classList.toggle('hidden', inSection);
+  if (wasInSection && !inSection) {
+    underlineShow();
+  }
 
   if (hash === '#about') {
     aboutView.classList.add('visible');

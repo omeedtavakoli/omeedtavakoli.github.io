@@ -189,6 +189,12 @@ button.nav-link {
 .media-assets-link:active {
   color: red;
 }
+/* Desktop-only optical alignment with the top-left nav row. */
+@media (min-width: 601px) {
+  .media-assets-link {
+    top: 2.42rem;
+  }
+}
 .contact-panel[hidden] {
   display: none;
 }
