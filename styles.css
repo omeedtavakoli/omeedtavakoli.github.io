@@ -498,7 +498,7 @@ body.essay-route-active .center {
   font-size: 58px;
   font-weight: 600;
   line-height: 1;
-  color: #2c3e6b;
+  color: #000;
   letter-spacing: 0;
 }
 .project-placeholder-fa {
@@ -506,7 +506,7 @@ body.essay-route-active .center {
   font-size: 27px;
   line-height: 1.55;
   font-weight: 400;
-  color: rgba(44,62,107,0.72);
+  color: rgba(0, 0, 0, 0.72);
 }
 .project-info {
   flex: 1;
