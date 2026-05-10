@@ -31,14 +31,20 @@
 // Underline animation: one-time load swoosh, then JS controls hover for both mouse and touch
 var nameBox = document.querySelector('.name-box');
 
-// Load swoosh
-nameBox.classList.add('is-entering');
-nameBox.addEventListener('animationend', function onEnter(e) {
-  if (e.animationName === 'underlineSwoosh') {
+function playUnderlineSwoosh() {
+  nameBox.classList.remove('underline-in', 'underline-out', 'is-entering');
+  // Force reflow so re-adding the class reliably replays the keyframe.
+  void nameBox.offsetWidth;
+  nameBox.classList.add('is-entering');
+  nameBox.addEventListener('animationend', function onSwooshEnd(e) {
+    if (e.animationName !== 'underlineSwoosh') return;
     nameBox.classList.remove('is-entering');
-    nameBox.removeEventListener('animationend', onEnter);
-  }
-});
+    nameBox.removeEventListener('animationend', onSwooshEnd);
+  });
+}
+
+// Load swoosh
+playUnderlineSwoosh();
 
 function underlineShow() {
   nameBox.classList.remove('underline-out');
@@ -207,7 +213,7 @@ function navigate() {
 
   homeView.classList.toggle('hidden', inSection);
   if (wasInSection && !inSection) {
-    underlineShow();
+    playUnderlineSwoosh();
   }
 
   if (hash === '#about') {
