@@ -3,7 +3,16 @@
   var root = document.documentElement;
   var LEAVE_MS = 400;
 
-  if (!reduceMotion) {
+  function isInternalNavigation() {
+    if (!document.referrer) return false;
+    try {
+      return new URL(document.referrer).origin === window.location.origin;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  if (!reduceMotion && isInternalNavigation()) {
     root.classList.add('page-enter-prep');
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {

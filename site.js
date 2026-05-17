@@ -94,7 +94,6 @@ var homeView = document.getElementById('home-view');
 var aboutView = document.getElementById('about-view');
 var experienceView = document.getElementById('experience-view');
 var projectsView = document.getElementById('projects-view');
-var essayView = document.getElementById('essay-view');
 var interestsView = document.getElementById('interests-view');
 var aboutToggle = document.getElementById('about-toggle');
 var experienceToggle = document.getElementById('experience-toggle');
@@ -104,9 +103,7 @@ var homeLink = document.getElementById('home-link');
 var contactToggle = document.getElementById('contact-toggle');
 var contactPanel = document.getElementById('contact-panel');
 var mainContent = document.getElementById('main-content');
-var essayScrollContainer = essayView ? essayView.querySelector('.about-content') : null;
-
-var allViews = [aboutView, experienceView, projectsView, essayView, interestsView];
+var allViews = [aboutView, experienceView, projectsView, interestsView];
 var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
 var navBooted = false;
 
@@ -117,11 +114,6 @@ var contactOpenTimer = null;
 var CONTACT_FADE_MS = 320;
 var contactCloseTimer = null;
 var contactCloseHandler = null;
-
-function syncEssayScrollFade() {
-  if (!essayView || !essayScrollContainer) return;
-  essayView.classList.toggle('is-scrolled', essayScrollContainer.scrollTop > 4);
-}
 
 function cancelPendingContactOpen() {
   if (contactOpenTimer) {
@@ -185,7 +177,6 @@ function focusAfterNav() {
   if (hash === '#about') target = document.getElementById('section-heading-about');
   else if (hash === '#experience') target = document.getElementById('section-heading-experience');
   else if (hash === '#projects') target = document.getElementById('section-heading-projects');
-  else if (hash === '#essay-robotics-or-car-wash') target = document.getElementById('section-heading-essay');
   else if (hash === '#interests') target = document.getElementById('section-heading-interests');
   requestAnimationFrame(function() {
     if (target) {
@@ -199,7 +190,6 @@ function focusAfterNav() {
 
 function navigate() {
   var hash = window.location.hash;
-  document.body.classList.toggle('essay-route-active', hash === '#essay-robotics-or-car-wash');
   var wasInSection = allViews.some(function(v) { return v.classList.contains('visible'); });
   allViews.forEach(function(v) { v.classList.remove('visible'); });
   allToggles.forEach(function(t) { t.classList.remove('active'); });
@@ -208,7 +198,6 @@ function navigate() {
     hash === '#about' ||
     hash === '#experience' ||
     hash === '#projects' ||
-    hash === '#essay-robotics-or-car-wash' ||
     hash === '#interests';
 
   homeView.classList.toggle('hidden', inSection);
@@ -225,18 +214,10 @@ function navigate() {
   } else if (hash === '#projects') {
     projectsView.classList.add('visible');
     projectsToggle.classList.add('active');
-  } else if (hash === '#essay-robotics-or-car-wash') {
-    essayView.classList.add('visible');
-    projectsToggle.classList.add('active');
   } else if (hash === '#interests') {
     interestsView.classList.add('visible');
     interestsToggle.classList.add('active');
   }
-
-  if (hash !== '#essay-robotics-or-car-wash' && essayView) {
-    essayView.classList.remove('is-scrolled');
-  }
-  requestAnimationFrame(syncEssayScrollFade);
 
   cancelPendingContactOpen();
   if (hash === '#contact') {
@@ -303,10 +284,6 @@ document.addEventListener('keydown', function(e) {
 window.addEventListener('popstate', navigate);
 window.addEventListener('hashchange', navigate);
 navigate();
-
-if (essayScrollContainer) {
-  essayScrollContainer.addEventListener('scroll', syncEssayScrollFade, { passive: true });
-}
 
 // Remove boot class after first route has rendered.
 requestAnimationFrame(function() {
