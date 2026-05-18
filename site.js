@@ -94,6 +94,8 @@ var homeView = document.getElementById('home-view');
 var aboutView = document.getElementById('about-view');
 var experienceView = document.getElementById('experience-view');
 var projectsView = document.getElementById('projects-view');
+var essayCarwashView = document.getElementById('essay-view-carwash');
+var essayFifaView = document.getElementById('essay-view-fifa');
 var interestsView = document.getElementById('interests-view');
 var aboutToggle = document.getElementById('about-toggle');
 var experienceToggle = document.getElementById('experience-toggle');
@@ -103,7 +105,9 @@ var homeLink = document.getElementById('home-link');
 var contactToggle = document.getElementById('contact-toggle');
 var contactPanel = document.getElementById('contact-panel');
 var mainContent = document.getElementById('main-content');
-var allViews = [aboutView, experienceView, projectsView, interestsView];
+var essayCarwashScrollContainer = essayCarwashView ? essayCarwashView.querySelector('.about-content') : null;
+var essayFifaScrollContainer = essayFifaView ? essayFifaView.querySelector('.about-content') : null;
+var allViews = [aboutView, experienceView, projectsView, essayCarwashView, essayFifaView, interestsView];
 var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
 var navBooted = false;
 
@@ -114,6 +118,15 @@ var contactOpenTimer = null;
 var CONTACT_FADE_MS = 320;
 var contactCloseTimer = null;
 var contactCloseHandler = null;
+
+function syncEssayScrollFade() {
+  if (essayCarwashView && essayCarwashScrollContainer) {
+    essayCarwashView.classList.toggle('is-scrolled', essayCarwashScrollContainer.scrollTop > 4);
+  }
+  if (essayFifaView && essayFifaScrollContainer) {
+    essayFifaView.classList.toggle('is-scrolled', essayFifaScrollContainer.scrollTop > 4);
+  }
+}
 
 function cancelPendingContactOpen() {
   if (contactOpenTimer) {
@@ -177,6 +190,8 @@ function focusAfterNav() {
   if (hash === '#about') target = document.getElementById('section-heading-about');
   else if (hash === '#experience') target = document.getElementById('section-heading-experience');
   else if (hash === '#projects') target = document.getElementById('section-heading-projects');
+  else if (hash === '#essay-robotics-or-car-wash') target = document.getElementById('section-heading-essay-carwash');
+  else if (hash === '#essay-fifa') target = document.getElementById('section-heading-essay-fifa');
   else if (hash === '#interests') target = document.getElementById('section-heading-interests');
   requestAnimationFrame(function() {
     if (target) {
@@ -190,6 +205,10 @@ function focusAfterNav() {
 
 function navigate() {
   var hash = window.location.hash;
+  document.body.classList.toggle(
+    'essay-route-active',
+    hash === '#essay-robotics-or-car-wash' || hash === '#essay-fifa'
+  );
   var wasInSection = allViews.some(function(v) { return v.classList.contains('visible'); });
   allViews.forEach(function(v) { v.classList.remove('visible'); });
   allToggles.forEach(function(t) { t.classList.remove('active'); });
@@ -198,6 +217,8 @@ function navigate() {
     hash === '#about' ||
     hash === '#experience' ||
     hash === '#projects' ||
+    hash === '#essay-robotics-or-car-wash' ||
+    hash === '#essay-fifa' ||
     hash === '#interests';
 
   homeView.classList.toggle('hidden', inSection);
@@ -214,10 +235,24 @@ function navigate() {
   } else if (hash === '#projects') {
     projectsView.classList.add('visible');
     projectsToggle.classList.add('active');
+  } else if (hash === '#essay-robotics-or-car-wash') {
+    essayCarwashView.classList.add('visible');
+    projectsToggle.classList.add('active');
+  } else if (hash === '#essay-fifa') {
+    essayFifaView.classList.add('visible');
+    projectsToggle.classList.add('active');
   } else if (hash === '#interests') {
     interestsView.classList.add('visible');
     interestsToggle.classList.add('active');
   }
+
+  if (hash !== '#essay-robotics-or-car-wash' && essayCarwashView) {
+    essayCarwashView.classList.remove('is-scrolled');
+  }
+  if (hash !== '#essay-fifa' && essayFifaView) {
+    essayFifaView.classList.remove('is-scrolled');
+  }
+  requestAnimationFrame(syncEssayScrollFade);
 
   cancelPendingContactOpen();
   if (hash === '#contact') {
@@ -284,6 +319,13 @@ document.addEventListener('keydown', function(e) {
 window.addEventListener('popstate', navigate);
 window.addEventListener('hashchange', navigate);
 navigate();
+
+if (essayCarwashScrollContainer) {
+  essayCarwashScrollContainer.addEventListener('scroll', syncEssayScrollFade, { passive: true });
+}
+if (essayFifaScrollContainer) {
+  essayFifaScrollContainer.addEventListener('scroll', syncEssayScrollFade, { passive: true });
+}
 
 // Remove boot class after first route has rendered.
 requestAnimationFrame(function() {

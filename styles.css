@@ -265,6 +265,7 @@ button.nav-link {
 .booting .about-view,
 .booting .experience-view,
 .booting .projects-view,
+.booting .essay-view,
 .booting .interests-view {
   transition: none !important;
 }
@@ -308,6 +309,7 @@ button.nav-link {
 .about-view,
 .experience-view,
 .projects-view,
+.essay-view,
 .interests-view {
   position: absolute;
   inset: 0;
@@ -324,6 +326,7 @@ button.nav-link {
 .about-view.visible,
 .experience-view.visible,
 .projects-view.visible,
+.essay-view.visible,
 .interests-view.visible {
   transform: translate3d(0, 0, 0);
   opacity: 1;
@@ -333,6 +336,7 @@ button.nav-link {
 .about-view::before,
 .experience-view::before,
 .projects-view::before,
+.essay-view::before,
 .interests-view::before {
   content: '';
   position: absolute;
@@ -344,9 +348,17 @@ button.nav-link {
   pointer-events: none;
   z-index: 1;
 }
+.essay-view::before {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.essay-view.is-scrolled::before {
+  opacity: 1;
+}
 .about-view::after,
 .experience-view::after,
 .projects-view::after,
+.essay-view::after,
 .interests-view::after {
   content: '';
   position: absolute;
@@ -357,6 +369,14 @@ button.nav-link {
   background: linear-gradient(to bottom, transparent, #1a1a1a);
   pointer-events: none;
   z-index: 1;
+}
+/* Tight top spacing for embedded essay routes so the title doesn't sit
+   too low below the header/nav block. */
+.essay-view .about-content {
+  padding-top: 0;
+}
+body.essay-route-active .center {
+  margin-top: -6rem;
 }
 .about-title {
   font-size: 30px;
@@ -868,6 +888,8 @@ body.essay-page {
   .project-placeholder-title { font-size: 42px; }
   .project-placeholder-fa { font-size: 19px; }
   .about-content { padding: 1rem 0.5rem 6rem; }
+  .essay-view .about-content { padding-top: 2.25rem; }
+  body.essay-route-active .center { margin-top: 0; }
   footer {
     flex-direction: column;
     align-items: flex-start;
