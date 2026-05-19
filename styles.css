@@ -136,7 +136,9 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  position: relative;
+  position: fixed;
+  top: 2.5rem;
+  left: 3rem;
   z-index: 2;
 }
 .nav-links {
@@ -188,6 +190,19 @@ button.nav-link {
 .media-assets-link:hover,
 .media-assets-link:active {
   color: red;
+}
+.inline-link {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+.inline-link:hover,
+.inline-link:active {
+  color: red;
+  text-decoration-color: red;
 }
 /* Desktop-only optical alignment with the top-left nav row. */
 @media (min-width: 601px) {
@@ -265,6 +280,7 @@ button.nav-link {
 .booting .about-view,
 .booting .experience-view,
 .booting .projects-view,
+.booting .essays-view,
 .booting .essay-view,
 .booting .interests-view {
   transition: none !important;
@@ -309,6 +325,7 @@ button.nav-link {
 .about-view,
 .experience-view,
 .projects-view,
+.essays-view,
 .essay-view,
 .interests-view {
   position: absolute;
@@ -326,6 +343,7 @@ button.nav-link {
 .about-view.visible,
 .experience-view.visible,
 .projects-view.visible,
+.essays-view.visible,
 .essay-view.visible,
 .interests-view.visible {
   transform: translate3d(0, 0, 0);
@@ -336,6 +354,7 @@ button.nav-link {
 .about-view::before,
 .experience-view::before,
 .projects-view::before,
+.essays-view::before,
 .essay-view::before,
 .interests-view::before {
   content: '';
@@ -358,6 +377,7 @@ button.nav-link {
 .about-view::after,
 .experience-view::after,
 .projects-view::after,
+.essays-view::after,
 .essay-view::after,
 .interests-view::after {
   content: '';
@@ -860,6 +880,10 @@ body.essay-page {
     font-size: 18px;
     top: 1.75rem;
     right: 1.5rem;
+  }
+  header {
+    top: 1.75rem;
+    left: 1.5rem;
   }
   .projects-list {
     grid-template-columns: 1fr;

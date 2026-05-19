@@ -94,12 +94,14 @@ var homeView = document.getElementById('home-view');
 var aboutView = document.getElementById('about-view');
 var experienceView = document.getElementById('experience-view');
 var projectsView = document.getElementById('projects-view');
+var essaysView = document.getElementById('essays-view');
 var essayCarwashView = document.getElementById('essay-view-carwash');
 var essayFifaView = document.getElementById('essay-view-fifa');
 var interestsView = document.getElementById('interests-view');
 var aboutToggle = document.getElementById('about-toggle');
 var experienceToggle = document.getElementById('experience-toggle');
 var projectsToggle = document.getElementById('projects-toggle');
+var essaysToggle = document.getElementById('essays-toggle');
 var interestsToggle = document.getElementById('interests-toggle');
 var homeLink = document.getElementById('home-link');
 var contactToggle = document.getElementById('contact-toggle');
@@ -107,8 +109,8 @@ var contactPanel = document.getElementById('contact-panel');
 var mainContent = document.getElementById('main-content');
 var essayCarwashScrollContainer = essayCarwashView ? essayCarwashView.querySelector('.about-content') : null;
 var essayFifaScrollContainer = essayFifaView ? essayFifaView.querySelector('.about-content') : null;
-var allViews = [aboutView, experienceView, projectsView, essayCarwashView, essayFifaView, interestsView];
-var allToggles = [aboutToggle, experienceToggle, projectsToggle, interestsToggle];
+var allViews = [aboutView, experienceView, projectsView, essaysView, essayCarwashView, essayFifaView, interestsView];
+var allToggles = [aboutToggle, experienceToggle, projectsToggle, essaysToggle, interestsToggle];
 var navBooted = false;
 
 // Roughly matches the section-view exit transition in styles.css so the
@@ -190,6 +192,7 @@ function focusAfterNav() {
   if (hash === '#about') target = document.getElementById('section-heading-about');
   else if (hash === '#experience') target = document.getElementById('section-heading-experience');
   else if (hash === '#projects') target = document.getElementById('section-heading-projects');
+  else if (hash === '#essays') target = document.getElementById('section-heading-essays');
   else if (hash === '#essay-robotics-or-car-wash') target = document.getElementById('section-heading-essay-carwash');
   else if (hash === '#essay-fifa') target = document.getElementById('section-heading-essay-fifa');
   else if (hash === '#interests') target = document.getElementById('section-heading-interests');
@@ -217,6 +220,7 @@ function navigate() {
     hash === '#about' ||
     hash === '#experience' ||
     hash === '#projects' ||
+    hash === '#essays' ||
     hash === '#essay-robotics-or-car-wash' ||
     hash === '#essay-fifa' ||
     hash === '#interests';
@@ -235,12 +239,15 @@ function navigate() {
   } else if (hash === '#projects') {
     projectsView.classList.add('visible');
     projectsToggle.classList.add('active');
+  } else if (hash === '#essays') {
+    essaysView.classList.add('visible');
+    essaysToggle.classList.add('active');
   } else if (hash === '#essay-robotics-or-car-wash') {
     essayCarwashView.classList.add('visible');
-    projectsToggle.classList.add('active');
+    essaysToggle.classList.add('active');
   } else if (hash === '#essay-fifa') {
     essayFifaView.classList.add('visible');
-    projectsToggle.classList.add('active');
+    essaysToggle.classList.add('active');
   } else if (hash === '#interests') {
     interestsView.classList.add('visible');
     interestsToggle.classList.add('active');
@@ -281,7 +288,7 @@ homeLink.addEventListener('click', function(e) {
   navigate();
 });
 
-[aboutToggle, experienceToggle, projectsToggle, interestsToggle].forEach(function(toggle) {
+[aboutToggle, experienceToggle, projectsToggle, essaysToggle, interestsToggle].forEach(function(toggle) {
   toggle.addEventListener('click', function(e) {
     if (isModifierClick(e)) return;
     e.preventDefault();
