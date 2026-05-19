@@ -16,6 +16,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 - Desktop footer: clock moved to bottom-left, stacked iOS-style (time on top, date below). Contact link moved to bottom-right with popup (X / LinkedIn / Email) that opens **upward**. Contact removed from top nav.
 - Mobile footer: kept the previous layout — Contact stays in the top nav (popup opens downward), footer just shows time/date stacked at bottom-left. Implemented via `position: fixed` on `.footer-contact` inside the mobile media query so the single element renders in different places per viewport.
 - Linked the word "X" in the About backstory (short version) to `x.com/omeedtavakoli`, opens in a new tab.
+- Reworked Contact placement again. Desktop: footer reverted to original row layout (time left, date right); Contact moved to the top-right corner under Headshot with a downward popup. Mobile: Contact is now a real child of `.nav-links` (wrapped in `.contact-wrap`) so the gap between Contact and the rest of the nav items is uniform — no more fragile hardcoded `top: 12.5rem`.
 
 ## Ideas / next
 

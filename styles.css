@@ -209,32 +209,50 @@ button.nav-link {
   .media-assets-link {
     top: 2.42rem;
   }
+  /* On desktop, pull Contact out of the nav stack and place it under Headshot. */
+  .contact-wrap {
+    position: fixed;
+    top: 5rem;
+    right: 3rem;
+    z-index: 2;
+  }
+  .contact-panel {
+    left: auto;
+    right: 0;
+    align-items: flex-end;
+    padding: 0 0.05rem 0.25rem 0;
+  }
 }
 .contact-panel[hidden] {
   display: none;
+}
+/* Contact lives in the nav-links DOM. On desktop we pull it out to the
+   top-right corner under Headshot; on mobile it stays in the flex flow
+   so the gap between Contact and other nav items is uniform. */
+.contact-wrap {
+  position: relative;
 }
 .contact-panel {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
   position: absolute;
-  bottom: 100%;
-  right: 0;
-  margin-bottom: 0.4rem;
-  padding: 0 0.05rem 0.25rem 0;
-  align-items: flex-end;
+  top: 100%;
+  left: 0;
+  margin-top: 0.4rem;
+  padding: 0 0 0.25rem 0.05rem;
   animation: contactFadeIn 0.32s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 .contact-panel.is-closing {
   animation: contactFadeOut 0.32s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 @keyframes contactFadeIn {
-  from { opacity: 0; transform: translateY(4px); }
+  from { opacity: 0; transform: translateY(-4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes contactFadeOut {
   from { opacity: 1; transform: translateY(0); }
-  to   { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 0; transform: translateY(-4px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .contact-panel,
@@ -763,20 +781,11 @@ footer {
   position: relative;
   z-index: 2;
 }
-.footer-clock {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.1rem;
-}
-.footer-clock span {
+footer span {
   font-size: 22px;
   font-weight: 400;
   letter-spacing: 0.01em;
   font-variant-numeric: tabular-nums;
-}
-.footer-contact {
-  position: relative;
 }
 
 /* Essay page */
@@ -930,38 +939,7 @@ body.essay-page {
     align-items: flex-start;
     gap: 0.2rem;
   }
-  .footer-clock span { font-size: 18px; }
-  /* On mobile, reposition Contact back into the nav stack and flip popup downward.
-     `top: 12.5rem` is calibrated for the current 6 nav items —
-     adjust if nav item count changes. */
-  .footer-contact {
-    position: fixed;
-    top: 12.5rem;
-    left: 1.5rem;
-    z-index: 2;
-  }
-  .contact-panel {
-    bottom: auto;
-    right: auto;
-    top: 100%;
-    left: 0;
-    margin-top: 0.4rem;
-    margin-bottom: 0;
-    padding: 0 0 0.25rem 0.05rem;
-    align-items: flex-start;
-    animation-name: contactFadeInDown;
-  }
-  .contact-panel.is-closing {
-    animation-name: contactFadeOutDown;
-  }
-  @keyframes contactFadeInDown {
-    from { opacity: 0; transform: translateY(-4px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes contactFadeOutDown {
-    from { opacity: 1; transform: translateY(0); }
-    to   { opacity: 0; transform: translateY(-4px); }
-  }
+  footer span { font-size: 18px; }
   .essay-main {
     margin-top: 1.5rem;
   }
