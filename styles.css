@@ -882,8 +882,9 @@ body.essay-page {
     right: 1.5rem;
   }
   header {
-    top: 1.75rem;
-    left: 1.5rem;
+    position: relative;
+    top: auto;
+    left: auto;
   }
   .projects-list {
     grid-template-columns: 1fr;
