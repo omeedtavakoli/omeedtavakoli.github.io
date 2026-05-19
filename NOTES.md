@@ -15,6 +15,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 - Mobile padding: bumped `.about-content` top padding to 4rem so titles clear the top fade overlay.
 - Desktop footer: clock moved to bottom-left, stacked iOS-style (time on top, date below). Contact link moved to bottom-right with popup (X / LinkedIn / Email) that opens **upward**. Contact removed from top nav.
 - Mobile footer: kept the previous layout — Contact stays in the top nav (popup opens downward), footer just shows time/date stacked at bottom-left. Implemented via `position: fixed` on `.footer-contact` inside the mobile media query so the single element renders in different places per viewport.
+- Linked the word "X" in the About backstory (short version) to `x.com/omeedtavakoli`, opens in a new tab.
 
 ## Ideas / next
 
