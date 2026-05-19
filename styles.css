@@ -222,7 +222,7 @@ button.nav-link {
 .contact-panel {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.5rem;
   position: absolute;
   top: 100%;
   left: 0;
