@@ -1,0 +1,29 @@
+# Site notes
+
+Personal log for omeedtavakoli.com. `git log` has the full commit history — this file is for the high-level "what changed" and "what's next" so things don't fall through the cracks.
+
+## Recent changes
+
+### 2026-05-18
+- Split essays out of Projects into a new top-level Essays tab; embedded essay routes (`#essay-robotics-or-car-wash`, `#essay-fifa`) now activate the Essays nav.
+- Reordered Essays: Breaking into SV (Coming soon) → Car Wash → Buy Clarity → FIFA.
+- Removed AI Math Proofs project card; added paper link inline to the Valente Center entry on Resume instead.
+- Updated Projects tagline: "A few trails I've followed outside the main road, from coding projects to interviews to travel stories."
+- Updated Tavakoli Family Tree description to "A coding project to map my family history."
+- Desktop layout: `header` is now `position: fixed` so all section views start much higher (no longer pushed below the vertical nav).
+- Mobile layout: `header` stays `position: relative` on viewports ≤600px (fixes nav/content overlap on iPhone).
+- Mobile padding: bumped `.about-content` top padding to 4rem so titles clear the top fade overlay.
+
+## Ideas / next
+
+- Publish the **Tavakoli Family Tree** project (currently Coming soon).
+- Write **Breaking into Silicon Valley** essay (currently Coming soon).
+- Decide if Grappling Analytics belongs in Projects long-term or eventually moves back to Resume.
+
+## Things tried and dropped
+
+Keeping these here so we don't re-litigate later:
+
+- **Subhead grouping inside Projects** (Essays / Interviews / Research / Other) — added visual noise without enough payoff for the current item count.
+- **Bottom-right corner Interests link with home-only fade** — created a "hidden destination" pattern that broke the implicit "nav shows everything" promise.
+- **Inline prose discovery links in About/Projects** (e.g. "feel free to check out my personal projects or interests") — felt like a maze; prose-as-navigation is a blog pattern, not a portfolio pattern.
