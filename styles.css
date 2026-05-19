@@ -245,7 +245,8 @@ button.nav-link {
 @media (min-width: 601px) {
   .contact-wrap {
     position: fixed;
-    top: 5rem;
+    /* Sits one nav-link-row + 0.5rem gap below Headshot (Headshot top: 2.42rem). */
+    top: 4.55rem;
     right: 3rem;
     z-index: 2;
   }

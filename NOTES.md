@@ -18,6 +18,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 - Linked the word "X" in the About backstory (short version) to `x.com/omeedtavakoli`, opens in a new tab.
 - Reworked Contact placement again. Desktop: footer reverted to original row layout (time left, date right); Contact moved to the top-right corner under Headshot with a downward popup. Mobile: Contact is now a real child of `.nav-links` (wrapped in `.contact-wrap`) so the gap between Contact and the rest of the nav items is uniform — no more fragile hardcoded `top: 12.5rem`.
 - Bugfix: the above broke on desktop because the `.contact-wrap { position: relative }` base rule was declared *after* the `@media (min-width: 601px)` override, so the override never won. Moved the desktop override into a media query that comes after the base rules.
+- Tuned Contact's vertical position on desktop from `top: 5rem` to `top: 4.55rem` so the visual gap between Headshot and Contact matches the 0.5rem gap between left-nav items.
 
 ## Ideas / next
 
