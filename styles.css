@@ -266,13 +266,22 @@ button.nav-link {
 .contact-link {
   color: rgba(255, 255, 255, 0.45);
   text-decoration: none;
-  font-size: 16px;
+  font-size: 22px;
   line-height: 1.4;
   transition: color 0.4s ease;
 }
 .contact-link:hover,
 .contact-link:active {
   color: red;
+}
+.contact-logo-link {
+  display: flex;
+  align-items: center;
+}
+.contact-logo {
+  width: 0.78em;
+  height: 0.78em;
+  fill: currentColor;
 }
 .center {
   flex: 1;
@@ -896,7 +905,7 @@ body.essay-page {
     font-size: 18px;
   }
   .contact-link {
-    font-size: 14px;
+    font-size: 18px;
   }
   .media-assets-link {
     font-size: 18px;

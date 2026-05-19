@@ -4,6 +4,11 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-05-19
+- Contact dropdown: X and LinkedIn entries replaced with their logo icons (SVG, grey/turns red on hover); Email stays as text.
+- Contact dropdown font size bumped to match the "Contact" nav-link size (22px desktop, 18px mobile).
+- About backstory: "the best way to reach me is on X" → "the best way to reach me is here" (same X profile link).
+
 ### 2026-05-18
 - Split essays out of Projects into a new top-level Essays tab; embedded essay routes (`#essay-robotics-or-car-wash`, `#essay-fifa`) now activate the Essays nav.
 - Reordered Essays: Breaking into SV (Coming soon) → Car Wash → Buy Clarity → FIFA.
