@@ -912,7 +912,7 @@ body.essay-page {
   .about-title { font-size: 24px; }
   .project-placeholder-title { font-size: 42px; }
   .project-placeholder-fa { font-size: 19px; }
-  .about-content { padding: 2.5rem 0.5rem 6rem; }
+  .about-content { padding: 4rem 0.5rem 6rem; }
   .essay-view .about-content { padding-top: 2.25rem; }
   body.essay-route-active .center { margin-top: 0; }
   footer {
