@@ -931,7 +931,9 @@ body.essay-page {
     gap: 0.2rem;
   }
   .footer-clock span { font-size: 18px; }
-  /* On mobile, reposition Contact back into the nav stack and flip popup downward */
+  /* On mobile, reposition Contact back into the nav stack and flip popup downward.
+     `top: 12.5rem` is calibrated for the current 6 nav items —
+     adjust if nav item count changes. */
   .footer-contact {
     position: fixed;
     top: 12.5rem;
