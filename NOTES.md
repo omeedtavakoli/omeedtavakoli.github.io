@@ -4,6 +4,11 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-05-20
+- Removed Interests from the nav and moved Contact to its slot (bottom of left nav, after Projects).
+- Interests page content (`#interests-view`) is fully preserved in `index.html` — just hidden from the nav. See **"Restoring Interests"** section below for exact steps to re-enable.
+- Desktop Contact fixed-positioning (top-right under Headshot) removed; Contact now lives in the left nav flow like all other links.
+
 ### 2026-05-19
 - Contact dropdown: X and LinkedIn entries replaced with their logo icons (SVG, grey/turns red on hover); Email stays as text.
 - Contact dropdown font size bumped to match the "Contact" nav-link size (22px desktop, 18px mobile).
@@ -30,6 +35,66 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 - Publish the **Tavakoli Family Tree** project (currently Coming soon).
 - Write **Breaking into Silicon Valley** essay (currently Coming soon).
 - Decide if Grappling Analytics belongs in Projects long-term or eventually moves back to Resume.
+
+## Restoring Interests
+
+The Interests page is fully preserved in `index.html` (the `#interests-view` div with all content). To bring it back:
+
+### 1. `index.html` — add nav link back after Projects and before `.contact-wrap`
+
+```html
+<a class="nav-link" href="#interests" id="interests-toggle">Interests</a>
+```
+
+Place it directly before `<div class="contact-wrap">` in the `<nav>` block.
+
+### 2. `styles.css` — restore desktop Contact fixed positioning
+
+Add this block back after the `.contact-wrap { position: relative; }` base rule:
+
+```css
+/* Desktop: pull Contact out of the nav stack and place it under Headshot. */
+@media (min-width: 601px) {
+  .contact-wrap {
+    position: fixed;
+    /* Sits one nav-link-row + 0.5rem gap below Headshot (Headshot top: 2.42rem). */
+    top: 4.55rem;
+    right: 3rem;
+    z-index: 2;
+  }
+  .contact-panel {
+    left: auto;
+    right: 0;
+    align-items: flex-end;
+    padding: 0 0.05rem 0.25rem 0;
+  }
+}
+```
+
+### 3. `site.js` — restore interestsToggle variable and references
+
+Add back after `essaysToggle`:
+```js
+var interestsToggle = document.getElementById('interests-toggle');
+```
+
+Update `allToggles`:
+```js
+var allToggles = [aboutToggle, experienceToggle, projectsToggle, essaysToggle, interestsToggle];
+```
+
+Update the nav click handler forEach:
+```js
+[aboutToggle, experienceToggle, projectsToggle, essaysToggle, interestsToggle].forEach(function(toggle) {
+```
+
+The `interestsView`, `#interests` route in `navigate()`, and the `#interests` case in `inSection` are all still in `site.js` untouched — no changes needed there.
+
+### 4. Bump cache busters
+
+Increment `styles.css?v=N` and `site.js?v=N` in `index.html`.
+
+---
 
 ## Things tried and dropped
 

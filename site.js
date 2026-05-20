@@ -102,7 +102,6 @@ var aboutToggle = document.getElementById('about-toggle');
 var experienceToggle = document.getElementById('experience-toggle');
 var projectsToggle = document.getElementById('projects-toggle');
 var essaysToggle = document.getElementById('essays-toggle');
-var interestsToggle = document.getElementById('interests-toggle');
 var homeLink = document.getElementById('home-link');
 var contactToggle = document.getElementById('contact-toggle');
 var contactPanel = document.getElementById('contact-panel');
@@ -110,7 +109,7 @@ var mainContent = document.getElementById('main-content');
 var essayCarwashScrollContainer = essayCarwashView ? essayCarwashView.querySelector('.about-content') : null;
 var essayFifaScrollContainer = essayFifaView ? essayFifaView.querySelector('.about-content') : null;
 var allViews = [aboutView, experienceView, projectsView, essaysView, essayCarwashView, essayFifaView, interestsView];
-var allToggles = [aboutToggle, experienceToggle, projectsToggle, essaysToggle, interestsToggle];
+var allToggles = [aboutToggle, experienceToggle, projectsToggle, essaysToggle];
 var navBooted = false;
 
 // Roughly matches the section-view exit transition in styles.css so the
@@ -288,7 +287,7 @@ homeLink.addEventListener('click', function(e) {
   navigate();
 });
 
-[aboutToggle, experienceToggle, projectsToggle, essaysToggle, interestsToggle].forEach(function(toggle) {
+[aboutToggle, experienceToggle, projectsToggle, essaysToggle].forEach(function(toggle) {
   toggle.addEventListener('click', function(e) {
     if (isModifierClick(e)) return;
     e.preventDefault();
