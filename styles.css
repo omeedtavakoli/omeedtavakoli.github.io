@@ -285,6 +285,10 @@ button.nav-link {
   height: 0.78em;
   fill: currentColor;
 }
+.linkedin-logo {
+  width: 0.92em;
+  height: 0.92em;
+}
 .center {
   flex: 1;
   min-height: 0;
