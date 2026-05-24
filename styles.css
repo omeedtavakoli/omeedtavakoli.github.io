@@ -416,9 +416,6 @@ button.nav-link {
 .essay-view .about-content {
   padding-top: 0;
 }
-body.essay-route-active .center {
-  margin-top: -6rem;
-}
 .about-title {
   font-size: 30px;
   font-weight: 400;
@@ -935,7 +932,6 @@ body.essay-page {
   .project-placeholder-fa { font-size: 19px; }
   .about-content { padding: 4rem 0.5rem 6rem; }
   .essay-view .about-content { padding-top: 2.25rem; }
-  body.essay-route-active .center { margin-top: 0; }
   footer {
     flex-direction: column;
     align-items: flex-start;

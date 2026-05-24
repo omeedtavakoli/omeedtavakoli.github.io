@@ -4,6 +4,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-05-24
+- Fixed desktop essay views (Car Wash, FIFA) being cut off: removed `body.essay-route-active .center { margin-top: -6rem }` which was shifting the center box above the body's `overflow: hidden` clip boundary, hiding the top of the essay and truncating the bottom.
+
 ### 2026-05-20
 - Removed Interests from the nav and moved Contact to its slot (bottom of left nav, after Projects).
 - Interests page content (`#interests-view`) is fully preserved in `index.html` — just hidden from the nav. See **"Restoring Interests"** section below for exact steps to re-enable.
