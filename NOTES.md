@@ -5,6 +5,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ## Recent changes
 
 ### 2026-05-24
+- Resume copy refresh: updated Perplexity, WagerPager, Claim, and T. Rowe Price descriptions; Valente Center stayed unchanged.
+- Fixed narrow desktop/tablet overlap where fixed left nav could cover section content by adding a medium-width content gutter (`601px`–`1240px`) and bumping `styles.css` to `v=57`.
+- Short Backstory refresh: added philosophy line, removed "etc" from the martial arts list, moved contact into its own paragraph, and kept "here" linked to X.
 - Fixed desktop essay views (Car Wash, FIFA) being cut off: removed `body.essay-route-active .center { margin-top: -6rem }` which was shifting the center box above the body's `overflow: hidden` clip boundary, hiding the top of the essay and truncating the bottom.
 
 ### 2026-05-20
