@@ -464,6 +464,19 @@ button.nav-link {
   margin-bottom: 0;
 }
 
+/* Keep fixed desktop nav from covering section content on narrower windows. */
+@media (min-width: 601px) and (max-width: 1240px) {
+  .about-content {
+    align-items: flex-start;
+    padding-left: 16rem;
+    padding-right: 3rem;
+  }
+
+  .about-content > * {
+    max-width: 100%;
+  }
+}
+
 /* Projects. Finished side quests. */
 .projects-list {
   list-style: none;
