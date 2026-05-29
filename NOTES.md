@@ -4,6 +4,10 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-05-28
+- Fixed `/#interests` crashing the SPA router: `navigate()` referenced `interestsToggle`, which was removed when Interests left the nav (2026-05-20), throwing `ReferenceError` and aborting the rest of navigation. Removed the dead line; the route now renders the preserved (still nav-hidden) Interests content without erroring. Bumped `site.js` to `v=22`.
+- Brought the two standalone essay pages (`essay-fifa.html`, `essay-robotics-or-car-wash.html`) in line with the live nav: dropped the removed Interests link, added the Essays tab, and marked Essays (not Projects) active.
+
 ### 2026-05-24
 - Resume copy refresh: updated Perplexity, WagerPager, Claim, and T. Rowe Price descriptions; Valente Center stayed unchanged.
 - Fixed narrow desktop/tablet overlap where fixed left nav could cover section content by adding a medium-width content gutter (`601px`–`1240px`) and bumping `styles.css` to `v=57`.
@@ -94,7 +98,15 @@ Update the nav click handler forEach:
 [aboutToggle, experienceToggle, projectsToggle, essaysToggle, interestsToggle].forEach(function(toggle) {
 ```
 
-The `interestsView`, `#interests` route in `navigate()`, and the `#interests` case in `inSection` are all still in `site.js` untouched — no changes needed there.
+Re-add the active-toggle line inside the `#interests` branch of `navigate()` (it was removed on 2026-05-28 to fix the crash, since there was no nav element to highlight):
+```js
+} else if (hash === '#interests') {
+  interestsView.classList.add('visible');
+  interestsToggle.classList.add('active');
+}
+```
+
+The `interestsView`, `#interests` route in `navigate()`, and the `#interests` case in `inSection` are otherwise still in `site.js` untouched.
 
 ### 4. Bump cache busters
 

@@ -249,7 +249,6 @@ function navigate() {
     essaysToggle.classList.add('active');
   } else if (hash === '#interests') {
     interestsView.classList.add('visible');
-    interestsToggle.classList.add('active');
   }
 
   if (hash !== '#essay-robotics-or-car-wash' && essayCarwashView) {
