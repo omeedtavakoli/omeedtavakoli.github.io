@@ -520,6 +520,9 @@ button.nav-link {
   object-fit: cover;
   display: block;
 }
+.essay-cover-image {
+  object-position: center 34%;
+}
 .project-placeholder {
   position: relative;
   width: 100%;
@@ -850,6 +853,12 @@ body.essay-page {
   border: 1px solid rgba(255, 255, 255, 0.12);
   margin-bottom: 1.8rem;
 }
+.essay-hero--centered {
+  aspect-ratio: 16 / 9;
+}
+.essay-hero.essay-cover-image {
+  object-position: center 34%;
+}
 .essay-section {
   margin-bottom: 1.75rem;
 }
@@ -875,6 +884,11 @@ body.essay-page {
 .essay-source {
   margin-top: 0.75rem;
   color: rgba(255, 255, 255, 0.62);
+}
+.essay-note {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 .essay-source a {
   color: rgba(255, 255, 255, 0.76);

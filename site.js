@@ -95,6 +95,7 @@ var aboutView = document.getElementById('about-view');
 var experienceView = document.getElementById('experience-view');
 var projectsView = document.getElementById('projects-view');
 var essaysView = document.getElementById('essays-view');
+var essayDefinitionSuccessView = document.getElementById('essay-view-definition-success');
 var essayCarwashView = document.getElementById('essay-view-carwash');
 var essayFifaView = document.getElementById('essay-view-fifa');
 var interestsView = document.getElementById('interests-view');
@@ -108,7 +109,7 @@ var contactPanel = document.getElementById('contact-panel');
 var mainContent = document.getElementById('main-content');
 var essayCarwashScrollContainer = essayCarwashView ? essayCarwashView.querySelector('.about-content') : null;
 var essayFifaScrollContainer = essayFifaView ? essayFifaView.querySelector('.about-content') : null;
-var allViews = [aboutView, experienceView, projectsView, essaysView, essayCarwashView, essayFifaView, interestsView];
+var allViews = [aboutView, experienceView, projectsView, essaysView, essayDefinitionSuccessView, essayCarwashView, essayFifaView, interestsView];
 var allToggles = [aboutToggle, experienceToggle, projectsToggle, essaysToggle];
 var navBooted = false;
 
@@ -192,6 +193,7 @@ function focusAfterNav() {
   else if (hash === '#experience') target = document.getElementById('section-heading-experience');
   else if (hash === '#projects') target = document.getElementById('section-heading-projects');
   else if (hash === '#essays') target = document.getElementById('section-heading-essays');
+  else if (hash === '#essay-definition-of-success') target = document.getElementById('section-heading-essay-definition-success');
   else if (hash === '#essay-robotics-or-car-wash') target = document.getElementById('section-heading-essay-carwash');
   else if (hash === '#essay-fifa') target = document.getElementById('section-heading-essay-fifa');
   else if (hash === '#interests') target = document.getElementById('section-heading-interests');
@@ -209,7 +211,7 @@ function navigate() {
   var hash = window.location.hash;
   document.body.classList.toggle(
     'essay-route-active',
-    hash === '#essay-robotics-or-car-wash' || hash === '#essay-fifa'
+    hash === '#essay-definition-of-success' || hash === '#essay-robotics-or-car-wash' || hash === '#essay-fifa'
   );
   var wasInSection = allViews.some(function(v) { return v.classList.contains('visible'); });
   allViews.forEach(function(v) { v.classList.remove('visible'); });
@@ -220,6 +222,7 @@ function navigate() {
     hash === '#experience' ||
     hash === '#projects' ||
     hash === '#essays' ||
+    hash === '#essay-definition-of-success' ||
     hash === '#essay-robotics-or-car-wash' ||
     hash === '#essay-fifa' ||
     hash === '#interests';
@@ -240,6 +243,9 @@ function navigate() {
     projectsToggle.classList.add('active');
   } else if (hash === '#essays') {
     essaysView.classList.add('visible');
+    essaysToggle.classList.add('active');
+  } else if (hash === '#essay-definition-of-success') {
+    essayDefinitionSuccessView.classList.add('visible');
     essaysToggle.classList.add('active');
   } else if (hash === '#essay-robotics-or-car-wash') {
     essayCarwashView.classList.add('visible');
@@ -385,4 +391,3 @@ document.querySelectorAll('.exp-item').forEach(function(item) {
     item.classList.toggle('closed');
   });
 });
-

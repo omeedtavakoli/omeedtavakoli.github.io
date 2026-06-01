@@ -4,6 +4,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-06-01
+- Added a local essay card and embedded essay route for **That's my Definition of Success** with the tagline "An essay on service.", `images/netflix.png` cover art, June 1, 2026 date, draft essay body with a separated end note, and matching 16:9 cover crop biased upward to show more of the Korean sign. Bumped `styles.css` to `v=63` and `site.js` to `v=23`.
+
 ### 2026-05-28
 - Fixed `/#interests` crashing the SPA router: `navigate()` referenced `interestsToggle`, which was removed when Interests left the nav (2026-05-20), throwing `ReferenceError` and aborting the rest of navigation. Removed the dead line; the route now renders the preserved (still nav-hidden) Interests content without erroring. Bumped `site.js` to `v=22`.
 - Brought the two standalone essay pages (`essay-fifa.html`, `essay-robotics-or-car-wash.html`) in line with the live nav: dropped the removed Interests link, added the Essays tab, and marked Essays (not Projects) active.
