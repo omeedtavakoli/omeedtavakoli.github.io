@@ -7,6 +7,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ### 2026-06-01
 - Added a local essay card and embedded essay route for **The Highest Standard** with the tagline "An essay on service.", `images/netflix.png` cover art, June 1, 2026 date, draft essay body with a separated end note, matching 16:9 cover crop biased upward to show more of the Korean sign, and the short `#highest-standard` route with a legacy alias from `#essay-definition-of-success`. Bumped `styles.css` to `v=63` and `site.js` to `v=24`.
 - Updated **The Highest Standard** copy: replaced the NASKA footnote marker with "Champions." and removed the starred closing note from the live essay.
+- Zoomed the **The Highest Standard** Essays-list thumbnail in slightly (`transform: scale(1.14)` on the `images/netflix.png` img) so the subject fills the shared 16:9 card better; box sizing is unchanged so all thumbnails stay uniform.
 
 ### 2026-05-28
 - Fixed `/#interests` crashing the SPA router: `navigate()` referenced `interestsToggle`, which was removed when Interests left the nav (2026-05-20), throwing `ReferenceError` and aborting the rest of navigation. Removed the dead line; the route now renders the preserved (still nav-hidden) Interests content without erroring. Bumped `site.js` to `v=22`.
