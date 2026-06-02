@@ -95,9 +95,6 @@ var aboutView = document.getElementById('about-view');
 var experienceView = document.getElementById('experience-view');
 var projectsView = document.getElementById('projects-view');
 var essaysView = document.getElementById('essays-view');
-var essayDefinitionSuccessView = document.getElementById('essay-view-definition-success');
-var essayCarwashView = document.getElementById('essay-view-carwash');
-var essayFifaView = document.getElementById('essay-view-fifa');
 var interestsView = document.getElementById('interests-view');
 var aboutToggle = document.getElementById('about-toggle');
 var experienceToggle = document.getElementById('experience-toggle');
@@ -107,11 +104,17 @@ var homeLink = document.getElementById('home-link');
 var contactToggle = document.getElementById('contact-toggle');
 var contactPanel = document.getElementById('contact-panel');
 var mainContent = document.getElementById('main-content');
-var essayCarwashScrollContainer = essayCarwashView ? essayCarwashView.querySelector('.about-content') : null;
-var essayFifaScrollContainer = essayFifaView ? essayFifaView.querySelector('.about-content') : null;
-var allViews = [aboutView, experienceView, projectsView, essaysView, essayDefinitionSuccessView, essayCarwashView, essayFifaView, interestsView];
+var allViews = [aboutView, experienceView, projectsView, essaysView, interestsView];
 var allToggles = [aboutToggle, experienceToggle, projectsToggle, essaysToggle];
 var navBooted = false;
+
+// Legacy SPA essay hashes → standalone pages (#highest-standard is canonical for The Highest Standard).
+var ESSAY_HASH_REDIRECTS = {
+  '#highest-standard': '/essay-highest-standard.html',
+  '#essay-definition-of-success': '/essay-highest-standard.html',
+  '#essay-robotics-or-car-wash': '/essay-robotics-or-car-wash.html',
+  '#essay-fifa': '/essay-fifa.html'
+};
 
 // Roughly matches the section-view exit transition in styles.css so the
 // contact panel waits for the page to settle before fading in.
@@ -120,15 +123,6 @@ var contactOpenTimer = null;
 var CONTACT_FADE_MS = 320;
 var contactCloseTimer = null;
 var contactCloseHandler = null;
-
-function syncEssayScrollFade() {
-  if (essayCarwashView && essayCarwashScrollContainer) {
-    essayCarwashView.classList.toggle('is-scrolled', essayCarwashScrollContainer.scrollTop > 4);
-  }
-  if (essayFifaView && essayFifaScrollContainer) {
-    essayFifaView.classList.toggle('is-scrolled', essayFifaScrollContainer.scrollTop > 4);
-  }
-}
 
 function cancelPendingContactOpen() {
   if (contactOpenTimer) {
@@ -193,9 +187,6 @@ function focusAfterNav() {
   else if (hash === '#experience') target = document.getElementById('section-heading-experience');
   else if (hash === '#projects') target = document.getElementById('section-heading-projects');
   else if (hash === '#essays') target = document.getElementById('section-heading-essays');
-  else if (hash === '#highest-standard') target = document.getElementById('section-heading-essay-definition-success');
-  else if (hash === '#essay-robotics-or-car-wash') target = document.getElementById('section-heading-essay-carwash');
-  else if (hash === '#essay-fifa') target = document.getElementById('section-heading-essay-fifa');
   else if (hash === '#interests') target = document.getElementById('section-heading-interests');
   requestAnimationFrame(function() {
     if (target) {
@@ -209,14 +200,11 @@ function focusAfterNav() {
 
 function navigate() {
   var hash = window.location.hash;
-  if (hash === '#essay-definition-of-success') {
-    history.replaceState(null, '', '#highest-standard');
-    hash = '#highest-standard';
+  if (ESSAY_HASH_REDIRECTS[hash]) {
+    window.location.replace(ESSAY_HASH_REDIRECTS[hash]);
+    return;
   }
-  document.body.classList.toggle(
-    'essay-route-active',
-    hash === '#highest-standard' || hash === '#essay-robotics-or-car-wash' || hash === '#essay-fifa'
-  );
+  document.body.classList.remove('essay-route-active');
   var wasInSection = allViews.some(function(v) { return v.classList.contains('visible'); });
   allViews.forEach(function(v) { v.classList.remove('visible'); });
   allToggles.forEach(function(t) { t.classList.remove('active'); });
@@ -226,9 +214,6 @@ function navigate() {
     hash === '#experience' ||
     hash === '#projects' ||
     hash === '#essays' ||
-    hash === '#highest-standard' ||
-    hash === '#essay-robotics-or-car-wash' ||
-    hash === '#essay-fifa' ||
     hash === '#interests';
 
   homeView.classList.toggle('hidden', inSection);
@@ -248,26 +233,9 @@ function navigate() {
   } else if (hash === '#essays') {
     essaysView.classList.add('visible');
     essaysToggle.classList.add('active');
-  } else if (hash === '#highest-standard') {
-    essayDefinitionSuccessView.classList.add('visible');
-    essaysToggle.classList.add('active');
-  } else if (hash === '#essay-robotics-or-car-wash') {
-    essayCarwashView.classList.add('visible');
-    essaysToggle.classList.add('active');
-  } else if (hash === '#essay-fifa') {
-    essayFifaView.classList.add('visible');
-    essaysToggle.classList.add('active');
   } else if (hash === '#interests') {
     interestsView.classList.add('visible');
   }
-
-  if (hash !== '#essay-robotics-or-car-wash' && essayCarwashView) {
-    essayCarwashView.classList.remove('is-scrolled');
-  }
-  if (hash !== '#essay-fifa' && essayFifaView) {
-    essayFifaView.classList.remove('is-scrolled');
-  }
-  requestAnimationFrame(syncEssayScrollFade);
 
   cancelPendingContactOpen();
   if (hash === '#contact') {
@@ -334,13 +302,6 @@ document.addEventListener('keydown', function(e) {
 window.addEventListener('popstate', navigate);
 window.addEventListener('hashchange', navigate);
 navigate();
-
-if (essayCarwashScrollContainer) {
-  essayCarwashScrollContainer.addEventListener('scroll', syncEssayScrollFade, { passive: true });
-}
-if (essayFifaScrollContainer) {
-  essayFifaScrollContainer.addEventListener('scroll', syncEssayScrollFade, { passive: true });
-}
 
 // Remove boot class after first route has rendered.
 requestAnimationFrame(function() {

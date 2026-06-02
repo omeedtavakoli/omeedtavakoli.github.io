@@ -5,6 +5,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ## Recent changes
 
 ### 2026-06-02
+- **Essays:** one canonical URL per piece — standalone `essay-*.html` only; removed embedded essay bodies from `index.html`. Added `essay-highest-standard.html` with article OG/Twitter meta. **The Highest Standard** uses `#highest-standard` everywhere in-site (Essays card + legacy hash redirects); `#essay-definition-of-success` still redirects for old bookmarks. Car Wash / FIFA use `#essay-robotics-or-car-wash` and `#essay-fifa`. Synced `styles.css?v=63` on all essay pages; bumped `site.js` to `v=26`.
 - **The Highest Standard** essay: tightened the Randolph/community paragraph — "moments that stay" leads, shorter beats on knowing you were someone in a community and helping make it bigger, stronger, more memorable.
 
 ### 2026-06-01
