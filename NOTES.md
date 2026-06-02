@@ -5,8 +5,8 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ## Recent changes
 
 ### 2026-06-01
-- Added a local essay card and embedded essay route for **That's my Definition of Success** with the tagline "An essay on service.", `images/netflix.png` cover art, June 1, 2026 date, draft essay body with a separated end note, and matching 16:9 cover crop biased upward to show more of the Korean sign. Bumped `styles.css` to `v=63` and `site.js` to `v=23`.
-- Updated **That's my Definition of Success** copy: replaced the NASKA footnote marker with "Champions." and removed the starred closing note from the live essay.
+- Added a local essay card and embedded essay route for **The Highest Standard** with the tagline "An essay on service.", `images/netflix.png` cover art, June 1, 2026 date, draft essay body with a separated end note, and matching 16:9 cover crop biased upward to show more of the Korean sign. Bumped `styles.css` to `v=63` and `site.js` to `v=23`.
+- Updated **The Highest Standard** copy: replaced the NASKA footnote marker with "Champions." and removed the starred closing note from the live essay.
 
 ### 2026-05-28
 - Fixed `/#interests` crashing the SPA router: `navigate()` referenced `interestsToggle`, which was removed when Interests left the nav (2026-05-20), throwing `ReferenceError` and aborting the rest of navigation. Removed the dead line; the route now renders the preserved (still nav-hidden) Interests content without erroring. Bumped `site.js` to `v=22`.
@@ -49,7 +49,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 - Publish the **Tavakoli Family Tree** project (currently Coming soon).
 - Write **Breaking into Silicon Valley** essay (currently Coming soon).
 - Decide if Grappling Analytics belongs in Projects long-term or eventually moves back to Resume.
-- Stashed note from **That's my Definition of Success** for possible reuse: "People say you need to get outside of your comfort zone. I think you should double down on what you are good at first. As you grow you can start to iterate and work on the things that make you uncomfortable. If you only do things that make you uncomfortable you won't be flourishing. Start from the foundation of what makes you excel and build from there. Because if things start to decline, you can always go back to what you know works. Trying new things when everything is already falling apart might just make the fall worse."
+- Stashed note from **The Highest Standard** for possible reuse: "People say you need to get outside of your comfort zone. I think you should double down on what you are good at first. As you grow you can start to iterate and work on the things that make you uncomfortable. If you only do things that make you uncomfortable you won't be flourishing. Start from the foundation of what makes you excel and build from there. Because if things start to decline, you can always go back to what you know works. Trying new things when everything is already falling apart might just make the fall worse."
 
 ## Restoring Interests
 
