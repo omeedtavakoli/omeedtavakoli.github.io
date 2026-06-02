@@ -193,7 +193,7 @@ function focusAfterNav() {
   else if (hash === '#experience') target = document.getElementById('section-heading-experience');
   else if (hash === '#projects') target = document.getElementById('section-heading-projects');
   else if (hash === '#essays') target = document.getElementById('section-heading-essays');
-  else if (hash === '#essay-definition-of-success') target = document.getElementById('section-heading-essay-definition-success');
+  else if (hash === '#highest-standard') target = document.getElementById('section-heading-essay-definition-success');
   else if (hash === '#essay-robotics-or-car-wash') target = document.getElementById('section-heading-essay-carwash');
   else if (hash === '#essay-fifa') target = document.getElementById('section-heading-essay-fifa');
   else if (hash === '#interests') target = document.getElementById('section-heading-interests');
@@ -209,9 +209,13 @@ function focusAfterNav() {
 
 function navigate() {
   var hash = window.location.hash;
+  if (hash === '#essay-definition-of-success') {
+    history.replaceState(null, '', '#highest-standard');
+    hash = '#highest-standard';
+  }
   document.body.classList.toggle(
     'essay-route-active',
-    hash === '#essay-definition-of-success' || hash === '#essay-robotics-or-car-wash' || hash === '#essay-fifa'
+    hash === '#highest-standard' || hash === '#essay-robotics-or-car-wash' || hash === '#essay-fifa'
   );
   var wasInSection = allViews.some(function(v) { return v.classList.contains('visible'); });
   allViews.forEach(function(v) { v.classList.remove('visible'); });
@@ -222,7 +226,7 @@ function navigate() {
     hash === '#experience' ||
     hash === '#projects' ||
     hash === '#essays' ||
-    hash === '#essay-definition-of-success' ||
+    hash === '#highest-standard' ||
     hash === '#essay-robotics-or-car-wash' ||
     hash === '#essay-fifa' ||
     hash === '#interests';
@@ -244,7 +248,7 @@ function navigate() {
   } else if (hash === '#essays') {
     essaysView.classList.add('visible');
     essaysToggle.classList.add('active');
-  } else if (hash === '#essay-definition-of-success') {
+  } else if (hash === '#highest-standard') {
     essayDefinitionSuccessView.classList.add('visible');
     essaysToggle.classList.add('active');
   } else if (hash === '#essay-robotics-or-car-wash') {
