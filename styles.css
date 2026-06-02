@@ -859,6 +859,26 @@ body.essay-page {
 .essay-hero.essay-cover-image {
   object-position: center 34%;
 }
+.essay-hero-wrap {
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-media);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 1.8rem;
+}
+.essay-hero-wrap .essay-hero {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  margin-bottom: 0;
+  border: none;
+  border-radius: 0;
+}
+.essay-hero-wrap .essay-cover-image {
+  transform: scale(1.05);
+  transform-origin: center center;
+}
 .essay-section {
   margin-bottom: 1.75rem;
 }
