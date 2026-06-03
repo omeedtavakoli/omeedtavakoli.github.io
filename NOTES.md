@@ -4,6 +4,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-06-03
+- Fixed the **Headshot** nav link drifting down the page during scroll on iOS/mobile. On mobile the header is `position: relative` (in normal flow), but `.media-assets-link` was still `position: fixed` — a lone fixed element drifts during momentum scroll on iOS because scrolling happens in the nested `.about-content` overflow container, not the body. Anchored Headshot to the header's top-right with `position: absolute; top: 0; right: 0` so it tracks the nav and scrolls away with it. Bumped `styles.css` to `v=64` in `index.html`.
+
 ### 2026-06-02
 - **The Highest Standard** hero: micro crop (`scale(1.05)` in `.essay-hero-wrap`) to hide the minor blank spot in the window pane; `styles.css` bumped to `v=64` on the essay page.
 - **Essays:** one canonical URL per piece — standalone `essay-*.html` only; removed embedded essay bodies from `index.html`. Added `essay-highest-standard.html` with article OG/Twitter meta. **The Highest Standard** uses `#highest-standard` everywhere in-site (Essays card + legacy hash redirects); `#essay-definition-of-success` still redirects for old bookmarks. Car Wash / FIFA use `#essay-robotics-or-car-wash` and `#essay-fifa`. Synced `styles.css?v=63` on all essay pages; bumped `site.js` to `v=26`.

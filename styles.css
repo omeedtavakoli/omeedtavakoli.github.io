@@ -941,15 +941,20 @@ body.essay-page {
   .contact-link {
     font-size: 18px;
   }
-  .media-assets-link {
-    font-size: 18px;
-    top: 1.75rem;
-    right: 1.5rem;
-  }
   header {
     position: relative;
     top: auto;
     left: auto;
+  }
+  /* Header is in normal flow on mobile, so anchor Headshot to the header's
+     top-right corner instead of leaving it independently position:fixed.
+     A lone fixed element drifts during momentum scroll on iOS because the
+     scroll happens in a nested overflow container, not the body. */
+  .media-assets-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 18px;
   }
   .projects-list {
     grid-template-columns: 1fr;
