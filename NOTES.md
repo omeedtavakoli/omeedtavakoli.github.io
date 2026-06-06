@@ -4,6 +4,10 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-06-05
+- **Cross-page transition wired up:** `page-transition.js` existed in the repo but was referenced nowhere, so navigating between the SPA (`index.html`) and the standalone essay pages did a hard full-page reload (white flash). Added `<script src="page-transition.js?v=1" defer>` to `index.html` and all three essay pages (`essay-highest-standard.html`, `essay-fifa.html`, `essay-robotics-or-car-wash.html`). The matching `.page-enter-prep` / `.page-leaving` CSS (`styles.css`) was already in place, so this is a wiring-only change — the fade now masks the flash while keeping per-essay shareable OG URLs.
+- **Removed the "Building products across consumer and prosumer. Previously on Perplexity's growth team." messaging** from `index.html`: set the schema, `og:description`, and `twitter:description` to "Omeed Tavakoli", and deleted the visible Resume subtitle line. The Backstory long-form narrative mention of Perplexity is unchanged (it's biography, not tagline).
+
 ### 2026-06-03
 - Fixed the **Headshot** nav link drifting down the page during scroll on iOS/mobile. On mobile the header is `position: relative` (in normal flow), but `.media-assets-link` was still `position: fixed` — a lone fixed element drifts during momentum scroll on iOS because scrolling happens in the nested `.about-content` overflow container, not the body. Anchored Headshot to the header's top-right with `position: absolute; top: 0; right: 0` so it tracks the nav and scrolls away with it. Bumped `styles.css` to `v=64` in `index.html`.
 
@@ -13,7 +17,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 - **The Highest Standard** essay: tightened the Randolph/community paragraph; clarified the line about people from different worlds arriving at the same answer about success.
 
 ### 2026-06-01
-- Added a local essay card and embedded essay route for **The Highest Standard** with the tagline "An essay on service.", `images/netflix.png` cover art, June 1, 2026 date, draft essay body with a separated end note, matching 16:9 cover crop biased upward to show more of the Korean sign, and the short `#highest-standard` route with a legacy alias from `#essay-definition-of-success`. Bumped `styles.css` to `v=63` and `site.js` to `v=24`.
+- Added a local essay card and embedded essay route for **The Highest Standard** with the tagline "An essay on service.", `images/netflix.png` cover art, June 1, 2026 date, essay body with a separated end note, matching 16:9 cover crop biased upward to show more of the Korean sign, and the short `#highest-standard` route with a legacy alias from `#essay-definition-of-success`. Bumped `styles.css` to `v=63` and `site.js` to `v=24`.
 - Updated **The Highest Standard** copy: replaced the NASKA footnote marker with "Champions." and removed the starred closing note from the live essay.
 - Zoomed the **The Highest Standard** Essays-list thumbnail in slightly (`transform: scale(1.14)` on the `images/netflix.png` img) so the subject fills the shared 16:9 card better; box sizing is unchanged so all thumbnails stay uniform.
 
