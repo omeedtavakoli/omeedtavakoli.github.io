@@ -6,13 +6,7 @@
   <title>The Highest Standard | Omeed Tavakoli</title>
   <meta name="description" content="An essay on service — the moments that stay when you help a community grow.">
   <link rel="canonical" href="https://omeedtavakoli.com/essay-highest-standard.html">
-  <link rel="shortcut icon" href="/favicon.ico?v=5">
-  <link rel="icon" href="/favicon.ico?v=5" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=5">
-  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=5">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=5">
-  <link rel="manifest" href="/site.webmanifest?v=5">
+  <!-- favicon + manifest links are injected by essay-chrome.js -->
   <meta name="theme-color" content="#1a1a1a">
 
   <!-- Open Graph / Social sharing -->
@@ -36,18 +30,8 @@
 <body class="essay-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <header>
-    <nav class="nav-links" aria-label="Primary">
-      <a class="nav-link" href="/">Home</a>
-      <a class="nav-link" href="/#about">About</a>
-      <a class="nav-link" href="/#experience">Resume</a>
-      <a class="nav-link active" href="/#essays">Essays</a>
-      <a class="nav-link" href="/#projects">Projects</a>
-      <a class="nav-link" href="/#contact">Contact</a>
-    </nav>
-    <a class="media-assets-link" href="https://x.com/omeedtavakoli/photo" target="_blank" rel="noopener">Headshot</a>
-  </header>
-
+  <!-- Nav header is injected here by essay-chrome.js (single source of truth). -->
+  <script src="essay-chrome.js?v=1"></script>
   <script src="page-transition.js?v=1" defer></script>
 
   <main class="essay-main" id="main-content" tabindex="-1">
@@ -86,21 +70,5 @@
     <span id="date"></span>
   </footer>
 
-  <script>
-    (function updateEssayClock() {
-      function update() {
-        var now = new Date();
-        document.getElementById('date').textContent = now.toLocaleDateString('en-US', {
-          month: 'numeric', day: 'numeric', year: 'numeric'
-        });
-        document.getElementById('time').textContent = now.toLocaleTimeString('en-US', {
-          hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
-        });
-      }
-
-      update();
-      setInterval(update, 1000);
-    })();
-  </script>
 </body>
 </html>
