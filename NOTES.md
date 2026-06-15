@@ -8,6 +8,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 - Published **Depth Builds Emotional Loyalty** at `/loyalty.html`, dated June 14, 2026, using `images/loyalty.png`, and linked its Essays card to the new page.
 - Updated the **Depth Builds Emotional Loyalty** description to "An essay on loyalty across sports, media, and technology."
 - Removed the delayed full-page transition between the homepage and standalone essays, which could leave the page dark or frozen during interrupted and back/forward navigations. Internal links now navigate immediately; `page-transition.js` is bumped to `v=2`.
+- Renamed the remaining standalone essay pages to short filenames: `/standard.html`, `/carwash.html`, and `/fifa.html`. Updated cards, canonical/social URLs, legacy hash redirects, and documented the filename convention in `AGENTS.md`; bumped `site.js` to `v=27`.
 - Fixed standalone essay content overlapping the fixed navigation at narrower desktop widths and increased browser zoom; bumped `styles.css` to `v=66`.
 
 ### 2026-06-05 (later)

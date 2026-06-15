@@ -14,6 +14,12 @@ Skip for trivial things: cache-buster bumps alone, internal-only comments, white
 
 When you edit `styles.css` or `site.js`, bump the corresponding `?v=N` query param in `index.html` so browsers refresh.
 
+## Essay filenames
+
+Use a simple one- or two-word lowercase filename for each standalone essay page, such as `loyalty.html`, `standard.html`, or `carwash.html`. Do not prefix essay pages with `essay-` or use the full essay title as the filename.
+
+When renaming an essay page, update its homepage card, canonical URL, Open Graph URL, and any legacy hash redirects in `site.js`.
+
 ## Deploys
 
 `main` deploys automatically to omeedtavakoli.com via GitHub Pages, usually within 30–60 seconds after push.

@@ -110,10 +110,10 @@ var navBooted = false;
 
 // Legacy SPA essay hashes → standalone pages (#highest-standard is canonical for The Highest Standard).
 var ESSAY_HASH_REDIRECTS = {
-  '#highest-standard': '/essay-highest-standard.html',
-  '#essay-definition-of-success': '/essay-highest-standard.html',
-  '#essay-robotics-or-car-wash': '/essay-robotics-or-car-wash.html',
-  '#essay-fifa': '/essay-fifa.html'
+  '#highest-standard': '/standard.html',
+  '#essay-definition-of-success': '/standard.html',
+  '#essay-robotics-or-car-wash': '/carwash.html',
+  '#essay-fifa': '/fifa.html'
 };
 
 // Roughly matches the section-view exit transition in styles.css so the
