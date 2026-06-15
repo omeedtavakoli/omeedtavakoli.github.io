@@ -4,6 +4,10 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-06-14
+- Published **Depth Builds Emotional Loyalty** at `/loyalty.html`, dated June 14, 2026, using `images/loyalty.png`, and linked its Essays card to the new page.
+- Fixed standalone essay content overlapping the fixed navigation at narrower desktop widths and increased browser zoom; bumped `styles.css` to `v=66`.
+
 ### 2026-06-05 (later)
 - **De-duplicated essay-page chrome into `essay-chrome.js`.** The three `essay-*.html` pages each had a byte-identical nav header, favicon/manifest block, and inline clock script — the source of the recurring "bring essays in line with nav" drift (fifa/car-wash were also stale on `styles.css?v=63` vs `v=64`). New shared `essay-chrome.js` is the single source of truth: it injects the favicon links, the primary nav header (Essays active), and runs the footer clock. Each essay page now just references it (`<script src="essay-chrome.js?v=1">`, loaded synchronously above `<main>` so the header lands before the article parses — no layout shift) and keeps only its own `<head>` meta + article content. Synced fifa/car-wash to `styles.css?v=64`. To change the essay nav from now on, edit `essay-chrome.js` only. No build step.
 

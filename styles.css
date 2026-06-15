@@ -901,6 +901,20 @@ body.essay-page {
 .essay-article p:last-child {
   margin-bottom: 0;
 }
+
+/* Keep the fixed essay nav from covering the article on narrower desktop
+   windows and at increased browser zoom. */
+@media (min-width: 601px) and (max-width: 1240px) {
+  .essay-main {
+    justify-content: flex-start;
+    padding-left: 16rem;
+  }
+
+  .essay-article {
+    max-width: 100%;
+  }
+}
+
 .essay-source {
   margin-top: 0.75rem;
   color: rgba(255, 255, 255, 0.62);
