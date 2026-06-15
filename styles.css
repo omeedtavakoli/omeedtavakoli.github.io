@@ -38,11 +38,13 @@ html.page-leaving body {
   transform: translate3d(-100%, 0, 0);
 }
 
-/* Remove focus boxes/outlines across the site. */
-:focus,
+/* Keep mouse focus quiet while preserving a visible keyboard focus ring. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
 :focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
+  outline: 1px solid red;
+  outline-offset: 4px;
 }
 
 /* Skip to main: hidden until :focus (keyboard) */

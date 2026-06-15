@@ -206,7 +206,11 @@ function navigate() {
   }
   document.body.classList.remove('essay-route-active');
   var wasInSection = allViews.some(function(v) { return v.classList.contains('visible'); });
-  allViews.forEach(function(v) { v.classList.remove('visible'); });
+  allViews.forEach(function(v) {
+    v.classList.remove('visible');
+    v.inert = true;
+    v.setAttribute('aria-hidden', 'true');
+  });
   allToggles.forEach(function(t) { t.classList.remove('active'); });
 
   var inSection =
@@ -217,24 +221,36 @@ function navigate() {
     hash === '#interests';
 
   homeView.classList.toggle('hidden', inSection);
+  homeView.inert = inSection;
+  homeView.setAttribute('aria-hidden', inSection ? 'true' : 'false');
   if (wasInSection && !inSection) {
     playUnderlineSwoosh();
   }
 
   if (hash === '#about') {
     aboutView.classList.add('visible');
+    aboutView.inert = false;
+    aboutView.setAttribute('aria-hidden', 'false');
     aboutToggle.classList.add('active');
   } else if (hash === '#experience') {
     experienceView.classList.add('visible');
+    experienceView.inert = false;
+    experienceView.setAttribute('aria-hidden', 'false');
     experienceToggle.classList.add('active');
   } else if (hash === '#projects') {
     projectsView.classList.add('visible');
+    projectsView.inert = false;
+    projectsView.setAttribute('aria-hidden', 'false');
     projectsToggle.classList.add('active');
   } else if (hash === '#essays') {
     essaysView.classList.add('visible');
+    essaysView.inert = false;
+    essaysView.setAttribute('aria-hidden', 'false');
     essaysToggle.classList.add('active');
   } else if (hash === '#interests') {
     interestsView.classList.add('visible');
+    interestsView.inert = false;
+    interestsView.setAttribute('aria-hidden', 'false');
   }
 
   cancelPendingContactOpen();
@@ -350,9 +366,21 @@ requestAnimationFrame(function() {
   longBtn.addEventListener('click', function() { swap(false); });
 })();
 
-// Experience expand/collapse (starts open, click to close)
+// Experience expand/collapse (starts open, click or keyboard to close)
 document.querySelectorAll('.exp-item').forEach(function(item) {
-  item.addEventListener('click', function() {
+  item.setAttribute('role', 'button');
+  item.setAttribute('tabindex', '0');
+  item.setAttribute('aria-expanded', 'true');
+
+  function toggleExperienceItem() {
     item.classList.toggle('closed');
+    item.setAttribute('aria-expanded', item.classList.contains('closed') ? 'false' : 'true');
+  }
+
+  item.addEventListener('click', toggleExperienceItem);
+  item.addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    toggleExperienceItem();
   });
 });
