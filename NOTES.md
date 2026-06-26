@@ -5,6 +5,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ## Recent changes
 
 ### 2026-06-26
+- Hid the **Breaking into Silicon Valley** Coming soon card from the Essays page while keeping its markup commented out for future publishing.
 - Simplified the **The Credit Card Router** card bio to "An essay on routing credit card purchases."
 
 ### 2026-06-25
