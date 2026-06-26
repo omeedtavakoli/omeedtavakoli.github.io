@@ -4,6 +4,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-06-25
+- Added **The Credit Card Router** essay card below **Breaking into Silicon Valley**, linking to the June 25 X Article and using `images/thumbs/router.creditcard.png`.
+
 ### 2026-06-14
 - Published **Depth Builds Emotional Loyalty** at `/loyalty.html`, dated June 14, 2026, using `images/loyalty.png`, and linked its Essays card to the new page.
 - Updated the **Depth Builds Emotional Loyalty** description to "An essay on loyalty across sports, media, and technology."
