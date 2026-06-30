@@ -366,11 +366,12 @@ requestAnimationFrame(function() {
   longBtn.addEventListener('click', function() { swap(false); });
 })();
 
-// Experience expand/collapse (starts open, click or keyboard to close)
+// Experience expand/collapse (starts closed, click or keyboard to expand)
 document.querySelectorAll('.exp-item').forEach(function(item) {
+  item.classList.add('closed');
   item.setAttribute('role', 'button');
   item.setAttribute('tabindex', '0');
-  item.setAttribute('aria-expanded', 'true');
+  item.setAttribute('aria-expanded', 'false');
 
   function toggleExperienceItem() {
     item.classList.toggle('closed');
