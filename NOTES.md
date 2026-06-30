@@ -7,6 +7,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ### 2026-06-29
 - Refreshed the Backstory short bio: split into three paragraphs, dropped "currently" and "early hire," and added "particularly" before the philosophy names.
 - Short bio now says San Francisco and Los Angeles instead of SF/LA, and notes you joined Perplexity when the company had around 120 employees.
+- Rewrote the Backstory long form: iPad through Playground arc, college uncertainty, Christmas 2022 Perplexity cold email, summer 2025 move west; ends on the move instead of a contact line.
 
 ### 2026-06-26
 - Hid the **Breaking into Silicon Valley** Coming soon card from the Essays page.
