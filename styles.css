@@ -90,6 +90,11 @@ html.page-leaving body {
   border-radius: 0;
 }
 
+/* Home main landmark: programmatic focus from routing */
+#main-content:focus {
+  outline: none;
+}
+
 /* Fade in. Slowly enough to feel deliberate. */
 @keyframes fadeIn {
   from { opacity: 0; }
