@@ -4,20 +4,42 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-06-29
+- Refreshed the Backstory short bio: split into three paragraphs, dropped "currently" and "early hire," and added "particularly" before the philosophy names.
+- Short bio now says San Francisco and Los Angeles instead of SF/LA, and notes you joined Perplexity when the company had around 120 employees.
+
 ### 2026-06-26
-- Hid the **Breaking into Silicon Valley** Coming soon card from the Essays page while keeping its markup commented out for future publishing.
+- Hid the **Breaking into Silicon Valley** Coming soon card from the Essays page.
 - Simplified the **The Credit Card Router** card bio to "An essay on routing credit card purchases."
 
 ### 2026-06-25
 - Added **The Credit Card Router** essay card below **Breaking into Silicon Valley**, linking to the June 25 X Article and using `images/thumbs/router.creditcard.png`.
 
 ### 2026-06-14
+- Added a Coming soon essay card for **22**, using a black cover with centered white serif text. The essay is planned for August 4.
+- Updated the **22** description to "A short note on turning 22."
 - Published **Depth Builds Emotional Loyalty** at `/loyalty.html`, dated June 14, 2026, using `images/loyalty.png`, and linked its Essays card to the new page.
 - Updated the **Depth Builds Emotional Loyalty** description to "An essay on loyalty across sports, media, and technology."
 - Removed the delayed full-page transition between the homepage and standalone essays, which could leave the page dark or frozen during interrupted and back/forward navigations. Internal links now navigate immediately; `page-transition.js` is bumped to `v=2`.
 - Renamed the remaining standalone essay pages to short filenames: `/standard.html`, `/carwash.html`, and `/fifa.html`. Updated cards, canonical/social URLs, legacy hash redirects, and documented the filename convention in `AGENTS.md`; bumped `site.js` to `v=27`.
+- Changed Essays thumbnails from lazy to eager loading so their images download while the section is hidden and appear immediately when returning to the Essays tab. Projects and Interests remain lazy-loaded.
+- Deep site audit: replaced the eager essay-card sources with dedicated 880px JPEG thumbnails, reducing their combined transfer size from roughly 19 MB to 1.4 MB while keeping instant tab returns. Added visible keyboard focus, removed hidden SPA views from the tab order, made Resume cards keyboard-operable, fixed malformed ampersands in URLs, and bumped `styles.css` to `v=67` and `site.js` to `v=28`.
 - Fixed standalone essay content overlapping the fixed navigation at narrower desktop widths and increased browser zoom; bumped `styles.css` to `v=66`.
-- Deep site audit: changed the six Essays thumbnails to eager-loaded 880px JPEGs, reducing their combined transfer size from roughly 18 MB to 1.2 MB while keeping instant tab returns. Added visible keyboard focus, removed hidden SPA views from the tab order, made Resume cards keyboard-operable, fixed malformed ampersands in URLs, and bumped `styles.css` to `v=67` and `site.js` to `v=28`.
+- Linked "Daniel Wall's podcast" to his YouTube channel and changed the essay's closing line to "That is what I call loyalty," with "loyalty" italicized.
+- Tightened the product and Apple transition in **Depth Builds Emotional Loyalty**, replacing the longer product-retention passage with one sentence and removing the WWDC setup paragraph.
+- Further tightened the Tim Cook section by removing the Steve Jobs comparison, succession details, and closing chapter metaphor.
+- Replaced the closing paragraph with "Across every medium, this is what I call loyalty."
+
+### 2026-06-09
+- Updated the **Depth Builds Emotional Loyalty** bio to "An essay on what the World Cup, social media, and Apple reveal about emotional loyalty."
+
+### 2026-06-07
+- Added a Coming soon essay card for **Depth Builds Emotional Loyalty** directly above **How Pokémon Came to America**, using `images/loyalty.png`. The idea was inspired by Daniel Wall's interview with Gary Vaynerchuk: attention creates an audience, but depth comes from slower, more personal acts of care such as answering questions live, engaging directly, and investing in people before expecting their loyalty.
+
+### 2026-06-06
+- Added a Coming soon essay card for **Being Focused vs Obsessed** directly below **Breaking into Silicon Valley**, using `images/focus.obe.essay.pic.png` and its introductory description.
+- Updated the card bio to "An essay on the difference between discipline and devotion."
+- Added a Coming soon card for **How Pokémon Came to America** below **Being Focused vs Obsessed**, with a blank white 16:9 cover placeholder and the bio "An essay on the people who carried ideas between Japanese and American consumer markets." Bumped `styles.css` to `v=65`.
 
 ### 2026-06-05 (later)
 - **De-duplicated essay-page chrome into `essay-chrome.js`.** The three `essay-*.html` pages each had a byte-identical nav header, favicon/manifest block, and inline clock script — the source of the recurring "bring essays in line with nav" drift (fifa/car-wash were also stale on `styles.css?v=63` vs `v=64`). New shared `essay-chrome.js` is the single source of truth: it injects the favicon links, the primary nav header (Essays active), and runs the footer clock. Each essay page now just references it (`<script src="essay-chrome.js?v=1">`, loaded synchronously above `<main>` so the header lands before the article parses — no layout shift) and keeps only its own `<head>` meta + article content. Synced fifa/car-wash to `styles.css?v=64`. To change the essay nav from now on, edit `essay-chrome.js` only. No build step.
@@ -79,6 +101,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 - Publish the **Tavakoli Family Tree** project (currently Coming soon).
 - Write **Breaking into Silicon Valley** essay (currently Coming soon).
+- Develop **How Ideas Cross the Pacific** (currently listed on the site as **How Pokémon Came to America**). Use Alfred Kahn bringing Pokémon to America as the narrative spine, then widen into examples such as Apple in Japan to show how Japanese creators and American operators have repeatedly amplified each other's ideas. Working bio: "An essay on the people who carried ideas between Japanese and American consumer markets." Keep the piece story-led rather than turning it into a broad historical survey.
 - Decide if Grappling Analytics belongs in Projects long-term or eventually moves back to Resume.
 - Stashed note from **The Highest Standard** for possible reuse: "People say you need to get outside of your comfort zone. I think you should double down on what you are good at first. As you grow you can start to iterate and work on the things that make you uncomfortable. If you only do things that make you uncomfortable you won't be flourishing. Start from the foundation of what makes you excel and build from there. Because if things start to decline, you can always go back to what you know works. Trying new things when everything is already falling apart might just make the fall worse."
 
