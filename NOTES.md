@@ -5,7 +5,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ## Recent changes
 
 ### 2026-06-29
-- Hid the **22** and **Being Focused vs Obsessed** Coming soon cards from the live Essays page (markup kept commented out for future publishing).
+- Hid the **22**, **Being Focused vs Obsessed**, and **How Pokémon Came to America** Coming soon cards from the live Essays page (markup kept commented out for future publishing).
 - Refreshed the Backstory short bio: split into three paragraphs, dropped "currently" and "early hire," and added "particularly" before the philosophy names.
 - Short bio now says San Francisco and Los Angeles instead of SF/LA, and notes you joined Perplexity when the company had around 120 employees.
 - Rewrote the Backstory long form: iPad through Playground arc, college uncertainty, Christmas 2022 Perplexity cold email, summer 2025 move west; ends on the move instead of a contact line.
