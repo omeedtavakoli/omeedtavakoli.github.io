@@ -8,8 +8,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 - Created a `Version 1` snapshot of the current site and a separate `version 2` working copy for the refresh MVP.
 - Reworked `version 2` into a compact single-page home plus matching essay and 404 pages, with no About page and the existing dark serif palette, red highlights, writing links, work history, projects, and clock.
 - Changed the `version 2` homepage sections from bullet lists into compact inline prose and added Contact to the V2 top navigation.
-- Optimized the `Version 1` copy by deferring Projects/Interests images until their sections open and replacing the 1.9 MB credit-card essay thumbnail with a 72 KB JPEG; bumped `site.js` to `v=30` in that copy.
-- Promoted the optimized `Version 1` files to the live root, removed the hidden Interests page markup/route from the live root and `Version 1`, and added `noindex`/robots exclusions so `version 2` can remain in the repo as an unlinked preview.
+- Marked `version 2` pages `noindex` so the folder can stay available as a preview without becoming the active public site.
 
 ### 2026-06-29
 - Hid the **22**, **Being Focused vs Obsessed**, and **How Pokémon Came to America** Coming soon cards from the live Essays page (markup kept commented out for future publishing).

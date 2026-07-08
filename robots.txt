@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /Version%201/
+Disallow: /Version 1/
+Disallow: /version%202/
+Disallow: /version 2/
