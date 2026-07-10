@@ -119,9 +119,14 @@ var ESSAY_HASH_REDIRECTS = {
 // contact panel waits for the page to settle before fading in.
 var CONTACT_OPEN_DELAY_MS = 400;
 var contactOpenTimer = null;
-var CONTACT_FADE_MS = 320;
+var CONTACT_FADE_MS = 300;
 var contactCloseTimer = null;
 var contactCloseHandler = null;
+var contactOpenFrame = null;
+
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
 
 function loadDeferredSectionImages(view) {
   if (!view) return;
@@ -136,6 +141,10 @@ function cancelPendingContactOpen() {
     clearTimeout(contactOpenTimer);
     contactOpenTimer = null;
   }
+  if (contactOpenFrame !== null) {
+    cancelAnimationFrame(contactOpenFrame);
+    contactOpenFrame = null;
+  }
 }
 
 function cancelPendingContactClose() {
@@ -144,47 +153,68 @@ function cancelPendingContactClose() {
     contactCloseTimer = null;
   }
   if (contactCloseHandler) {
-    contactPanel.removeEventListener('animationend', contactCloseHandler);
+    contactPanel.removeEventListener('transitionend', contactCloseHandler);
     contactCloseHandler = null;
   }
-  contactPanel.classList.remove('is-closing');
 }
 
 function finishContactClose() {
   cancelPendingContactClose();
+  cancelPendingContactOpen();
+  contactPanel.classList.remove('is-open');
   contactPanel.hidden = true;
 }
 
 function closeContact() {
   if (!contactPanel || !contactToggle) return;
-  if (contactPanel.hidden) return;
+  if (contactPanel.hidden && !contactPanel.classList.contains('is-open')) return;
   contactToggle.setAttribute('aria-expanded', 'false');
   contactToggle.classList.remove('active');
+  cancelPendingContactOpen();
   cancelPendingContactClose();
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    contactPanel.hidden = true;
+  if (prefersReducedMotion() || !contactPanel.classList.contains('is-open')) {
+    finishContactClose();
     return;
   }
-  contactPanel.classList.add('is-closing');
+  contactPanel.classList.remove('is-open');
   contactCloseHandler = function(e) {
-    if (e.animationName !== 'contactFadeOut') return;
+    if (e.target !== contactPanel) return;
+    if (e.propertyName !== 'opacity') return;
     finishContactClose();
   };
-  contactPanel.addEventListener('animationend', contactCloseHandler);
+  contactPanel.addEventListener('transitionend', contactCloseHandler);
   contactCloseTimer = setTimeout(finishContactClose, CONTACT_FADE_MS + 50);
 }
 
 function openContact() {
   if (!contactPanel || !contactToggle) return;
   cancelPendingContactClose();
-  if (!contactPanel.hidden) {
-    contactToggle.setAttribute('aria-expanded', 'true');
-    contactToggle.classList.add('active');
-    return;
-  }
-  contactPanel.hidden = false;
   contactToggle.setAttribute('aria-expanded', 'true');
   contactToggle.classList.add('active');
+  if (!contactPanel.hidden && contactPanel.classList.contains('is-open')) return;
+
+  var wasHidden = contactPanel.hidden;
+  contactPanel.hidden = false;
+
+  if (prefersReducedMotion()) {
+    contactPanel.classList.add('is-open');
+    return;
+  }
+
+  if (wasHidden) {
+    // Start from the closed presentation value, then open on the next frame
+    // so the transition runs (and can be interrupted by a quick close).
+    contactPanel.classList.remove('is-open');
+    void contactPanel.offsetWidth;
+    if (contactOpenFrame !== null) cancelAnimationFrame(contactOpenFrame);
+    contactOpenFrame = requestAnimationFrame(function() {
+      contactOpenFrame = null;
+      if (contactPanel.hidden) return;
+      contactPanel.classList.add('is-open');
+    });
+  } else {
+    contactPanel.classList.add('is-open');
+  }
 }
 
 function focusAfterNav() {

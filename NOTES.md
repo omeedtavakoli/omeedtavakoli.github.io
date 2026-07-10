@@ -4,6 +4,10 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-07-09
+- Apple-feel interaction polish (no layout redesign): press scale on nav/contact/toggle links, interruptible contact dropdown open/close via CSS transitions, light frosted nav material with `prefers-reduced-transparency` fallback, and reduced-motion guards for the new motion. Bumped `styles.css` to `v=70` and `site.js` to `v=31`.
+- Fixed Headshot overlapping the left nav: `backdrop-filter` on `header` was creating a containing block for the fixed Headshot link. Moved the frost to `.nav-links` instead. Bumped `styles.css` to `v=71`.
+
 ### 2026-07-08
 - Created a `Version 1` snapshot of the current site and a separate `version 2` working copy for the refresh MVP.
 - Reworked `version 2` into a compact single-page home plus matching essay and 404 pages, with no About page and the existing dark serif palette, red highlights, writing links, work history, projects, and clock.

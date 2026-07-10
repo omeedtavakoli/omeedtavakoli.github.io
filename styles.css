@@ -138,7 +138,9 @@ header, footer {
   }
 }
 
-/* Header. Name, nav, contact. */
+/* Header. Name, nav, contact. Frost lives on .nav-links (not header) so
+   the fixed Headshot link still anchors to the viewport — backdrop-filter
+   on an ancestor would retarget position:fixed to that box. */
 header {
   display: flex;
   justify-content: flex-start;
@@ -154,13 +156,26 @@ header {
   gap: 0.5rem;
   align-items: flex-start;
   position: relative;
+  padding: 0.4rem 0.75rem 0.55rem 0.55rem;
+  margin: -0.4rem 0 0 -0.55rem;
+  border-radius: 10px;
+  background: rgba(26, 26, 26, 0.55);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .nav-links {
+    background: #1a1a1a;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 .nav-link {
   color: #fff;
   text-decoration: none;
   font-size: 22px;
   cursor: pointer;
-  transition: color 0.4s ease;
+  transition: color 0.4s ease, transform 100ms ease-out;
 }
 button.nav-link {
   background: none;
@@ -172,9 +187,12 @@ button.nav-link {
   -webkit-appearance: none;
   appearance: none;
 }
-.nav-link:hover,
+.nav-link:hover {
+  color: red;
+}
 .nav-link:active {
   color: red;
+  transform: scale(0.97);
 }
 .nav-link.active {
   color: red;
@@ -191,12 +209,15 @@ button.nav-link {
   text-decoration: none;
   font-size: 22px;
   cursor: pointer;
-  transition: color 0.4s ease;
+  transition: color 0.4s ease, transform 100ms ease-out;
   z-index: 2;
 }
-.media-assets-link:hover,
+.media-assets-link:hover {
+  color: red;
+}
 .media-assets-link:active {
   color: red;
+  transform: scale(0.97);
 }
 .inline-link {
   color: #fff;
@@ -204,12 +225,16 @@ button.nav-link {
   text-decoration-color: rgba(255, 255, 255, 0.45);
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
-  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease, transform 100ms ease-out;
 }
-.inline-link:hover,
+.inline-link:hover {
+  color: red;
+  text-decoration-color: red;
+}
 .inline-link:active {
   color: red;
   text-decoration-color: red;
+  transform: scale(0.97);
 }
 /* Desktop-only optical alignment with the top-left nav row. */
 @media (min-width: 601px) {
@@ -220,9 +245,8 @@ button.nav-link {
 .contact-panel[hidden] {
   display: none;
 }
-/* Contact lives in the nav-links DOM. On desktop we pull it out to the
-   top-right corner under Headshot; on mobile it stays in the flex flow
-   so the gap between Contact and other nav items is uniform. */
+/* Contact dropdown under the Contact link. Open/close share one path
+   (opacity + small translate) so rapid toggles can reverse mid-flight. */
 .contact-wrap {
   position: relative;
 }
@@ -235,23 +259,36 @@ button.nav-link {
   left: 0;
   margin-top: 0.4rem;
   padding: 0 0 0.25rem 0.05rem;
-  animation: contactFadeIn 0.32s cubic-bezier(0.4, 0, 0.2, 1) both;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.contact-panel.is-closing {
-  animation: contactFadeOut 0.32s cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-@keyframes contactFadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes contactFadeOut {
-  from { opacity: 1; transform: translateY(0); }
-  to   { opacity: 0; transform: translateY(-4px); }
+.contact-panel.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 @media (prefers-reduced-motion: reduce) {
-  .contact-panel,
-  .contact-panel.is-closing {
-    animation: none;
+  .contact-panel {
+    transition: none;
+  }
+  .nav-link,
+  .media-assets-link,
+  .inline-link,
+  .contact-link,
+  .toggle-option,
+  .essay-source a {
+    transition: color 0.4s ease, text-decoration-color 0.3s ease;
+  }
+  .nav-link:active,
+  .media-assets-link:active,
+  .inline-link:active,
+  .contact-link:active,
+  .toggle-option:active,
+  .essay-source a:active {
+    transform: none;
   }
 }
 .contact-link {
@@ -259,11 +296,14 @@ button.nav-link {
   text-decoration: none;
   font-size: 22px;
   line-height: 1.4;
-  transition: color 0.4s ease;
+  transition: color 0.4s ease, transform 100ms ease-out;
 }
-.contact-link:hover,
+.contact-link:hover {
+  color: red;
+}
 .contact-link:active {
   color: red;
+  transform: scale(0.97);
 }
 .contact-logo-link {
   display: flex;
@@ -724,11 +764,15 @@ button.nav-link {
   text-transform: none;
   color: rgba(255,255,255,0.42);
   padding: 0;
-  transition: color 0.25s ease;
+  transition: color 0.25s ease, transform 100ms ease-out;
   user-select: none;
 }
 .toggle-option:hover {
   color: red;
+}
+.toggle-option:active {
+  color: red;
+  transform: scale(0.97);
 }
 .toggle-option.active {
   color: red;
@@ -940,11 +984,15 @@ body.essay-page {
   color: rgba(255, 255, 255, 0.76);
   text-decoration: underline;
   text-underline-offset: 0.15em;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 100ms ease-out;
+  display: inline-block;
 }
-.essay-source a:hover,
+.essay-source a:hover {
+  color: red;
+}
 .essay-source a:active {
   color: red;
+  transform: scale(0.97);
 }
 /* Phones exist. */
 @media (max-width: 600px) {
@@ -971,6 +1019,10 @@ body.essay-page {
     position: relative;
     top: auto;
     left: auto;
+  }
+  .nav-links {
+    /* Keep frost padding, but don't offset layout on in-flow mobile header. */
+    margin: 0;
   }
   /* Header is in normal flow on mobile, so anchor Headshot to the header's
      top-right corner instead of leaving it independently position:fixed.
