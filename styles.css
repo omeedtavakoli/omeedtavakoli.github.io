@@ -357,14 +357,13 @@ button.nav-link {
   text-decoration: none;
   color: #fff;
   font-size: 22px;
-  letter-spacing: 0.35em;
   text-transform: uppercase;
   font-family: 'Times New Roman', Times, serif;
   font-weight: normal;
   cursor: pointer;
   background: transparent;
   border: none;
-  padding: 0 0 0 0.35em;
+  padding: 0;
   transition: color 0.4s ease;
   position: fixed;
   top: 48.5vh;
@@ -373,6 +372,14 @@ button.nav-link {
   pointer-events: auto;
   white-space: nowrap;
   z-index: 1;
+}
+/* Tracking lives on the inner label. margin-right cancels the trailing
+   letter-spacing so left:50% + translate(-50%) centers the glyphs — the
+   old padding-left hack still looked left-shifted on iOS/WebKit. */
+.name-box-label {
+  display: inline-block;
+  letter-spacing: 0.35em;
+  margin-right: -0.35em;
 }
 .name-box::after {
   content: '';
@@ -1003,11 +1010,8 @@ body.essay-page {
   .name-box {
     top: 47vh;
   }
-  /* Keep the mobile underline centered under the tracked name text. */
   .name-box::after {
-    left: 0.35em;
     bottom: -6px;
-    width: calc(100% - 0.35em);
   }
   .nav-link {
     font-size: 18px;

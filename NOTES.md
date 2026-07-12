@@ -5,6 +5,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ## Recent changes
 
 ### 2026-07-12
+- Fixed the home name sitting left of center on mobile/iOS: moved `letter-spacing` onto an inner `.name-box-label` and canceled the trailing tracking with `margin-right: -0.35em`, so `translate(-50%)` centers the glyphs instead of the glyphs-plus-extra-space. Bumped `styles.css` to `v=82`.
 - Promoted the Archive-nav refresh to the live root (Archive image-card list, Contact→X, Headshot restored, Academic Research card, "other work" GitHub link, Backstory edits, simplified centered 404). Removed the `/v3/` preview folder.
 - Deprecated the previous live site entirely: deleted the `/old/` folder so it is no longer served (still recoverable via git history) and dropped its `robots.txt` entry.
 - Removed the legacy `Version 1` and `version 2` preview folders from the repo (recoverable via git history) and cleared their `robots.txt` disallow entries.
