@@ -5,8 +5,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ## Recent changes
 
 ### 2026-07-12
+- Promoted the Archive-nav refresh to the live root (Archive image-card list, Contact→X, Headshot restored, Academic Research card, "other work" GitHub link, Backstory edits, simplified centered 404). Removed the `/v3/` preview folder and snapshotted the previous live site into `/old/` (noindex, disallowed in `robots.txt`).
 - Simplified the 404 page: removed the ASCII "404 NOT FOUND" art and centered the remaining copy.
-- Added a `/v3/` noindex preview of the Archive-nav refresh (merged Archive, Contact→X, Headshot restored, Backstory edits, etc.). Live root is unchanged; preview at `omeedtavakoli.com/v3/`. Updated `robots.txt` to disallow `/v3/`.
+- Earlier same-day iteration on Archive (text lists, splits) and a `/v3/` preview folder — now superseded by promoting the refresh to root.
 
 ### 2026-07-09
 - Apple-feel interaction polish (no layout redesign): press scale on nav/contact/toggle links, interruptible contact dropdown open/close via CSS transitions, light frosted nav material with `prefers-reduced-transparency` fallback, and reduced-motion guards for the new motion. Bumped `styles.css` to `v=70` and `site.js` to `v=31`.

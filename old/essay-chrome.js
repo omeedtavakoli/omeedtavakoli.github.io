@@ -30,15 +30,16 @@
   }
 
   // --- Primary nav header ----------------------------------------------------
-  // Archive is marked active because every page using this file is an essay.
+  // Essays is marked active because every page using this file is an essay.
   var header = document.createElement('header');
   header.innerHTML =
     '<nav class="nav-links" aria-label="Primary">' +
-      '<a class="nav-link" href="./">Home</a>' +
-      '<a class="nav-link" href="./#about">About</a>' +
-      '<a class="nav-link active" href="./#archive">Archive</a>' +
-      '<a class="nav-link" href="https://www.linkedin.com/in/omeedtavakoli/" target="_blank" rel="noopener">Resume</a>' +
-      '<a class="nav-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener">Contact</a>' +
+      '<a class="nav-link" href="/">Home</a>' +
+      '<a class="nav-link" href="/#about">About</a>' +
+      '<a class="nav-link" href="/#experience">Resume</a>' +
+      '<a class="nav-link active" href="/#essays">Essays</a>' +
+      '<a class="nav-link" href="/#projects">Projects</a>' +
+      '<a class="nav-link" href="/#contact">Contact</a>' +
     '</nav>' +
     '<a class="media-assets-link" href="https://x.com/omeedtavakoli/photo" target="_blank" rel="noopener">Headshot</a>';
 

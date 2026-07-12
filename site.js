@@ -92,19 +92,16 @@ setInterval(update, 1000);
 // Hash routing. A single-page app on a single page.
 var homeView = document.getElementById('home-view');
 var aboutView = document.getElementById('about-view');
-var experienceView = document.getElementById('experience-view');
+var archiveView = document.getElementById('archive-view');
 var projectsView = document.getElementById('projects-view');
 var essaysView = document.getElementById('essays-view');
 var aboutToggle = document.getElementById('about-toggle');
-var experienceToggle = document.getElementById('experience-toggle');
-var projectsToggle = document.getElementById('projects-toggle');
-var essaysToggle = document.getElementById('essays-toggle');
+var archiveToggle = document.getElementById('archive-toggle');
 var homeLink = document.getElementById('home-link');
-var contactToggle = document.getElementById('contact-toggle');
-var contactPanel = document.getElementById('contact-panel');
 var mainContent = document.getElementById('main-content');
-var allViews = [aboutView, experienceView, projectsView, essaysView];
-var allToggles = [aboutToggle, experienceToggle, projectsToggle, essaysToggle];
+// #projects and #essays views are deactivated (no nav link) but kept reachable by direct hash.
+var allViews = [aboutView, archiveView, projectsView, essaysView];
+var allToggles = [aboutToggle, archiveToggle];
 var navBooted = false;
 
 // Legacy SPA essay hashes → standalone pages (#highest-standard is canonical for The Highest Standard).
@@ -114,19 +111,8 @@ var ESSAY_HASH_REDIRECTS = {
   '#essay-robotics-or-car-wash': '/carwash.html',
   '#essay-fifa': '/fifa.html'
 };
-
-// Roughly matches the section-view exit transition in styles.css so the
-// contact panel waits for the page to settle before fading in.
-var CONTACT_OPEN_DELAY_MS = 400;
-var contactOpenTimer = null;
-var CONTACT_FADE_MS = 300;
-var contactCloseTimer = null;
-var contactCloseHandler = null;
-var contactOpenFrame = null;
-
-function prefersReducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
+var LINKEDIN_URL = 'https://www.linkedin.com/in/omeedtavakoli/';
+var X_URL = 'https://x.com/omeedtavakoli';
 
 function loadDeferredSectionImages(view) {
   if (!view) return;
@@ -136,92 +122,11 @@ function loadDeferredSectionImages(view) {
   });
 }
 
-function cancelPendingContactOpen() {
-  if (contactOpenTimer) {
-    clearTimeout(contactOpenTimer);
-    contactOpenTimer = null;
-  }
-  if (contactOpenFrame !== null) {
-    cancelAnimationFrame(contactOpenFrame);
-    contactOpenFrame = null;
-  }
-}
-
-function cancelPendingContactClose() {
-  if (contactCloseTimer) {
-    clearTimeout(contactCloseTimer);
-    contactCloseTimer = null;
-  }
-  if (contactCloseHandler) {
-    contactPanel.removeEventListener('transitionend', contactCloseHandler);
-    contactCloseHandler = null;
-  }
-}
-
-function finishContactClose() {
-  cancelPendingContactClose();
-  cancelPendingContactOpen();
-  contactPanel.classList.remove('is-open');
-  contactPanel.hidden = true;
-}
-
-function closeContact() {
-  if (!contactPanel || !contactToggle) return;
-  if (contactPanel.hidden && !contactPanel.classList.contains('is-open')) return;
-  contactToggle.setAttribute('aria-expanded', 'false');
-  contactToggle.classList.remove('active');
-  cancelPendingContactOpen();
-  cancelPendingContactClose();
-  if (prefersReducedMotion() || !contactPanel.classList.contains('is-open')) {
-    finishContactClose();
-    return;
-  }
-  contactPanel.classList.remove('is-open');
-  contactCloseHandler = function(e) {
-    if (e.target !== contactPanel) return;
-    if (e.propertyName !== 'opacity') return;
-    finishContactClose();
-  };
-  contactPanel.addEventListener('transitionend', contactCloseHandler);
-  contactCloseTimer = setTimeout(finishContactClose, CONTACT_FADE_MS + 50);
-}
-
-function openContact() {
-  if (!contactPanel || !contactToggle) return;
-  cancelPendingContactClose();
-  contactToggle.setAttribute('aria-expanded', 'true');
-  contactToggle.classList.add('active');
-  if (!contactPanel.hidden && contactPanel.classList.contains('is-open')) return;
-
-  var wasHidden = contactPanel.hidden;
-  contactPanel.hidden = false;
-
-  if (prefersReducedMotion()) {
-    contactPanel.classList.add('is-open');
-    return;
-  }
-
-  if (wasHidden) {
-    // Start from the closed presentation value, then open on the next frame
-    // so the transition runs (and can be interrupted by a quick close).
-    contactPanel.classList.remove('is-open');
-    void contactPanel.offsetWidth;
-    if (contactOpenFrame !== null) cancelAnimationFrame(contactOpenFrame);
-    contactOpenFrame = requestAnimationFrame(function() {
-      contactOpenFrame = null;
-      if (contactPanel.hidden) return;
-      contactPanel.classList.add('is-open');
-    });
-  } else {
-    contactPanel.classList.add('is-open');
-  }
-}
-
 function focusAfterNav() {
   var hash = window.location.hash;
   var target = null;
   if (hash === '#about') target = document.getElementById('section-heading-about');
-  else if (hash === '#experience') target = document.getElementById('section-heading-experience');
+  else if (hash === '#archive') target = document.getElementById('section-heading-archive');
   else if (hash === '#projects') target = document.getElementById('section-heading-projects');
   else if (hash === '#essays') target = document.getElementById('section-heading-essays');
   requestAnimationFrame(function() {
@@ -240,6 +145,14 @@ function navigate() {
     window.location.replace(ESSAY_HASH_REDIRECTS[hash]);
     return;
   }
+  if (hash === '#experience') {
+    window.location.replace(LINKEDIN_URL);
+    return;
+  }
+  if (hash === '#contact') {
+    window.location.replace(X_URL);
+    return;
+  }
   if (hash === '#interests') {
     history.replaceState(null, '', window.location.pathname);
     hash = '';
@@ -255,7 +168,7 @@ function navigate() {
 
   var inSection =
     hash === '#about' ||
-    hash === '#experience' ||
+    hash === '#archive' ||
     hash === '#projects' ||
     hash === '#essays';
 
@@ -271,37 +184,23 @@ function navigate() {
     aboutView.inert = false;
     aboutView.setAttribute('aria-hidden', 'false');
     aboutToggle.classList.add('active');
-  } else if (hash === '#experience') {
-    experienceView.classList.add('visible');
-    experienceView.inert = false;
-    experienceView.setAttribute('aria-hidden', 'false');
-    experienceToggle.classList.add('active');
+  } else if (hash === '#archive') {
+    loadDeferredSectionImages(archiveView);
+    archiveView.classList.add('visible');
+    archiveView.inert = false;
+    archiveView.setAttribute('aria-hidden', 'false');
+    archiveToggle.classList.add('active');
   } else if (hash === '#projects') {
     loadDeferredSectionImages(projectsView);
     projectsView.classList.add('visible');
     projectsView.inert = false;
     projectsView.setAttribute('aria-hidden', 'false');
-    projectsToggle.classList.add('active');
   } else if (hash === '#essays') {
     essaysView.classList.add('visible');
     essaysView.inert = false;
     essaysView.setAttribute('aria-hidden', 'false');
-    essaysToggle.classList.add('active');
   }
 
-  cancelPendingContactOpen();
-  if (hash === '#contact') {
-    if (wasInSection) {
-      contactOpenTimer = setTimeout(function() {
-        contactOpenTimer = null;
-        if (window.location.hash === '#contact') openContact();
-      }, CONTACT_OPEN_DELAY_MS);
-    } else {
-      openContact();
-    }
-  } else {
-    closeContact();
-  }
   focusAfterNav();
 }
 
@@ -316,7 +215,7 @@ homeLink.addEventListener('click', function(e) {
   navigate();
 });
 
-[aboutToggle, experienceToggle, projectsToggle, essaysToggle].forEach(function(toggle) {
+[aboutToggle, archiveToggle].forEach(function(toggle) {
   toggle.addEventListener('click', function(e) {
     if (isModifierClick(e)) return;
     e.preventDefault();
@@ -330,18 +229,7 @@ homeLink.addEventListener('click', function(e) {
   });
 });
 
-contactToggle.addEventListener('click', function(e) {
-  if (isModifierClick(e)) return;
-  e.preventDefault();
-  if (window.location.hash === '#contact') {
-    history.pushState(null, '', window.location.pathname);
-  } else {
-    history.pushState(null, '', '/#contact');
-  }
-  navigate();
-});
-
-// Escape returns home from any hash route (including #contact).
+// Escape returns home from any hash route.
 document.addEventListener('keydown', function(e) {
   if (e.key !== 'Escape') return;
   if (!window.location.hash) return;
@@ -401,23 +289,3 @@ requestAnimationFrame(function() {
   shortBtn.addEventListener('click', function() { swap(true); });
   longBtn.addEventListener('click', function() { swap(false); });
 })();
-
-// Experience expand/collapse (starts closed, click or keyboard to expand)
-document.querySelectorAll('.exp-item').forEach(function(item) {
-  item.classList.add('closed');
-  item.setAttribute('role', 'button');
-  item.setAttribute('tabindex', '0');
-  item.setAttribute('aria-expanded', 'false');
-
-  function toggleExperienceItem() {
-    item.classList.toggle('closed');
-    item.setAttribute('aria-expanded', item.classList.contains('closed') ? 'false' : 'true');
-  }
-
-  item.addEventListener('click', toggleExperienceItem);
-  item.addEventListener('keydown', function(e) {
-    if (e.key !== 'Enter' && e.key !== ' ') return;
-    e.preventDefault();
-    toggleExperienceItem();
-  });
-});
