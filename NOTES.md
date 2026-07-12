@@ -7,6 +7,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ### 2026-07-12
 - Promoted the Archive-nav refresh to the live root (Archive image-card list, Contact→X, Headshot restored, Academic Research card, "other work" GitHub link, Backstory edits, simplified centered 404). Removed the `/v3/` preview folder.
 - Deprecated the previous live site entirely: deleted the `/old/` folder so it is no longer served (still recoverable via git history) and dropped its `robots.txt` entry.
+- Removed the legacy `Version 1` and `version 2` preview folders from the repo (recoverable via git history) and cleared their `robots.txt` disallow entries.
 - Simplified the 404 page: removed the ASCII "404 NOT FOUND" art and centered the remaining copy. Removed all fade-in animations and the link color transition.
 - Earlier same-day iteration on Archive (text lists, splits) and a `/v3/` preview folder — now superseded by promoting the refresh to root.
 
