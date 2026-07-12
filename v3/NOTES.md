@@ -5,7 +5,28 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ## Recent changes
 
 ### 2026-07-12
-- Added a `/v3/` noindex preview of the Archive-nav refresh (merged Archive, Contact→X, Headshot restored, Backstory edits, etc.). Live root is unchanged; preview at `omeedtavakoli.com/v3/`. Updated `robots.txt` to disallow `/v3/`.
+- Snapshot of the Archive-nav refresh kept in `/v3/` as a noindex preview (`omeedtavakoli.com/v3/`). Live root stays on the previous site.
+- Archive subtitle is now "Writing, projects, and other work.", with **other work** linking to GitHub.
+- Renamed the research Archive card to **Academic Research - Co-authored Paper**.
+- Zoomed the Academic Research thumbnail (`proofs.graphs.png`) with a tighter crop.
+- Math Research Archive card now uses `images/proofs.graphs.png` as its thumbnail.
+- Backstory long-form: Perplexity tip line is now `His text was short, "might be worth sending a cold email."`
+- Backstory long-form: "teaching" instead of "instructing" for the martial arts first job.
+- Cut the Backstory long-form college opener about always having the same problem / not leaving things alone.
+- Cut the Backstory long-form sentence about leading consumer verticals / education expansion at Perplexity.
+- Dropped "while in school" from the Backstory long-form Perplexity sentence.
+- Tweaked Backstory long-form line on OpenAI Playground: "It felt like the iPad all over again and I couldn't put it down."
+- Swapped nav order so **Archive** comes before **Resume**. Bumped `essay-chrome.js` to `v=7`.
+- Renamed the research paper Archive card title to **Math Research**, with the former title as the bio.
+- Restored Archive to the image-card layout (combined chronological list with thumbnails). Bumped `styles.css` to `v=81`.
+- Contact nav now opens X (`x.com/omeedtavakoli`); restored the top-right **Headshot** link (`x.com/omeedtavakoli/photo`) in place of `@omeedtavakoli`. Legacy `/#contact` redirects to X. Bumped `site.js` to `v=35` and `essay-chrome.js` to `v=6`.
+- Archive is one combined chronological text list again (title link + description, no Essays/Projects split, no image cards). Bumped `styles.css` to `v=80`.
+- Simplified Archive into plain underlined link lists under Essays / Projects (title + short description, no dates or card chrome). Bumped `styles.css` to `v=79`.
+- Replaced Archive image cards with two text lists (**Essays** and **Projects**): title links with descriptions and dates underneath, no thumbnails. Bumped `styles.css` to `v=78`.
+- Restored the research paper to Archive as **Benchmarks on AI grading of mathematical proofs (paper under publication review).**, dated May 10, 2025 and linked to the paper.
+- Merged Essays and Projects into a single **Archive** section (`#archive`), one date-sorted list (newest first) with the "Coming soon" family tree pinned on top. Deactivated the Essays and Projects nav links (their `#essays`/`#projects` views + routing are kept for later, just unlinked). Replaced the top-right **Headshot** link with the **@omeedtavakoli** handle (to `x.com/omeedtavakoli`) and removed the duplicate handle from the nav row. Archive inherits the original Projects view styling; restored the exact pre-session stylesheet and bumped `styles.css` to `v=77`, `site.js` to `v=34`, and `essay-chrome.js` to `v=5`.
+- Contact nav is now a direct `mailto:` link; removed the Contact dropdown and X option. Legacy `/#contact` redirects to email. Bumped `styles.css` to `v=73`, `site.js` to `v=33`, and `essay-chrome.js` to `v=3`.
+- Resume nav now opens LinkedIn instead of the in-site experience page; removed LinkedIn from the Contact dropdown (X + Email remain). Deleted the Resume/experience section markup and related JS/CSS. Legacy `/#experience` redirects to LinkedIn. Bumped `styles.css` to `v=72`, `site.js` to `v=32`, and `essay-chrome.js` to `v=2`.
 
 ### 2026-07-09
 - Apple-feel interaction polish (no layout redesign): press scale on nav/contact/toggle links, interruptible contact dropdown open/close via CSS transitions, light frosted nav material with `prefers-reduced-transparency` fallback, and reduced-motion guards for the new motion. Bumped `styles.css` to `v=70` and `site.js` to `v=31`.
