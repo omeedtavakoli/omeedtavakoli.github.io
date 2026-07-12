@@ -6,6 +6,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ### 2026-07-12
 - Fixed the home name sitting left of center on mobile/iOS: moved `letter-spacing` onto an inner `.name-box-label` and canceled the trailing tracking with `margin-right: -0.35em`, so `translate(-50%)` centers the glyphs instead of the glyphs-plus-extra-space. Bumped `styles.css` to `v=82`.
+- Apple-design interaction functionality pass (no visual/layout/copy changes): made the Backstory Short/Long toggle interruptible (removed the input lockout and fixed 130ms timer, now driven off `transitionend` with re-targeting on mid-swap clicks), added `prefers-reduced-motion` JS guards + fallback timeouts for the underline swoosh and backstory swap so state can't get stranded, and made the mobile underline hide timer cancel-safe on re-touch/cancel/visibility change. Bumped `site.js` to `v=36`.
 - Promoted the Archive-nav refresh to the live root (Archive image-card list, Contact→X, Headshot restored, Academic Research card, "other work" GitHub link, Backstory edits, simplified centered 404). Removed the `/v3/` preview folder.
 - Deprecated the previous live site entirely: deleted the `/old/` folder so it is no longer served (still recoverable via git history) and dropped its `robots.txt` entry.
 - Removed the legacy `Version 1` and `version 2` preview folders from the repo (recoverable via git history) and cleared their `robots.txt` disallow entries.

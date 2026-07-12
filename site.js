@@ -28,19 +28,36 @@
   });
 })();
 
+// Respect the user's reduced-motion preference for JS-driven animations.
+var reduceMotionQuery = window.matchMedia
+  ? window.matchMedia('(prefers-reduced-motion: reduce)')
+  : null;
+function prefersReducedMotion() {
+  return !!(reduceMotionQuery && reduceMotionQuery.matches);
+}
+
 // Underline animation: one-time load swoosh, then JS controls hover for both mouse and touch
 var nameBox = document.querySelector('.name-box');
 
 function playUnderlineSwoosh() {
   nameBox.classList.remove('underline-in', 'underline-out', 'is-entering');
+  // With reduced motion the swoosh keyframe is disabled, so `animationend`
+  // would never fire — skip the class dance entirely to avoid stranding it.
+  if (prefersReducedMotion()) return;
   // Force reflow so re-adding the class reliably replays the keyframe.
   void nameBox.offsetWidth;
   nameBox.classList.add('is-entering');
-  nameBox.addEventListener('animationend', function onSwooshEnd(e) {
-    if (e.animationName !== 'underlineSwoosh') return;
+  var fallback = setTimeout(function() {
     nameBox.classList.remove('is-entering');
     nameBox.removeEventListener('animationend', onSwooshEnd);
-  });
+  }, 1200);
+  function onSwooshEnd(e) {
+    if (e.animationName !== 'underlineSwoosh') return;
+    clearTimeout(fallback);
+    nameBox.classList.remove('is-entering');
+    nameBox.removeEventListener('animationend', onSwooshEnd);
+  }
+  nameBox.addEventListener('animationend', onSwooshEnd);
 }
 
 // Load swoosh
@@ -62,18 +79,37 @@ function underlineReset() {
 nameBox.addEventListener('mouseenter', underlineShow);
 nameBox.addEventListener('mouseleave', underlineHide);
 
-// Touch (iOS/mobile) — let underlineIn finish before retracting
+// Touch (iOS/mobile) — let underlineIn finish before retracting.
+// Track the pending hide so rapid taps don't queue overlapping timers.
+var underlineHideTimer = null;
+function clearUnderlineHideTimer() {
+  if (underlineHideTimer) {
+    clearTimeout(underlineHideTimer);
+    underlineHideTimer = null;
+  }
+}
 nameBox.addEventListener('touchstart', function() {
+  clearUnderlineHideTimer();
   underlineShow();
 }, { passive: true });
 nameBox.addEventListener('touchend', function() {
-  setTimeout(underlineHide, 800);
+  clearUnderlineHideTimer();
+  underlineHideTimer = setTimeout(function() {
+    underlineHideTimer = null;
+    underlineHide();
+  }, 800);
 });
-nameBox.addEventListener('touchcancel', underlineReset);
+nameBox.addEventListener('touchcancel', function() {
+  clearUnderlineHideTimer();
+  underlineReset();
+});
 
 // Safety net: reset if user comes back to the page (e.g. after mail app)
 document.addEventListener('visibilitychange', function() {
-  if (!document.hidden) underlineReset();
+  if (!document.hidden) {
+    clearUnderlineHideTimer();
+    underlineReset();
+  }
 });
 
 // Clock. Updates every second, whether you asked or not.
@@ -250,40 +286,83 @@ requestAnimationFrame(function() {
   });
 });
 
-// Backstory short/long toggle with swoop animation
+// Backstory short/long toggle with swoop animation.
+// Interruptible: a new click re-targets from the current state instead of being
+// ignored, and the swap is sequenced off the real transition (not a fixed timer).
 (function() {
   var shortEl = document.getElementById('backstory-short');
   var longEl = document.getElementById('backstory-long');
   var shortBtn = document.getElementById('backstory-short-btn');
   var longBtn = document.getElementById('backstory-long-btn');
-  var busy = false;
 
-  function swap(toShort) {
-    var activeBtn = toShort ? shortBtn : longBtn;
-    if (busy || activeBtn.classList.contains('active')) return;
-    busy = true;
+  // Matches the 0.13s transition in styles.css; used only as a fallback cap in
+  // case `transitionend` is missed (e.g. no property actually changed).
+  var SWOOP_FALLBACK_MS = 250;
+  var current = shortBtn.classList.contains('active') ? shortEl : longEl;
+  var token = 0;
 
-    var showEl = toShort ? shortEl : longEl;
-    var hideEl = toShort ? longEl : shortEl;
+  function onceTransitionEnd(el, cb) {
+    if (prefersReducedMotion()) { cb(); return; }
+    var done = false;
+    var timer = setTimeout(finish, SWOOP_FALLBACK_MS);
+    function finish() {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      el.removeEventListener('transitionend', handler);
+      cb();
+    }
+    function handler(e) {
+      if (e.target === el && e.propertyName === 'opacity') finish();
+    }
+    el.addEventListener('transitionend', handler);
+  }
 
+  function setButtons(toShort) {
     shortBtn.classList.toggle('active', toShort);
     shortBtn.setAttribute('aria-pressed', toShort ? 'true' : 'false');
     longBtn.classList.toggle('active', !toShort);
     longBtn.setAttribute('aria-pressed', toShort ? 'false' : 'true');
+  }
 
+  function swap(toShort) {
+    var showEl = toShort ? shortEl : longEl;
+    var hideEl = toShort ? longEl : shortEl;
+    if (showEl === current) return; // already showing the requested copy
+
+    var myToken = ++token; // any in-flight swap is now stale
+    setButtons(toShort);
+    current = showEl;
+
+    // Reduced motion: swap instantly, never wait on transition events.
+    if (prefersReducedMotion()) {
+      hideEl.classList.remove('swoop-in', 'swoop-out');
+      hideEl.style.display = 'none';
+      showEl.classList.remove('swoop-in', 'swoop-out');
+      showEl.style.display = '';
+      return;
+    }
+
+    showEl.classList.remove('swoop-in', 'swoop-out');
+
+    // Phase 1: swoop the outgoing copy away.
+    hideEl.classList.remove('swoop-in');
     hideEl.classList.add('swoop-out');
-    setTimeout(function() {
+    onceTransitionEnd(hideEl, function() {
+      if (myToken !== token) return; // superseded by a newer click
       hideEl.style.display = 'none';
       hideEl.classList.remove('swoop-out');
+
+      // Phase 2: bring the incoming copy in from its offset start.
       showEl.classList.add('swoop-in');
       showEl.style.display = '';
       requestAnimationFrame(function() {
         requestAnimationFrame(function() {
+          if (myToken !== token) return;
           showEl.classList.remove('swoop-in');
-          busy = false;
         });
       });
-    }, 130);
+    });
   }
 
   shortBtn.addEventListener('click', function() { swap(true); });
