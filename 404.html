@@ -27,6 +27,7 @@
       align-items: center;
       justify-content: center;
       padding: 2.5rem 3rem;
+      text-align: center;
       -webkit-font-smoothing: antialiased;
       cursor: default;
     }
@@ -34,23 +35,13 @@
       from { opacity: 0; }
       to   { opacity: 1; }
     }
-    pre {
-      font-family: 'Courier New', Courier, monospace;
-      font-size: clamp(5px, 1.1vw, 13px);
-      line-height: 1.2;
-      white-space: pre;
-      color: #fff;
-      margin-bottom: 2rem;
-      text-align: left;
-      animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
-    }
     .sub {
       font-family: 'Times New Roman', Times, serif;
       font-size: clamp(11px, 1.5vw, 18px);
       color: rgba(255,255,255,0.45);
       margin-bottom: 2rem;
       letter-spacing: 0.01em;
-      animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.3s both;
+      animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
     }
     .back {
       text-decoration: none;
@@ -59,32 +50,17 @@
       letter-spacing: 0.01em;
       color: rgba(255,255,255,0.9);
       transition: color 0.4s ease;
-      animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.5s both;
+      animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.3s both;
     }
     .back:hover {
       color: red;
     }
     @media (prefers-reduced-motion: reduce) {
-      pre, .sub, .back { animation: none; opacity: 1; }
+      .sub, .back { animation: none; opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <pre>
- ██╗  ██╗ ██████╗ ██╗  ██╗
- ██║  ██║██╔═══██╗██║  ██║
- ███████║██║   ██║███████║
- ╚════██║██║   ██║╚════██║
-      ██║╚██████╔╝     ██║
-      ╚═╝ ╚═════╝      ╚═╝
-
- ███╗   ██╗ ██████╗ ████████╗    ███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗
- ████╗  ██║██╔═══██╗╚══██╔══╝    ██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗
- ██╔██╗ ██║██║   ██║   ██║       █████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║
- ██║╚██╗██║██║   ██║   ██║       ██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║
- ██║ ╚████║╚██████╔╝   ██║       ██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝
- ╚═╝  ╚═══╝ ╚═════╝    ╚═╝       ╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝
-  </pre>
   <div class="sub">this side quest leads nowhere.</div>
   <a class="back" href="/">[ return home ]</a>
 </body>

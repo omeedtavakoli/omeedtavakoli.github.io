@@ -5,6 +5,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ## Recent changes
 
 ### 2026-07-12
+- Simplified the 404 page: removed the ASCII "404 NOT FOUND" art and centered the remaining copy.
 - Snapshot of the Archive-nav refresh kept in `/v3/` as a noindex preview (`omeedtavakoli.com/v3/`). Live root stays on the previous site.
 - Archive subtitle is now "Writing, projects, and other work.", with **other work** linking to GitHub.
 - Renamed the research Archive card to **Academic Research - Co-authored Paper**.

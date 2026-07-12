@@ -5,6 +5,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 ## Recent changes
 
 ### 2026-07-12
+- Simplified the 404 page: removed the ASCII "404 NOT FOUND" art and centered the remaining copy.
 - Added a `/v3/` noindex preview of the Archive-nav refresh (merged Archive, Contact→X, Headshot restored, Backstory edits, etc.). Live root is unchanged; preview at `omeedtavakoli.com/v3/`. Updated `robots.txt` to disallow `/v3/`.
 
 ### 2026-07-09
