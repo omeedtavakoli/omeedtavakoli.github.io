@@ -100,6 +100,9 @@ html.page-leaving body {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+/* DEPRECATED 2026-07-15 — name underline (flaky on load / return-to-home).
+   Restore later with the matching JS in site.js. See NOTES.md → Ideas / next. */
+/*
 @keyframes underlineSwoosh {
   0%   { transform: scaleX(0); }
   50%  { transform: scaleX(1); }
@@ -113,10 +116,6 @@ html.page-leaving body {
   from { transform: scaleX(1); }
   to   { transform: scaleX(0); }
 }
-.name-box {
-  animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
-  animation-delay: 0s;
-}
 .name-box.is-entering::after {
   animation: underlineSwoosh 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.4s forwards;
 }
@@ -126,6 +125,12 @@ html.page-leaving body {
 .name-box.underline-out::after {
   animation: underlineOut 0.7s cubic-bezier(.77, 0, .175, 1) forwards;
 }
+*/
+.name-box {
+  animation: fadeIn 1.8s cubic-bezier(0.7, 0, 0.3, 1) both;
+  animation-delay: 0s;
+}
+
 header, footer {
   animation: fadeIn 1.05s cubic-bezier(0.7, 0, 0.3, 1) both;
   animation-delay: 1.3s;
@@ -381,6 +386,8 @@ button.nav-link {
   letter-spacing: 0.35em;
   margin-right: -0.35em;
 }
+/* DEPRECATED 2026-07-15 — red line under home name. See NOTES.md → Ideas / next. */
+/*
 .name-box::after {
   content: '';
   position: absolute;
@@ -392,6 +399,7 @@ button.nav-link {
   transform: scaleX(0);
   transform-origin: left;
 }
+*/
 .name-box:hover {
   color: #fff;
 }
@@ -1010,9 +1018,12 @@ body.essay-page {
   .name-box {
     top: 47vh;
   }
+  /* DEPRECATED 2026-07-15 — name underline mobile offset. See NOTES.md. */
+  /*
   .name-box::after {
     bottom: -6px;
   }
+  */
   .nav-link {
     font-size: 18px;
   }

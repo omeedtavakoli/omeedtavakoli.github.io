@@ -36,7 +36,11 @@ function prefersReducedMotion() {
   return !!(reduceMotionQuery && reduceMotionQuery.matches);
 }
 
-// Underline animation: one-time load swoosh, then JS controls hover for both mouse and touch
+/* DEPRECATED 2026-07-15 — red underline under the home name (load swoosh +
+   hover/touch). Flaky on first visit and when returning to Home; removed for
+   now. Restore later: uncomment this block + matching CSS in styles.css
+   (search "DEPRECATED name underline"). See NOTES.md → Ideas / next. */
+/*
 var nameBox = document.querySelector('.name-box');
 
 function playUnderlineSwoosh() {
@@ -111,6 +115,7 @@ document.addEventListener('visibilitychange', function() {
     underlineReset();
   }
 });
+*/
 
 // Clock. Updates every second, whether you asked or not.
 function update() {
@@ -194,7 +199,8 @@ function navigate() {
     hash = '';
   }
   document.body.classList.remove('essay-route-active');
-  var wasInSection = allViews.some(function(v) { return v.classList.contains('visible'); });
+  // DEPRECATED 2026-07-15 — only used by playUnderlineSwoosh on return-to-home
+  // var wasInSection = allViews.some(function(v) { return v.classList.contains('visible'); });
   allViews.forEach(function(v) {
     v.classList.remove('visible');
     v.inert = true;
@@ -211,9 +217,10 @@ function navigate() {
   homeView.classList.toggle('hidden', inSection);
   homeView.inert = inSection;
   homeView.setAttribute('aria-hidden', inSection ? 'true' : 'false');
-  if (wasInSection && !inSection) {
-    playUnderlineSwoosh();
-  }
+  // DEPRECATED 2026-07-15 — restore with name underline (see NOTES.md)
+  // if (wasInSection && !inSection) {
+  //   playUnderlineSwoosh();
+  // }
 
   if (hash === '#about') {
     aboutView.classList.add('visible');

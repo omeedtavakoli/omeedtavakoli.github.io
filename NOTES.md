@@ -4,6 +4,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-07-15
+- Deprecated the red underline under the home name (load swoosh + hover/touch + return-to-home replay). It was flaky — sometimes missing or incomplete on first visit and when navigating back to Home. Code kept commented in `site.js` / `styles.css` (search `DEPRECATED name underline` / `DEPRECATED 2026-07-15`). Bumped `styles.css` to `v=83` and `site.js` to `v=37`. Restore when ready — see Ideas / next.
+
 ### 2026-07-12
 - Fixed the home name sitting left of center on mobile/iOS: moved `letter-spacing` onto an inner `.name-box-label` and canceled the trailing tracking with `margin-right: -0.35em`, so `translate(-50%)` centers the glyphs instead of the glyphs-plus-extra-space. Bumped `styles.css` to `v=82`.
 - Apple-design interaction functionality pass (no visual/layout/copy changes): made the Backstory Short/Long toggle interruptible (removed the input lockout and fixed 130ms timer, now driven off `transitionend` with re-targeting on mid-swap clicks), added `prefers-reduced-motion` JS guards + fallback timeouts for the underline swoosh and backstory swap so state can't get stranded, and made the mobile underline hide timer cancel-safe on re-touch/cancel/visibility change. Bumped `site.js` to `v=36`.
@@ -123,6 +126,7 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Ideas / next
 
+- **Bring back the red underline under the home name.** Deprecated 2026-07-15 because it didn't reliably play on first load or when returning to Home. Uncomment the blocks marked `DEPRECATED 2026-07-15` in `site.js` (underline helpers + `playUnderlineSwoosh()` on return-to-home) and `styles.css` (keyframes, `.is-entering` / `.underline-in` / `.underline-out`, `.name-box::after`, mobile `::after` offset). Then fix the flakiness before shipping.
 - Publish the **Tavakoli Family Tree** project (currently Coming soon).
 - Write **Breaking into Silicon Valley** essay (currently Coming soon).
 - Develop **How Ideas Cross the Pacific** (currently listed on the site as **How Pokémon Came to America**). Use Alfred Kahn bringing Pokémon to America as the narrative spine, then widen into examples such as Apple in Japan to show how Japanese creators and American operators have repeatedly amplified each other's ideas. Working bio: "An essay on the people who carried ideas between Japanese and American consumer markets." Keep the piece story-led rather than turning it into a broad historical survey.
