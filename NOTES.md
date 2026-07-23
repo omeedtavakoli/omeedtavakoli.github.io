@@ -4,6 +4,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-07-23
+- Removed the FIFA essay: deleted its listing from both the Archive and Essays tabs in `index.html`, dropped the `#essay-fifa` → `/fifa.html` legacy hash redirect from `site.js`, and trashed `fifa.html` and the listing thumbnail `images/thumbs/fifa.jpg`. Kept the essay photo `images/fifa.essay.image.png`. Bumped `site.js` to `v=38`.
+
 ### 2026-07-15
 - Short Backstory opener now reads: "I'm based in San Francisco and Los Angeles, originally from the East Coast."
 - Deprecated the red underline under the home name (load swoosh + hover/touch + return-to-home replay). It was flaky — sometimes missing or incomplete on first visit and when navigating back to Home. Code kept commented in `site.js` / `styles.css` (search `DEPRECATED name underline` / `DEPRECATED 2026-07-15`). Bumped `styles.css` to `v=83` and `site.js` to `v=37`. Restore when ready — see Ideas / next.

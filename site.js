@@ -149,8 +149,7 @@ var navBooted = false;
 var ESSAY_HASH_REDIRECTS = {
   '#highest-standard': '/standard.html',
   '#essay-definition-of-success': '/standard.html',
-  '#essay-robotics-or-car-wash': '/carwash.html',
-  '#essay-fifa': '/fifa.html'
+  '#essay-robotics-or-car-wash': '/carwash.html'
 };
 var LINKEDIN_URL = 'https://www.linkedin.com/in/omeedtavakoli/';
 var X_URL = 'https://x.com/omeedtavakoli';
