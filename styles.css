@@ -342,10 +342,23 @@ button.nav-link {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
 }
+/* Hiding the home layer has to remove it from HIT TESTING, not just from view.
+   `opacity: 0` still hit-tests, and the `pointer-events: none` here does NOT
+   reach .name-box, because a descendant's `pointer-events: auto` overrides an
+   ancestor's `none`. That left an invisible, fixed, centered mailto link
+   sitting on top of the section pages and swallowing every touch that started
+   mid-screen — which is exactly where a scroll gesture starts, so About read
+   as frozen on mobile. visibility:hidden is delayed by the fade duration so
+   the 0.5s opacity transition still plays on the way out. */
 .home-view.hidden {
   opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.5s;
+}
+.home-view.hidden .name-box {
   pointer-events: none;
 }
 /* Avoid flicker on hard refresh: disable transitions during initial boot only. */
@@ -419,6 +432,9 @@ button.nav-link {
   inset: 0;
   background: #1a1a1a;
   overflow: hidden;
+  /* Above the home layer: .name-box carries z-index:1, so without this the
+     section pages paint (and hit-test) underneath it. */
+  z-index: 2;
   transform: translate3d(100%, 0, 0);
   opacity: 0;
   pointer-events: none;
@@ -496,7 +512,9 @@ button.nav-link {
   position: absolute;
   inset: 0;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  /* No -webkit-overflow-scrolling: touch — deprecated since iOS 13 (momentum
+     is the default now) and a known cause of dead scroll containers when an
+     ancestor is composited, which .about-view is (translate3d + will-change). */
   overscroll-behavior: contain;
   touch-action: pan-y;
   padding: 2rem 1rem 6rem;
