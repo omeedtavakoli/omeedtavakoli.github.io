@@ -4,6 +4,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-07-25
+- Hid the **Tavakoli Family Tree** Coming soon card from the live Archive page and the (nav-less) `#projects` page — markup kept commented out in both places for future publishing, matching how the Essays Coming soon cards were handled on 2026-06-29. No Coming soon cards render anywhere on the site now. The Credit Card Router is the first Archive item. No CSS/JS touched, so no cache-buster bump; the `.project-item.pending` and `.project-placeholder*` styles are intentionally left in `styles.css` for when the card returns.
+
 ### 2026-07-23
 - Removed the FIFA essay: deleted its listing from both the Archive and Essays tabs in `index.html`, dropped the `#essay-fifa` → `/fifa.html` legacy hash redirect from `site.js`, and trashed `fifa.html` and the listing thumbnail `images/thumbs/fifa.jpg`. Kept the essay photo `images/fifa.essay.image.png`. Bumped `site.js` to `v=38`.
 
