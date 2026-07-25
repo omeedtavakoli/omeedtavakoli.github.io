@@ -754,55 +754,11 @@ button.nav-link {
   margin-top: 0.35rem;
 }
 
-.backstory-toggle {
-  margin-top: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-.toggle-text {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.55rem;
-}
-.toggle-sep {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 18px;
-  color: rgba(255,255,255,0.22);
-  user-select: none;
-}
-.toggle-option {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 18px;
-  letter-spacing: 0.03em;
-  text-transform: none;
-  color: rgba(255,255,255,0.42);
-  padding: 0;
-  transition: color 0.25s ease, transform 100ms ease-out;
-  user-select: none;
-}
-.toggle-option:hover {
-  color: red;
-}
-.toggle-option:active {
-  color: red;
-  transform: scale(0.97);
-}
-.toggle-option.active {
-  color: red;
-}
-#backstory-short, #backstory-long {
-  transition: opacity 0.13s cubic-bezier(0.4, 0, 0.2, 1), transform 0.13s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: opacity, transform;
-}
-#backstory-short.swoop-out, #backstory-long.swoop-out {
-  opacity: 0;
-  transform: translateX(-28px);
-}
-#backstory-short.swoop-in, #backstory-long.swoop-in {
-  opacity: 0;
-  transform: translateX(28px);
+/* Backstory copy. The Short/Long toggle and its swoop animation were removed
+   2026-07-25 (see drafts/backstory-parked.md); this margin stands in for the
+   space the toggle used to hold, matching the other tabs' heading rhythm. */
+#backstory-short {
+  margin-top: 1.6rem;
 }
 
 /* Interests. The part recruiters skim. */
