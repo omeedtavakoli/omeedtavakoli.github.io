@@ -1055,6 +1055,18 @@ body.essay-page {
   .project-placeholder-title { font-size: 42px; }
   .project-placeholder-fa { font-size: 19px; }
   .about-content { padding: 4rem 0.5rem 6rem; }
+  /* iOS gives no elastic feedback when a scroll container's content fits
+     exactly — the page doesn't budge on a swipe, which reads as frozen rather
+     than short. This trailing flex item guarantees a little overflow so every
+     section responds to touch. Sits below the fold, so it costs nothing
+     visually. Remove it if the sections get long enough to scroll on their
+     own again. */
+  .about-content::after {
+    content: '';
+    display: block;
+    width: 100%;
+    flex: 0 0 18vh;
+  }
   .essay-view .about-content { padding-top: 2.25rem; }
   footer {
     flex-direction: column;
