@@ -371,7 +371,11 @@ button.nav-link {
   padding: 0;
   transition: color 0.4s ease;
   position: fixed;
+  /* dvh, not vh: on iOS Safari `vh` measures the URL-bar-retracted viewport,
+     so a plain `vh` offset renders below true visual center. Home never
+     scrolls (body is overflow:hidden), so dvh can't shift mid-scroll here. */
   top: 48.5vh;
+  top: 48.5dvh;
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: auto;
@@ -973,6 +977,7 @@ body.essay-page {
   }
   .name-box {
     top: 47vh;
+    top: 47dvh;
   }
   /* DEPRECATED 2026-07-15 — name underline mobile offset. See NOTES.md. */
   /*
