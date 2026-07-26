@@ -153,7 +153,10 @@ header {
   position: fixed;
   top: 2.5rem;
   left: 3rem;
-  z-index: 2;
+  /* 3, not 2: the section views also sit at z-index 2 and come later in the
+     DOM, so an equal z-index let them paint over the nav — the whole menu
+     vanished on About/Archive. The nav has to outrank them. */
+  z-index: 3;
 }
 .nav-links {
   display: flex;
