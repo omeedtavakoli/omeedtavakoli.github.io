@@ -4,6 +4,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-07-26
+- Archive subtitle: "Writing, projects, and other work." → "**Essays**, projects, and other work." The original wasn't ungrammatical — "writing" is a mass noun, so it takes a singular verb the same way "work" does — but it read as singular next to the plural "projects", and "Essays" matches what the page actually lists. Copy-only change in `index.html`, no CSS/JS touched, so no cache-buster bump.
+
 ### 2026-07-25
 - **Fixed the nav menu disappearing on About and Archive.** Regression from the `z-index: 2` added to the section views earlier today (the tap-blocking-overlay fix below). `header` was already at `z-index: 2`, and both live in the root stacking context, so with an equal z-index the later element in the DOM wins — the opaque section views painted straight over the fixed nav and the Headshot link. Raised `header` to `z-index: 3` so it outranks the section views; the views still sit above `.name-box` (`z-index: 1`), so the overlay fix is intact. Home was never affected. Bumped `styles.css` to `v=88`.
 - Section pages now respond to a swipe on mobile. After the long Backstory came out, About's copy fit the viewport exactly, so the scroll container had zero overflow — and iOS gives no elastic bounce in that state, so the page didn't move at all on a swipe and read as frozen rather than simply short. Added an `.about-content::after` trailing flex item (`flex: 0 0 18vh`, mobile only) to guarantee a little scrollable overflow. It sits below the fold so it costs nothing visually. Drop it if the sections get long enough to scroll on their own again. Bumped `styles.css` to `v=87`.
