@@ -4,6 +4,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-07-30
+- Reworded the second Backstory paragraph. Was: "I'm Iranian-American. I like martial arts (BJJ, Muay Thai, Silat, third-degree black belt in TKD), and I enjoy reading philosophy (particularly Rumi, Aristotle, Tolstoy)." Now: "I'm Iranian-American and a martial artist (BJJ, Muay Thai, Silat, a third-degree black belt in TKD). I also enjoy reading philosophy (particularly Rumi, Aristotle, Tolstoy)." Three changes: "I like martial arts" → "a martial artist" (identity rather than preference, and parallel to "Iranian-American"); added the article in "a third-degree black belt" so that item reads as a rank instead of a fourth art; and "I also enjoy" opens the second sentence so it continues the first rather than restarting. An intermediate draft folded all three into one "I'm X, a Y, and a reader of philosophy" series — dropped it because "a reader of philosophy" read as try-hard, and because the version with "I enjoy" in the third slot broke parallelism ("I'm A, B, and I enjoy C"). Splitting into two sentences keeps the casual register and avoids the broken series. Copy-only change in `index.html`, no CSS/JS touched, so no cache-buster bump.
+
 ### 2026-07-26
 - Archive subtitle: "Writing, projects, and other work." → "**Essays**, projects, and other work." The original wasn't ungrammatical — "writing" is a mass noun, so it takes a singular verb the same way "work" does — but it read as singular next to the plural "projects", and "Essays" matches what the page actually lists. Copy-only change in `index.html`, no CSS/JS touched, so no cache-buster bump.
 
