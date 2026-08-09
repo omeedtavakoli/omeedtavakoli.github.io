@@ -147,9 +147,9 @@ var navBooted = false;
 
 // Legacy SPA essay hashes → standalone pages (#highest-standard is canonical for The Highest Standard).
 var ESSAY_HASH_REDIRECTS = {
-  '#highest-standard': '/standard.html',
-  '#essay-definition-of-success': '/standard.html',
-  '#essay-robotics-or-car-wash': '/carwash.html'
+  '#highest-standard': '/standard/',
+  '#essay-definition-of-success': '/standard/',
+  '#essay-robotics-or-car-wash': '/carwash/'
 };
 var LINKEDIN_URL = 'https://www.linkedin.com/in/omeedtavakoli/';
 var X_URL = 'https://x.com/omeedtavakoli';
