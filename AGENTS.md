@@ -14,11 +14,13 @@ Skip for trivial things: cache-buster bumps alone, internal-only comments, white
 
 When you edit `styles.css` or `site.js`, bump the corresponding `?v=N` query param in `index.html` so browsers refresh.
 
-## Essay filenames
+## Essay page URLs
 
-Use a simple one- or two-word lowercase filename for each standalone essay page, such as `loyalty.html`, `standard.html`, or `carwash.html`. Do not prefix essay pages with `essay-` or use the full essay title as the filename.
+Every standalone page is a directory index, not a flat file: `loyalty/index.html`, `standard/index.html`, `carwash/index.html`. Pick a simple one- or two-word lowercase directory name — do not prefix with `essay-` or use the full essay title. The public URL is `/loyalty/`, **with the trailing slash**; write it that way in cards, canonicals, and OG tags so nothing takes a needless redirect hop. The `.html` paths are retired and 404 on purpose.
 
-When renaming an essay page, update its homepage card, canonical URL, Open Graph URL, and any legacy hash redirects in `site.js`.
+**Every path inside these pages must be absolute.** From `/22/index.html`, a relative `styles.css?v=71` resolves to `/22/styles.css` and 404s — an unstyled page with no nav. Root all of it with a leading `/`: stylesheets, `essay-chrome.js`, `page-transition.js`, and any images.
+
+When renaming a page, update its homepage card, canonical URL, Open Graph URL, and any legacy hash redirects in `site.js`.
 
 ## Deploys
 
