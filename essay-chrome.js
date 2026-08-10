@@ -1,14 +1,12 @@
-// Shared chrome for the standalone essay pages: favicon links and the footer
-// clock. Neither is visible page furniture, so building them in JS costs
-// nothing on screen.
+// Shared chrome for the standalone essay pages (essay-*.html): favicon links,
+// the primary nav header, and the footer clock. This is the single source of
+// truth for all three — change the nav here and every essay page updates, so
+// they can't drift out of sync with the homepage nav anymore.
 //
-// The nav header used to be injected here too. It isn't anymore: a JS-built
-// header means the corner of the page is empty until this script runs, which is
-// exactly the flicker we were trying to kill. The header now ships in the HTML
-// of each essay page. That reintroduces the copy-paste drift this file was
-// created to prevent, so ./check-site.sh now enforces that every copy stays
-// byte-identical — the guarantee moved from "one source" to "a check that
-// fails loudly".
+// Load this synchronously near the TOP of <body> (no `defer`), before <main>.
+// The header is then inserted before the article parses, so there's no layout
+// shift. The clock waits for DOMContentLoaded because the footer spans parse
+// after this script runs.
 (function essayChrome() {
   // --- Favicon links (mirrors the homepage set) -----------------------------
   var head = document.head;
@@ -29,6 +27,28 @@
       if (def.sizes) link.sizes = def.sizes;
       head.appendChild(link);
     });
+  }
+
+  // --- Primary nav header ----------------------------------------------------
+  // Archive is marked active because every page using this file is an essay.
+  var header = document.createElement('header');
+  header.innerHTML =
+    '<nav class="nav-links" aria-label="Primary">' +
+      '<a class="nav-link" href="/">Home</a>' +
+      '<a class="nav-link" href="/#about">About</a>' +
+      '<a class="nav-link active" href="/#archive">Archive</a>' +
+      '<a class="nav-link" href="https://www.linkedin.com/in/omeedtavakoli/" target="_blank" rel="noopener">Resume</a>' +
+      '<a class="nav-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener">Contact</a>' +
+    '</nav>' +
+    '<a class="media-assets-link" href="https://x.com/omeedtavakoli/photo" target="_blank" rel="noopener">Headshot</a>';
+
+  // Insert right after the skip-link (and before <main>, which hasn't parsed
+  // yet) so the article flows below the header with no visible jump.
+  var skip = document.querySelector('.skip-link');
+  if (skip && skip.parentNode) {
+    skip.parentNode.insertBefore(header, skip.nextSibling);
+  } else if (document.body) {
+    document.body.insertBefore(header, document.body.firstChild);
   }
 
   // --- Footer clock ----------------------------------------------------------
