@@ -25,17 +25,38 @@ body {
   overflow: hidden;
   /* Remove tap highlight on iOS */
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-html.page-enter-prep body {
-  opacity: 0;
-  transform: translate3d(100%, 0, 0);
+/* Cross-document navigation (home <-> an essay page) is a real page load: the
+   browser tears the document down and builds the next one, so the nav and the
+   corner links blink out and come back. This hands that swap to the browser,
+   which cross-fades the old page into the new one instead.
+
+   Replaces the old JS approach. page-transition.js used to intercept clicks and
+   animate `.page-enter-prep` / `.page-leaving` on <body>, but commit 313cf4e
+   gutted it down to a no-op in June 2026 and left the CSS behind doing nothing.
+   Both are gone now.
+
+   Unsupported browsers (Firefox as of 2026) simply ignore this block and get the
+   plain navigation they already had — nothing to fall back to, nothing breaks. */
+@view-transition {
+  navigation: auto;
 }
 
-html.page-leaving body {
-  opacity: 0;
-  transform: translate3d(-100%, 0, 0);
+/* Tagging the header pulls it out of the page-wide cross-fade and animates it as
+   its own element, so it reads as one persistent nav rather than a nav that dies
+   and is reborn. The name must be unique per document — there is exactly one
+   <header> on every page here, so a static name is safe. */
+header {
+  view-transition-name: site-header;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
 
 /* Keep mouse focus quiet while preserving a visible keyboard focus ring. */
@@ -68,14 +89,6 @@ html.page-leaving body {
   transform: translateY(0);
 }
 @media (prefers-reduced-motion: reduce) {
-  body {
-    transition: none;
-  }
-  html.page-enter-prep body,
-  html.page-leaving body {
-    opacity: 1;
-    transform: none;
-  }
   .skip-link {
     transition: none;
   }

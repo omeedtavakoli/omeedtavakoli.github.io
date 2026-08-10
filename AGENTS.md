@@ -22,6 +22,25 @@ Every standalone page is a directory index, not a flat file: `loyalty/index.html
 
 When renaming a page, update its homepage card, canonical URL, Open Graph URL, and any legacy hash redirects in `site.js`.
 
+## Adding a page — start from the template, then run the checker
+
+Copy `drafts/essay-template.html`, **not** the last essay you shipped. Copying a live page is how the stylesheet version drifted (essays sat on `v=71` while the homepage moved to `v=88`, so crossing between them refetched an already-cached stylesheet and flashed).
+
+```
+cp drafts/essay-template.html SLUG/index.html   # a directory, not SLUG.html
+# fill in the SLUG / TITLE / DESCRIPTION / DATE placeholders
+# add the Archive card in index.html, linking to "/SLUG/"
+./check-site.sh
+```
+
+`./check-site.sh` is the guardrail — run it before every commit. It fails if the stylesheet or `essay-chrome.js` versions disagree across pages, if the nav header markup has drifted from the template, if any in-page path is relative, if an internal link is missing its trailing slash, or if anything links a retired `.html` path.
+
+The nav header is deliberately **duplicated** into every page's HTML rather than injected by `essay-chrome.js`, so it paints with the document instead of after a script. The checker is what keeps the copies honest — if you change the nav, change it in the template and mirror it to every page.
+
+## Page transitions
+
+Cross-document navigation is handled by the CSS `@view-transition` block in `styles.css` — no JavaScript. `page-transition.js` was deleted; it had been a no-op since commit `313cf4e` (June 2026). Browsers without support fall back to a plain navigation.
+
 ## Deploys
 
 `main` deploys automatically to omeedtavakoli.com via GitHub Pages, usually within 30–60 seconds after push.
