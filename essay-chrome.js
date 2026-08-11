@@ -35,7 +35,7 @@
   header.innerHTML =
     '<nav class="nav-links" aria-label="Primary">' +
       '<a class="nav-link" href="/">Home</a>' +
-      '<a class="nav-link" href="/#about">About</a>' +
+      '<a class="nav-link" href="/#about">Bio</a>' +
       '<a class="nav-link active" href="/#archive">Archive</a>' +
       '<a class="nav-link" href="https://www.linkedin.com/in/omeedtavakoli/" target="_blank" rel="noopener">Resume</a>' +
       '<a class="nav-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener">Contact</a>' +

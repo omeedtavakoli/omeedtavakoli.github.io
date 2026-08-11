@@ -550,6 +550,13 @@ button.nav-link {
 .about-content p:last-child {
   margin-bottom: 0;
 }
+/* Bio prose runs at essay body size (.essay-article p) so the section reads in
+   the same voice as the writing. Scoped to #backstory-short rather than
+   .about-content p, which also catches the Archive/Projects/Essays subtitles. */
+#backstory-short p {
+  font-size: 22px;
+  line-height: 1.72;
+}
 
 /* Keep fixed desktop nav from covering section content on narrower windows. */
 @media (min-width: 601px) and (max-width: 1240px) {
@@ -1081,6 +1088,10 @@ body.essay-page {
     margin-top: 1.5rem;
   }
   .essay-article p {
+    font-size: 19px;
+    line-height: 1.65;
+  }
+  #backstory-short p {
     font-size: 19px;
     line-height: 1.65;
   }
