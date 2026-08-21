@@ -345,7 +345,6 @@ button.nav-link {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
 }
 /* Hiding the home layer has to remove it from HIT TESTING, not just from view.
    `opacity: 0` still hit-tests, and the `pointer-events: none` here does NOT
@@ -353,18 +352,21 @@ button.nav-link {
    ancestor's `none`. That left an invisible, fixed, centered mailto link
    sitting on top of the section pages and swallowing every touch that started
    mid-screen — which is exactly where a scroll gesture starts, so About read
-   as frozen on mobile. visibility:hidden is delayed by the fade duration so
-   the 0.5s opacity transition still plays on the way out. */
+   as frozen on mobile. The fade-out that visibility:hidden used to wait on is
+   gone (2026-08-20), so it now applies on the same frame as opacity:0. */
 .home-view.hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.5s;
 }
 .home-view.hidden .name-box {
   pointer-events: none;
 }
-/* Avoid flicker on hard refresh: disable transitions during initial boot only. */
+/* Avoid flicker on hard refresh: disable transitions during initial boot only.
+   INERT since 2026-08-20 — none of these carry a transition any more, so this
+   suppresses nothing. Kept as the guard that has to be here if view switching
+   is ever animated again; `.booting` is still set in index.html and cleared in
+   site.js after the first route renders. */
 .booting .home-view,
 .booting .about-view,
 .booting .experience-view,
@@ -441,7 +443,6 @@ button.nav-link {
   transform: translate3d(100%, 0, 0);
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, opacity;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
