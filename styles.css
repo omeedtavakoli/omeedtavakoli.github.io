@@ -136,6 +136,17 @@ header, footer {
   animation-delay: 1.3s;
 }
 
+/* The entrance animation belongs to arriving at the site, not to moving around
+   inside it. On the standalone pages (/22/, /familytree/, /loyalty/, /standard/,
+   /carwash/) the chrome is there on the first frame — clicking an Archive card
+   shouldn't cost you a 1.3s wait before the nav appears. The homepage keeps the
+   fade; it's the only place you can arrive cold. */
+body.essay-page header,
+body.essay-page footer {
+  animation: none;
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   header, footer, .name-box {
     animation: none;
