@@ -64,7 +64,19 @@
   <meta name="twitter:site" content="@omeedtavakoli">
   <meta name="twitter:image" content="https://omeedtavakoli.com/images/og-image.png">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@500;600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=91">
+  <!-- The entrance fade belongs to arriving at the site, not to coming back to
+       it. If this tab has already loaded a page here, mark the document so the
+       fade is skipped. Inline and synchronous on purpose: a deferred check
+       would run after the animation had already started. The flag is set in
+       page-transition.js, which every page loads. -->
+  <script>
+    try {
+      if (sessionStorage.getItem('ot-visited')) {
+        document.documentElement.classList.add('has-entered');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="styles.css?v=101">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -100,6 +112,20 @@
         <h1 class="about-title" id="section-heading-archive" tabindex="-1">Archive</h1>
         <p class="about-updated">Essays, projects, and <a class="inline-link" href="https://github.com/omeedtavakoli" target="_blank" rel="noopener">other work</a>.</p>
         <ul class="projects-list">
+          <li>
+            <a class="project-item pending">
+              <div class="project-thumb-wrap">
+                <div class="project-thumb mathart-thumb" role="img" aria-label="Mathematical Art preview">
+                  <span class="mathart-thumb-text" aria-hidden="true">THEOREM (Euclid). There are infinitely many prime numbers. PROOF. Suppose, for the sake of contradiction, that the set of primes is finite. Then we may enumerate it in full as P = {p₁, p₂, …, pₙ}, where every prime appears exactly once. Define the integer N = (p₁ · p₂ · ⋯ · pₙ) + 1. Since every pᵢ ≥ 2, the product p₁p₂⋯pₙ ≥ 2, and therefore N ≥ 3 > 1. By the Fundamental Theorem of Arithmetic, every integer greater than 1 has a prime divisor; let q be a prime with q | N. By assumption P contains every prime, so q = pᵢ for some i. But pᵢ divides the product p₁p₂⋯pₙ, hence q | (N − 1). Since q | N and q | (N − 1), it follows that q | 1, so q = 1, contradicting the requirement that q > 1. Therefore no finite list contains every prime, and the set of primes is infinite. ∎</span>
+                </div>
+              </div>
+              <div class="project-info">
+                <span class="project-title">Mathematical Art</span>
+                <span class="project-bio">Research project to find math proofs that render illustrations, inspired by mathematical artist Hamid Naderi Yeganeh.</span>
+                <span class="project-sub">Ongoing</span>
+              </div>
+            </a>
+          </li>
           <li>
             <a class="project-item" href="/22/">
               <div class="project-thumb-wrap">
@@ -574,7 +600,7 @@
     <span id="date"></span>
   </footer>
 
-  <script src="page-transition.js?v=2" defer></script>
+  <script src="page-transition.js?v=3" defer></script>
   <script src="site.js?v=40" defer></script>
 </body>
 </html>
