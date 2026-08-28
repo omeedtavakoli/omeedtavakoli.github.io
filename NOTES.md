@@ -4,6 +4,10 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-08-28
+- **Standalone page bylines now parenthesize the date:** `by Omeed Tavakoli (August 4, 2026)` instead of `by Omeed Tavakoli, August 4, 2026`. Applied to all five `.essay-meta` lines — `/22/`, `/familytree/`, `/standard/`, and the two pages whose homepage cards are currently turned off, `/loyalty/` and `/carwash/`, so the format doesn't drift if those cards come back.
+- **The Archive cards were not touched.** They carry a bare date in `.project-sub` with no byline, so there was nothing in this format to change there. Copy-only edit across the standalone pages — no `index.html`, `styles.css`, or `site.js` changes, so no cache-buster bump (`styles.css` stays at `v=101`, `site.js` at `v=40`, `page-transition.js` at `v=3`).
+
 ### 2026-08-27
 - **The Mathematical Art card is turned off — same day it shipped.** The `<li>` is wrapped in an HTML comment labeled `Turned off 2026-08-27; uncomment to bring back`, the same convention already used for the three cards turned off on 2026-08-21 and the unpublished drafts. **Only one block to uncomment here**, unlike those: this card lives solely in `#archive-view` and was never added to `#essays-view` or `#projects-view`, so there's no second copy to fall out of sync. Verified the commented block contains no `--` sequences, which would have closed the comment early — the proof text uses U+2212 minus signs and `⋯`, not hyphens.
 - **The `.mathart-thumb` and `.mathart-thumb-text` rules stay in `styles.css`.** They're unreferenced while the card is off and cost a few unused bytes; deleting them would mean rewriting the thumbnail from scratch to bring the card back, and the whole point of the comment-wrapper convention is that restoring is a one-step operation. Same reason `images/thumbs/loyalty.jpg` and friends were left on disk in the 2026-08-21 turn-off. Markup-only change, no CSS/JS edits, so no cache-buster bump — `styles.css` stays at `v=101` and `page-transition.js` at `v=3`.
