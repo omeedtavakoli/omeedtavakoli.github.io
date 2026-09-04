@@ -529,7 +529,9 @@ button.nav-link {
   margin-bottom: 0.4rem;
 }
 .about-updated {
-  font-size: 16px;
+  /* No font-size here: .about-content p (0-1-1) outranks a bare .about-updated,
+     so sizing lives with the #backstory-short rule below. Same for the color and
+     margin — kept only for an .about-updated used outside .about-content. */
   color: rgba(255,255,255,0.5);
   margin-bottom: 2rem;
 }
@@ -575,7 +577,8 @@ button.nav-link {
 /* Bio prose runs at essay body size (.essay-article p) so the section reads in
    the same voice as the writing. Scoped to #backstory-short rather than
    .about-content p, which also catches the Archive/Projects/Essays subtitles. */
-#backstory-short p {
+#backstory-short p,
+.about-content .about-updated {
   font-size: 22px;
   line-height: 1.72;
 }
@@ -1134,7 +1137,8 @@ body.essay-page {
     font-size: 19px;
     line-height: 1.65;
   }
-  #backstory-short p {
+  #backstory-short p,
+  .about-content .about-updated {
     font-size: 19px;
     line-height: 1.65;
   }
