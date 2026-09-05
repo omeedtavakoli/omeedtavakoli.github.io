@@ -76,7 +76,7 @@
       }
     } catch (e) {}
   </script>
-  <link rel="stylesheet" href="styles.css?v=102">
+  <link rel="stylesheet" href="styles.css?v=147">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -101,15 +101,14 @@
         <!-- Long version + Short/Long toggle removed 2026-07-25. Pre-edit copy parked in drafts/backstory-parked.md. -->
         <div id="backstory-short">
           <p>I study Econ and CS at USC. I am based in San Francisco / Los Angeles and a son of Iranian immigrants.</p>
-          <p>In the past, I've enjoyed working on various uses of AI, math evals research, and competitive Taekwondo.</p>
+          <p>In the past, I've enjoyed working on AI products, math evals research, and competitive Taekwondo.</p>
         </div>
       </div>
     </div>
     <div class="projects-view archive-view" id="archive-view" inert aria-hidden="true">
       <div class="about-content">
         <h1 class="about-title" id="section-heading-archive" tabindex="-1">Archive</h1>
-        <p class="about-updated">Essays, projects, and others</p>
-        <ul class="projects-list">
+        <ul class="projects-list" hidden>
           <!-- Turned off 2026-08-27; uncomment to bring back.
           <li>
             <a class="project-item pending">
@@ -354,13 +353,33 @@
             </a>
           </li>
         </ul>
+        <!-- Simple-list experiment 2026-09-04. The card list above is hidden, not
+             deleted — drop the `hidden` attribute on it and delete this <ul> to revert. -->
+        <ul class="simple-list">
+          <li><a class="inline-link" href="/22/">Short note on turning 22</a> <span class="simple-list-date">(August 2026)</span></li>
+          <li><a class="inline-link" href="/familytree/">Private archive of my family, traced back 11 generations</a> <span class="simple-list-date">(August 2026)</span></li>
+          <li><a class="inline-link" href="/standard/">Essay on service</a> <span class="simple-list-date">(June 2026)</span></li>
+          <li><a class="inline-link" href="https://x.com/omeedtavakoli/status/2015214499809337758?s=20" target="_blank" rel="noopener">Essay on finding direction first</a> <span class="simple-list-date">(January 2026)</span></li>
+          <li><a class="inline-link" href="https://drive.google.com/file/d/1wWxrdxCSKyTXEHgyay6H7A4Pbe9bkJxg/view" target="_blank" rel="noopener">Benchmarks on AI grading of math proofs</a> <span class="simple-list-date">(draft, under review)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=CG4vyr2-DTo&amp;t=15s" target="_blank" rel="noopener">Conversation with actor Brian Takahashi on acting in Cobra Kai</a> <span class="simple-list-date">(February 2025)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=W61UKhwyFj8&amp;t=1s" target="_blank" rel="noopener">Conversation with sport karate competitor Dawson Holt on forms and weapons</a> <span class="simple-list-date">(December 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=NS9SmM2vCn8" target="_blank" rel="noopener">Conversation with martial artist Esteban Tremblay on tricking</a> <span class="simple-list-date">(October 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=zfo1rjhFcFc&amp;t=13s" target="_blank" rel="noopener">Conversation with martial artist Reid Presley on the bo staff</a> <span class="simple-list-date">(September 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=KCn8UmgKz7g&amp;t=156s" target="_blank" rel="noopener">Conversation with martial artist Andrew Trento on twenty years in the sport</a> <span class="simple-list-date">(July 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=7I24ohKjfK4" target="_blank" rel="noopener">Conversation with martial artist Dave Kovar on forty years of teaching</a> <span class="simple-list-date">(July 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=eBt2BSJhQhM&amp;t=5s" target="_blank" rel="noopener">Conversation with sport karate legend Jackson Rudolph on the bo staff</a> <span class="simple-list-date">(June 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=WT9d86yJFa0&amp;t=329s" target="_blank" rel="noopener">Conversation with Taekwondo instructor Jimmy Kline on teaching</a> <span class="simple-list-date">(March 2024)</span></li>
+          <li><a class="inline-link" href="https://omeedtavakoli.notion.site/Backpacking-in-Europe-Fall-23-273331aefa948096a271d296166b3f09" target="_blank" rel="noopener">Travel log from backpacking Europe</a> <span class="simple-list-date">(December 2023)</span></li>
+          <li><a class="inline-link" href="https://github.com/omeedtavakoli/Grappling-Technique-Analytics" target="_blank" rel="noopener">ML project for grappling positions</a> <span class="simple-list-date">(December 2023)</span></li>
+        </ul>
+
       </div>
     </div>
     <div class="projects-view" id="projects-view" inert aria-hidden="true">
       <div class="about-content">
         <h1 class="about-title" id="section-heading-projects" tabindex="-1">Projects</h1>
         <p class="about-updated">A few trails I’ve followed outside the main road, from coding projects to interviews to travel stories.</p>
-        <ul class="projects-list">
+        <ul class="projects-list" hidden>
           <!-- Kept local for future publishing; hidden from the live Projects page.
           <li>
             <div class="project-item pending">
@@ -501,13 +520,28 @@
             </a>
           </li>
         </ul>
+        <!-- Simple-list layout 2026-09-04. The card list above is hidden, not
+             deleted — drop the `hidden` attribute on it and delete this <ul> to revert. -->
+        <ul class="simple-list">
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=CG4vyr2-DTo&amp;t=15s" target="_blank" rel="noopener">Conversation with actor Brian Takahashi on acting in Cobra Kai</a> <span class="simple-list-date">(February 2025)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=W61UKhwyFj8&amp;t=1s" target="_blank" rel="noopener">Conversation with sport karate competitor Dawson Holt on forms and weapons</a> <span class="simple-list-date">(December 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=NS9SmM2vCn8" target="_blank" rel="noopener">Conversation with martial artist Esteban Tremblay on tricking</a> <span class="simple-list-date">(October 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=zfo1rjhFcFc&amp;t=13s" target="_blank" rel="noopener">Conversation with martial artist Reid Presley on the bo staff</a> <span class="simple-list-date">(September 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=KCn8UmgKz7g&amp;t=156s" target="_blank" rel="noopener">Conversation with martial artist Andrew Trento on twenty years in the sport</a> <span class="simple-list-date">(July 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=7I24ohKjfK4" target="_blank" rel="noopener">Conversation with martial artist Dave Kovar on forty years of teaching</a> <span class="simple-list-date">(July 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=eBt2BSJhQhM&amp;t=5s" target="_blank" rel="noopener">Conversation with sport karate legend Jackson Rudolph on the bo staff</a> <span class="simple-list-date">(June 2024)</span></li>
+          <li><a class="inline-link" href="https://www.youtube.com/watch?v=WT9d86yJFa0&amp;t=329s" target="_blank" rel="noopener">Conversation with Taekwondo instructor Jimmy Kline on teaching</a> <span class="simple-list-date">(March 2024)</span></li>
+          <li><a class="inline-link" href="https://omeedtavakoli.notion.site/Backpacking-in-Europe-Fall-23-273331aefa948096a271d296166b3f09" target="_blank" rel="noopener">Travel log from backpacking Europe</a> <span class="simple-list-date">(December 2023)</span></li>
+          <li><a class="inline-link" href="https://github.com/omeedtavakoli/Grappling-Technique-Analytics" target="_blank" rel="noopener">ML project for grappling positions</a> <span class="simple-list-date">(December 2023)</span></li>
+        </ul>
+
       </div>
     </div>
     <div class="essays-view" id="essays-view" inert aria-hidden="true">
       <div class="about-content">
         <h1 class="about-title" id="section-heading-essays" tabindex="-1">Essays</h1>
         <p class="about-updated">Pieces I've written.</p>
-        <ul class="projects-list">
+        <ul class="projects-list" hidden>
           <li>
             <a class="project-item" href="/22/">
               <div class="project-info">
@@ -591,6 +625,14 @@
             </a>
           </li>
         </ul>
+        <!-- Simple-list layout 2026-09-04. The card list above is hidden, not
+             deleted — drop the `hidden` attribute on it and delete this <ul> to revert. -->
+        <ul class="simple-list">
+          <li><a class="inline-link" href="/22/">Short note on turning 22</a> <span class="simple-list-date">(August 2026)</span></li>
+          <li><a class="inline-link" href="/standard/">Essay on service</a> <span class="simple-list-date">(June 2026)</span></li>
+          <li><a class="inline-link" href="https://x.com/omeedtavakoli/status/2015214499809337758?s=20" target="_blank" rel="noopener">Essay on finding direction first</a> <span class="simple-list-date">(January 2026)</span></li>
+        </ul>
+
       </div>
     </div>
   </main>

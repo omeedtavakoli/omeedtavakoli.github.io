@@ -43,7 +43,7 @@ html.page-leaving body {
   outline: none;
 }
 :focus-visible {
-  outline: 1px solid red;
+  outline: 1px solid #fff;
   outline-offset: 4px;
 }
 
@@ -216,19 +216,26 @@ button.nav-link {
   -webkit-appearance: none;
   appearance: none;
 }
+/* Hover underlines in the link's own color instead of turning it red. No
+   `color` here on purpose: currentColor means an unselected item underlines in
+   white and the selected (red) item underlines in red. */
 .nav-link:hover {
-  color: red;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 .nav-link:active {
-  color: red;
   transform: scale(0.97);
 }
+/* Current section is marked by a standing underline, not a color — no red in
+   the nav at all. Same treatment as :hover, so hovering it changes nothing. */
 .nav-link.active {
-  color: red;
   cursor: pointer;
-}
-.nav-link.active:hover {
-  color: red;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 .media-assets-link {
   position: fixed;
@@ -242,10 +249,12 @@ button.nav-link {
   z-index: 2;
 }
 .media-assets-link:hover {
-  color: red;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 .media-assets-link:active {
-  color: red;
   transform: scale(0.97);
 }
 .inline-link {
@@ -257,12 +266,10 @@ button.nav-link {
   transition: color 0.3s ease, text-decoration-color 0.3s ease, transform 100ms ease-out;
 }
 .inline-link:hover {
-  color: red;
-  text-decoration-color: red;
+  text-decoration-color: currentColor;
 }
 .inline-link:active {
-  color: red;
-  text-decoration-color: red;
+  text-decoration-color: currentColor;
   transform: scale(0.97);
 }
 /* Desktop-only optical alignment with the top-left nav row. */
@@ -328,10 +335,14 @@ button.nav-link {
   transition: color 0.4s ease, transform 100ms ease-out;
 }
 .contact-link:hover {
-  color: red;
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 .contact-link:active {
-  color: red;
+  color: #fff;
   transform: scale(0.97);
 }
 .contact-logo-link {
@@ -548,18 +559,15 @@ button.nav-link {
   display: flex;
   flex-direction: column;
   align-items: center;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.15) transparent;
+  /* No visible scrollbar: the 4px bar sat at the viewport's right edge, a few
+     dozen pixels from the fixed Headshot link, and was the only piece of
+     browser chrome on a site that otherwise has none. Scrolling is unchanged —
+     wheel, trackpad, keyboard, and touch all still work. */
+  scrollbar-width: none;
 }
 .about-content::-webkit-scrollbar {
-  width: 4px;
-}
-.about-content::-webkit-scrollbar-track {
-  background: transparent;
-}
-.about-content::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.15);
-  border-radius: 2px;
+  width: 0;
+  height: 0;
 }
 .about-content > * {
   width: 100%;
@@ -581,6 +589,9 @@ button.nav-link {
 .about-content .about-updated {
   font-size: 22px;
   line-height: 1.72;
+}
+#backstory-short p {
+  color: #fff;
 }
 
 /* Keep fixed desktop nav from covering section content on narrower windows. */
@@ -740,7 +751,7 @@ button.nav-link {
   color: rgba(255,255,255,0.45);
 }
 .project-item:hover .project-title {
-  color: red;
+  color: #fff;
 }
 .project-item:hover .project-sub {
   color: rgba(255,255,255,0.4);
@@ -769,7 +780,7 @@ button.nav-link {
   color: rgba(255,255,255,0.4);
 }
 .exp-item:hover .exp-title {
-  color: red;
+  color: #fff;
 }
 .exp-item:hover .exp-title .exp-sub {
   color: rgba(255,255,255,0.4);
@@ -1037,10 +1048,10 @@ body.essay-page {
   display: inline-block;
 }
 .essay-source a:hover {
-  color: red;
+  color: #fff;
 }
 .essay-source a:active {
-  color: red;
+  color: #fff;
   transform: scale(0.97);
 }
 /* Phones exist. */
@@ -1156,5 +1167,93 @@ body.essay-page {
   }
   .essay-meta {
     font-size: 14px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Simple list — Archive, Projects and Essays, 2026-09-04.
+   One row per entry, no thumbs / titles / dates-as-cards: the bio line is the
+   link and the month-year trails it. Single column, capped at 58rem — wide
+   enough that the longest row ("Conversation with Dave Kovar on forty years of
+   teaching martial arts (July 2024)") still sets on one line, narrow enough
+   that the measure doesn't run away. Sized off the bio prose (22px / 19px).
+   Delete this block and the `hidden` on #archive-view .projects-list to go
+   back to cards.
+   --------------------------------------------------------------------------- */
+.projects-list[hidden] {
+  display: none;
+}
+.simple-list {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  /* Indented from the "Archive" heading rather than flush with it — the
+     heading hangs left and the list sits inside it. */
+  padding: 0 0 0 3rem;
+  /* No max-width of its own. .about-content centers its children, so a narrower
+     cap here floated the list inward and left it misaligned with the "Archive"
+     heading; inheriting the 1100px from `.about-content > *` puts both blocks
+     on the same left edge — and gives the longest rows room to stay on one
+     line. Measure is held by the row length itself, not by a cap. */
+}
+.simple-list li {
+  position: relative;
+  padding-left: 1.15rem;
+  margin-bottom: 0.8rem;
+}
+.simple-list li:last-child {
+  margin-bottom: 0;
+}
+/* Square marker, optically centered on the first line's x-height rather than
+   its box — a true 50% sits low next to Times' small x-height. */
+.simple-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.66em;
+  width: 3px;
+  height: 3px;
+  background: #fff;
+}
+.simple-list a {
+  font-size: 22px;
+  line-height: 1.4;
+  color: #fff;
+  /* No underline in this list — 15 underlined rows read as noise. The red
+     hover from .inline-link is the affordance instead. */
+  text-decoration: none;
+}
+/* Hover is an underline in the text's own color — no color shift. Overrides
+   .inline-link's red on both hover and active (0-2-1 beats 0-2-0). */
+.simple-list a:hover,
+.simple-list a:active {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+/* Date sits outside the anchor so it isn't underlined and isn't part of the
+   click target. Dimmed well under the label so a row reads title-first and the
+   date is there when you look for it. A touch above the old 0.32, since the
+   labels went from 82% to pure white and widened the gap on their own. */
+.simple-list-date {
+  font-size: 22px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  /* No room for the indent on a phone — full width instead. */
+  .simple-list {
+    margin-top: 1.3rem;
+    padding-left: 0;
+  }
+  .simple-list li {
+    margin-bottom: 0.9rem;
+  }
+  .simple-list a,
+  .simple-list-date {
+    font-size: 19px;
+    line-height: 1.45;
   }
 }
