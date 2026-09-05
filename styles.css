@@ -1173,12 +1173,12 @@ body.essay-page {
 /* ---------------------------------------------------------------------------
    Simple list — Archive, Projects and Essays, 2026-09-04.
    One row per entry, no thumbs / titles / dates-as-cards: the bio line is the
-   link and the month-year trails it. Single column, capped at 58rem — wide
-   enough that the longest row ("Conversation with Dave Kovar on forty years of
-   teaching martial arts (July 2024)") still sets on one line, narrow enough
-   that the measure doesn't run away. Sized off the bio prose (22px / 19px).
-   Delete this block and the `hidden` on #archive-view .projects-list to go
-   back to cards.
+   link and the month-year trails it. Single column with no max-width of its own
+   (see .simple-list below), which is what keeps every row on one line — two
+   columns forced the long rows to wrap, and a wrapped row reads as two entries.
+   Sized off the bio prose (22px / 19px). Delete this block and the `hidden` on
+   each view's .projects-list to go back to cards; that layout is documented in
+   drafts/archive-cards-parked.md.
    --------------------------------------------------------------------------- */
 .projects-list[hidden] {
   display: none;
