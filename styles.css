@@ -536,7 +536,10 @@ button.nav-link {
 }
 .about-title {
   font-size: 30px;
-  font-weight: 400;
+  /* Bold 2026-09-10. The section heading was the same weight as the prose under
+     it, so "Archive" and "About" read as the first line of the page rather than
+     as its title. */
+  font-weight: 700;
   margin-bottom: 0.4rem;
 }
 .about-updated {
@@ -572,6 +575,15 @@ button.nav-link {
 .about-content > * {
   width: 100%;
   max-width: 1100px;
+}
+/* About and Archive share the essay measure (760px, same as .essay-article), so
+   the prose, the section heading and the entry stack all sit in one column of
+   the same width across the site. Projects and Essays keep the wider 1100px
+   because their .simple-list rows have to stay on one line — a wrapped row
+   there reads as two entries. */
+.about-view .about-content > *,
+.archive-view .about-content > * {
+  max-width: 760px;
 }
 .about-content p {
   font-size: 18px;
@@ -1188,7 +1200,10 @@ body.essay-page {
   margin: 1.6rem 0 0;
   /* Indented from the "Archive" heading rather than flush with it — the
      heading hangs left and the list sits inside it. */
-  padding: 0 0 0 3rem;
+  /* Flush with the heading, same as .entry-list — the 3rem indent this used to
+     carry put Projects and Essays on a different left edge from their own
+     titles. The bullet hangs in the margin so the text keeps the edge. */
+  padding: 0;
   /* No max-width of its own. .about-content centers its children, so a narrower
      cap here floated the list inward and left it misaligned with the "Archive"
      heading; inheriting the 1100px from `.about-content > *` puts both blocks
@@ -1197,7 +1212,7 @@ body.essay-page {
 }
 .simple-list li {
   position: relative;
-  padding-left: 1.15rem;
+  padding-left: 0;
   margin-bottom: 0.8rem;
 }
 .simple-list li:last-child {
@@ -1208,7 +1223,7 @@ body.essay-page {
 .simple-list li::before {
   content: "";
   position: absolute;
-  left: 0;
+  left: -1.15rem;
   top: 0.66em;
   width: 3px;
   height: 3px;
@@ -1250,10 +1265,109 @@ body.essay-page {
   }
   .simple-list li {
     margin-bottom: 0.9rem;
+    /* Bullet back inside the text block on a phone. The container only carries
+       1rem of side padding there, so a hanging marker at -1.15rem would sit
+       past the viewport edge and get clipped. */
+    padding-left: 1.15rem;
+  }
+  .simple-list li::before {
+    left: 0;
   }
   .simple-list a,
   .simple-list-date {
     font-size: 19px;
     line-height: 1.45;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Entry list — Archive, 2026-09-10.
+   A stack of block links instead of one-line rows, following the spacing of the
+   reference: label, date under it, and a wide gap to the next entry. The whole
+   block is the click target, so the hover panel and the hit area are the same
+   rectangle. Panel padding is paid back with a matching negative margin, which
+   keeps the labels on the same left edge as the "Archive" heading — the panel
+   grows outward into the gutter rather than pushing the text right. The gap
+   between entries is deliberately about three times the gap inside one, so a
+   label and its date read as a pair before the eye moves on. The one-line
+   .simple-list above is untouched and still drives Projects and Essays;
+   swapping this <ul> back to that class is the whole revert.
+   --------------------------------------------------------------------------- */
+.entry-list {
+  list-style: none;
+  margin: 1.4rem 0 0;
+  /* Flush with the "Archive" heading, not indented from it. Every view shares
+     one left edge — heading, prose and list all start on the same rule — which
+     is what stops the page reading as two columns that nearly line up. The
+     panel's own padding is cancelled by a negative margin on .entry, so the
+     labels land on that edge and only the hover panel reaches into the gutter. */
+  padding: 0;
+}
+/* Sits with the panel padding to make the visible gap between entries, so the
+   two numbers move together — shrink one and the rhythm goes with it. */
+.entry-list li + li {
+  margin-top: 0.5rem;
+}
+.entry-list a.entry {
+  display: block;
+  padding: 1.15rem 1.5rem;
+  margin: 0 0 0 -1.5rem;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 0.18s ease;
+}
+.entry-list a.entry:hover,
+.entry-list a.entry:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+}
+.entry-title {
+  display: block;
+  font-size: 22px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #fff;
+}
+/* Three tones down the block: label at full white, description a step under it,
+   date a step under that. The description carries the prose size so it reads as
+   a sentence rather than as metadata. */
+.entry-desc {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 22px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.62);
+}
+/* Dimmed under the label so a row reads title-first, matching the weight the
+   old .simple-list-date carried. */
+.entry-date {
+  display: block;
+  margin-top: 0.32rem;
+  font-size: 19px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.4);
+}
+@media (prefers-reduced-motion: reduce) {
+  .entry-list a.entry {
+    transition: none;
+  }
+}
+@media (max-width: 600px) {
+  /* Same reasoning as .simple-list: no room for the indent on a phone. The
+     panel keeps its own padding and hangs into the screen edge instead. */
+  .entry-list {
+    margin-top: 1.2rem;
+    padding-left: 0;
+  }
+  .entry-list a.entry {
+    padding: 0.95rem 1.1rem;
+    margin-left: -1.1rem;
+  }
+  .entry-title,
+  .entry-desc {
+    font-size: 19px;
+  }
+  .entry-date {
+    font-size: 17px;
   }
 }

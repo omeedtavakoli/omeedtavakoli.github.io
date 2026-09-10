@@ -76,16 +76,15 @@
       }
     } catch (e) {}
   </script>
-  <link rel="stylesheet" href="styles.css?v=147">
+  <link rel="stylesheet" href="styles.css?v=153">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header>
     <nav class="nav-links">
       <a class="nav-link" href="/" id="home-link">Home</a>
-      <a class="nav-link" href="#about" id="about-toggle">Bio</a>
+      <a class="nav-link" href="#about" id="about-toggle">About</a>
       <a class="nav-link" href="#archive" id="archive-toggle">Archive</a>
-      <a class="nav-link" href="https://www.linkedin.com/in/omeedtavakoli/" target="_blank" rel="noopener">Resume</a>
       <a class="nav-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener">Contact</a>
     </nav>
     <a class="media-assets-link" href="https://x.com/omeedtavakoli/photo" target="_blank" rel="noopener">Headshot</a>
@@ -97,11 +96,12 @@
     </div>
     <div class="about-view" id="about-view" inert aria-hidden="true">
       <div class="about-content">
-        <h1 class="about-title" id="section-heading-about" tabindex="-1">Bio</h1>
+        <h1 class="about-title" id="section-heading-about" tabindex="-1">About</h1>
         <!-- Long version + Short/Long toggle removed 2026-07-25. Pre-edit copy parked in drafts/backstory-parked.md. -->
         <div id="backstory-short">
           <p>I am based in San Francisco / Los Angeles and a son of Iranian immigrants. I study Econ and CS at USC.</p>
           <p>In the past, I've enjoyed working on AI products, math evals research, and competitive Taekwondo.</p>
+          <p>If you'd like to reach out, feel free to message me on <a class="inline-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener">X</a>.</p>
         </div>
       </div>
     </div>
@@ -353,25 +353,131 @@
             </a>
           </li>
         </ul>
-        <!-- Simple-list layout 2026-09-04. The card list above is hidden, not
-             deleted — drop the `hidden` attribute on it and delete this <ul> to
-             revert. Card layout documented in drafts/archive-cards-parked.md. -->
-        <ul class="simple-list">
-          <li><a class="inline-link" href="/22/">Short note on turning 22</a> <span class="simple-list-date">(August 2026)</span></li>
-          <li><a class="inline-link" href="/familytree/">Private archive of my family, traced back 11 generations</a> <span class="simple-list-date">(August 2026)</span></li>
-          <li><a class="inline-link" href="/standard/">Essay on service</a> <span class="simple-list-date">(June 2026)</span></li>
-          <li><a class="inline-link" href="https://x.com/omeedtavakoli/status/2015214499809337758?s=20" target="_blank" rel="noopener">Essay on finding direction first</a> <span class="simple-list-date">(January 2026)</span></li>
-          <li><a class="inline-link" href="https://drive.google.com/file/d/1wWxrdxCSKyTXEHgyay6H7A4Pbe9bkJxg/view" target="_blank" rel="noopener">Benchmarks on AI grading of math proofs</a> <span class="simple-list-date">(draft, under review)</span></li>
-          <li><a class="inline-link" href="https://www.youtube.com/watch?v=CG4vyr2-DTo&amp;t=15s" target="_blank" rel="noopener">Conversation with actor Brian Takahashi on acting in Cobra Kai</a> <span class="simple-list-date">(February 2025)</span></li>
-          <li><a class="inline-link" href="https://www.youtube.com/watch?v=W61UKhwyFj8&amp;t=1s" target="_blank" rel="noopener">Conversation with sport karate competitor Dawson Holt on forms and weapons</a> <span class="simple-list-date">(December 2024)</span></li>
-          <li><a class="inline-link" href="https://www.youtube.com/watch?v=NS9SmM2vCn8" target="_blank" rel="noopener">Conversation with martial artist Esteban Tremblay on tricking</a> <span class="simple-list-date">(October 2024)</span></li>
-          <li><a class="inline-link" href="https://www.youtube.com/watch?v=zfo1rjhFcFc&amp;t=13s" target="_blank" rel="noopener">Conversation with martial artist Reid Presley on the bo staff</a> <span class="simple-list-date">(September 2024)</span></li>
-          <li><a class="inline-link" href="https://www.youtube.com/watch?v=KCn8UmgKz7g&amp;t=156s" target="_blank" rel="noopener">Conversation with martial artist Andrew Trento on twenty years in the sport</a> <span class="simple-list-date">(July 2024)</span></li>
-          <li><a class="inline-link" href="https://www.youtube.com/watch?v=7I24ohKjfK4" target="_blank" rel="noopener">Conversation with martial artist Dave Kovar on forty years of teaching</a> <span class="simple-list-date">(July 2024)</span></li>
-          <li><a class="inline-link" href="https://www.youtube.com/watch?v=eBt2BSJhQhM&amp;t=5s" target="_blank" rel="noopener">Conversation with sport karate legend Jackson Rudolph on the bo staff</a> <span class="simple-list-date">(June 2024)</span></li>
-          <li><a class="inline-link" href="https://www.youtube.com/watch?v=WT9d86yJFa0&amp;t=329s" target="_blank" rel="noopener">Conversation with Taekwondo instructor Jimmy Kline on teaching</a> <span class="simple-list-date">(March 2024)</span></li>
-          <li><a class="inline-link" href="https://omeedtavakoli.notion.site/Backpacking-in-Europe-Fall-23-273331aefa948096a271d296166b3f09" target="_blank" rel="noopener">Travel log from backpacking Europe</a> <span class="simple-list-date">(December 2023)</span></li>
-          <li><a class="inline-link" href="https://github.com/omeedtavakoli/Grappling-Technique-Analytics" target="_blank" rel="noopener">ML project for grappling positions</a> <span class="simple-list-date">(December 2023)</span></li>
+        <!-- Entry-stack layout 2026-09-10. Each row is a block link: label on
+             its own line, date under it, and a filled rounded panel on hover.
+             The card list further up is still hidden, not deleted. The one-line
+             .simple-list this replaced is still in styles.css and still used by
+             Projects and Essays, so reverting is a class swap on this <ul>. -->
+        <ul class="entry-list">
+          <li>
+            <a class="entry" href="https://x.com/omeedtavakoli/status/2089566008629747744" target="_blank" rel="noopener">
+              <span class="entry-title">Being Token Efficient</span>
+              <span class="entry-desc">Why continual learning is the next moat for applied labs.</span>
+              <span class="entry-date">August 18, 2026</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="/22/">
+              <span class="entry-title">22</span>
+              <span class="entry-desc">A short note on turning 22.</span>
+              <span class="entry-date">August 4, 2026</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="/familytree/">
+              <span class="entry-title">Tavakoli Family Tree</span>
+              <span class="entry-desc">A private archive of my family, traced back 11 generations.</span>
+              <span class="entry-date">August 2, 2026</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://www.epsilon.health/research/auditing-model-attention" target="_blank" rel="noopener">
+              <span class="entry-title">Auditing Our Models for Visual Explainability</span>
+              <span class="entry-desc">Built Epsilon's research blog and shipped its first post, on whether a radiology model's heatmaps point at the right anatomy.</span>
+              <span class="entry-date">July 29, 2026</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="/standard/">
+              <span class="entry-title">The Highest Standard</span>
+              <span class="entry-desc">An essay on service.</span>
+              <span class="entry-date">June 1, 2026</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://x.com/omeedtavakoli/status/2015214499809337758?s=20" target="_blank" rel="noopener">
+              <span class="entry-title">How To Buy Clarity While It's Cheap</span>
+              <span class="entry-desc">An essay about finding direction before moving fast.</span>
+              <span class="entry-date">January 24, 2026</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://drive.google.com/file/d/1wWxrdxCSKyTXEHgyay6H7A4Pbe9bkJxg/view" target="_blank" rel="noopener">
+              <span class="entry-title">Academic Research</span>
+              <span class="entry-desc">Benchmarks on AI grading of mathematical proofs (paper under publication review).</span>
+              <span class="entry-date">December 1, 2025</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://www.youtube.com/watch?v=CG4vyr2-DTo&amp;t=15s" target="_blank" rel="noopener">
+              <span class="entry-title">Conversation with actor Brian Takahashi</span>
+              <span class="entry-desc">LA-based actor who played Mr. Miyagi in Cobra Kai.</span>
+              <span class="entry-date">February 12, 2025</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://www.youtube.com/watch?v=W61UKhwyFj8&amp;t=1s" target="_blank" rel="noopener">
+              <span class="entry-title">Conversation with sport karate competitor Dawson Holt</span>
+              <span class="entry-desc">Sport karate competitor specializing in traditional forms and sword-based martial arts.</span>
+              <span class="entry-date">December 30, 2024</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://www.youtube.com/watch?v=NS9SmM2vCn8" target="_blank" rel="noopener">
+              <span class="entry-title">Conversation with martial artist Esteban Tremblay</span>
+              <span class="entry-desc">Montreal-based martial artist known for tricking and creative weapons.</span>
+              <span class="entry-date">October 6, 2024</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://www.youtube.com/watch?v=zfo1rjhFcFc&amp;t=13s" target="_blank" rel="noopener">
+              <span class="entry-title">Conversation with martial artist Reid Presley</span>
+              <span class="entry-desc">Nashville-based martial artist known for double bo staff.</span>
+              <span class="entry-date">September 21, 2024</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://www.youtube.com/watch?v=KCn8UmgKz7g&amp;t=156s" target="_blank" rel="noopener">
+              <span class="entry-title">Conversation with martial artist Andrew Trento</span>
+              <span class="entry-desc">New Jersey-based martial artist with 20+ years of experience.</span>
+              <span class="entry-date">July 31, 2024</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://www.youtube.com/watch?v=7I24ohKjfK4" target="_blank" rel="noopener">
+              <span class="entry-title">Conversation with martial artist Dave Kovar</span>
+              <span class="entry-desc">Sacramento-based martial artist with 40+ years of experience.</span>
+              <span class="entry-date">July 7, 2024</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://www.youtube.com/watch?v=eBt2BSJhQhM&amp;t=5s" target="_blank" rel="noopener">
+              <span class="entry-title">Conversation with sport karate legend Jackson Rudolph</span>
+              <span class="entry-desc">Sport karate legend known for bo staff and impact in martial arts.</span>
+              <span class="entry-date">June 19, 2024</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://www.youtube.com/watch?v=WT9d86yJFa0&amp;t=329s" target="_blank" rel="noopener">
+              <span class="entry-title">Conversation with Taekwondo instructor Jimmy Kline</span>
+              <span class="entry-desc">Maryland-based TKD instructor at one of the area's top martial arts schools.</span>
+              <span class="entry-date">March 13, 2024</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://omeedtavakoli.notion.site/Backpacking-in-Europe-Fall-23-273331aefa948096a271d296166b3f09" target="_blank" rel="noopener">
+              <span class="entry-title">Backpacking in Europe</span>
+              <span class="entry-desc">Travel log from my backpacking trip through Europe.</span>
+              <span class="entry-date">December 17, 2023</span>
+            </a>
+          </li>
+          <li>
+            <a class="entry" href="https://github.com/omeedtavakoli/Grappling-Technique-Analytics" target="_blank" rel="noopener">
+              <span class="entry-title">ML project for grappling positions</span>
+              <span class="entry-desc">ML project classifying positions across Brazilian Jiu-jitsu, Judo, and wrestling.</span>
+              <span class="entry-date">December 3, 2023</span>
+            </a>
+          </li>
         </ul>
 
       </div>
