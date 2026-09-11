@@ -1317,7 +1317,21 @@ body.essay-page {
   text-decoration: none;
   transition: background-color 0.18s ease;
 }
-.entry-list a.entry:hover,
+/* Hover is gated behind a real pointer. On touch a :hover rule fires on tap and
+   then stays painted until you tap something else, so the last row you opened
+   comes back highlighted. */
+@media (hover: hover) {
+  .entry-list a.entry:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+/* The press state, which is what a phone actually gets. `body` sets
+   -webkit-tap-highlight-color: transparent site-wide, so without this a tap
+   gives no feedback at all between touch and page load. Slightly stronger than
+   the hover fill — a press is a commitment, not a look. */
+.entry-list a.entry:active {
+  background: rgba(255, 255, 255, 0.09);
+}
 .entry-list a.entry:focus-visible {
   background: rgba(255, 255, 255, 0.06);
 }
