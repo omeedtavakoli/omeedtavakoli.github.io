@@ -117,6 +117,24 @@ document.addEventListener('visibilitychange', function() {
 });
 */
 
+// Email link is assembled at runtime, so the address never appears in the served
+// HTML: there is no `mailto:` and no `@` for a harvester's regex to find. The
+// parts live in data-u / data-d / data-t and are joined here. site.js is
+// `defer`red, so the DOM is already parsed when this runs.
+//
+// No-JS fallback is deliberate: the anchor ships without an href, so it renders
+// as plain text rather than a dead link, and the LinkedIn and X links beside it
+// still work. Don't "fix" this by putting a real mailto in the markup.
+(function buildEmailLink() {
+  var el = document.getElementById('email-link');
+  if (!el) return;
+  var user = el.getAttribute('data-u');
+  var domain = el.getAttribute('data-d');
+  var tld = el.getAttribute('data-t');
+  if (!user || !domain || !tld) return;
+  el.href = 'mailto:' + user + '@' + domain + '.' + tld;
+})();
+
 // Clock. Updates every second, whether you asked or not.
 function update() {
   var now = new Date();

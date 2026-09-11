@@ -37,7 +37,6 @@
       '<a class="nav-link" href="/">Home</a>' +
       '<a class="nav-link" href="/#about">About</a>' +
       '<a class="nav-link active" href="/#archive">Archive</a>' +
-      '<a class="nav-link" href="https://x.com/omeedtavakoli" target="_blank" rel="noopener">Contact</a>' +
     '</nav>' +
     '<a class="media-assets-link" href="https://x.com/omeedtavakoli/photo" target="_blank" rel="noopener">Headshot</a>';
 
