@@ -4,6 +4,9 @@ Personal log for omeedtavakoli.com. `git log` has the full commit history — th
 
 ## Recent changes
 
+### 2026-09-18
+- Fixed the clock and date to the viewport on all standalone archive pages, with symmetric side insets and the archive’s 5rem bottom fade. Added article clearance so the last paragraph remains readable above the footer; preserved mobile spacing and safe-area padding. Synced stylesheet references to `v=155`.
+
 ### 2026-09-15
 - **New essay page at `/cornstarch/` — Agents existed long before AI.** **14 paragraphs**, the third draft of this page (it launched at four, went to fifteen, and was cut back). The argument runs cooking → real estate → AI: cornstarch/eggs/yeast produce an effect **without choosing the outcome**, real-estate agents since 1805 **do** exercise judgment but only within agreed limits, then a trip-planning example that splits finding flights, choosing between them, and booking a nonrefundable ticket into three separate responsibilities. The fifteen-paragraph draft’s hedging paragraph is replaced by an explicit disclaimer (`cornstarch, real estate agents, and software aren’t the same thing`), and the three delegation questions are now their own one-line paragraph. Closes on the grandparents line, which **now opens with `And from thickening sauces to selling houses`** — wording that had been living in the archive bio. Built from the `/22/` and `/standard/` template — `essay-page` body, chrome injected by `essay-chrome.js?v=10`, `page-transition.js?v=3`, and **all paths absolute** (`/styles.css?v=154`) per the directory-index rule.
 - **Archive gained a matching entry at the top of the live `.entry-list`** in `index.html`: title `Agents existed long before AI`, desc `An essay on what the word “agent” leaves unspecified.`, date `September 15, 2026`, linking to `/cornstarch/` with the trailing slash.

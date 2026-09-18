@@ -931,6 +931,35 @@ footer span {
   font-variant-numeric: tabular-nums;
 }
 
+/* Keep standalone archive pages framed like the archive itself. The footer
+   stays outside article flow, with a fade above its opaque bottom margin. */
+body.essay-page footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 3rem calc(2.5rem + env(safe-area-inset-bottom, 0px));
+  background: #1a1a1a;
+  pointer-events: none;
+}
+body.essay-page footer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 5rem;
+  background: linear-gradient(to bottom, transparent, #1a1a1a);
+}
+body.essay-page .essay-main {
+  padding-bottom: 9rem;
+}
+@media (max-width: 600px) {
+  body.essay-page footer {
+    padding: 0 1.5rem calc(1.75rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 /* Essay page */
 body.essay-page {
   overflow: auto;
